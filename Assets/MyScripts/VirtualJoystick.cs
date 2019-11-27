@@ -53,4 +53,19 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 			knob.rectTransform.anchoredPosition = new Vector3(input.x * (background.rectTransform.sizeDelta.x/2), input.y * (background.rectTransform.sizeDelta.x/2));
 		}
 	}
+
+	public float Horizontal()
+	{
+		if(input.x != 0)
+			return input.x;
+		else
+			return Input.GetAxis("Horizontal");
+	}
+	public float Vertical()
+	{
+		if(input.y != 0)
+			return input.y;
+		else
+			return Input.GetAxis("Vertical");
+	}
 }
