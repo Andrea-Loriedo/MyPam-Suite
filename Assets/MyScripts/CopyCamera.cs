@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class CopyCamera : MonoBehaviour {
 
+	public Vector3 forward, right;
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
 	}
 }
