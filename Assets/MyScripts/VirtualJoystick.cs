@@ -41,6 +41,7 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 
 			input = new Vector2(position.x*2 + 1, position.y*2 - 1); 
 
+			// keep joystick within range
 			if(input.magnitude > 1.0f)
 			{
 				input = input.normalized;
