@@ -30,6 +30,9 @@ public class SerialHandler: MonoBehaviour {
 		_port.Close();
 	}
 
+	public Vector3 MyPAMOrigin,MyPAMPosition,BallInputPosition;
+
+
 	void ReadArduino()
 	{        
 		// For any COM number larger than 9, you should add prefix of \\\\.\\ to it. 
@@ -60,8 +63,14 @@ public class SerialHandler: MonoBehaviour {
 
 		while (_looping)
 		{
+			//-180,-160
 			strData = _port.ReadLine(); // blocking call.
-			print(strData);
+			
+
+			
+
+			MyPAMOrigin.x = -180;
+			MyPAMOrigin.z = -160;
 
         	string[] armCoordinates = strData.Split(','); // Separate values
 
@@ -70,6 +79,13 @@ public class SerialHandler: MonoBehaviour {
 				{
 					x = float.Parse(armCoordinates[i++]);
 					y = float.Parse(armCoordinates[i++]);
+
+					MyPAMPosition.x = x;
+					MyPAMPosition.z = y;
+
+					BallInputPosition = (MyPAMPosition - MyPAMOrigin) / 5;
+
+					//Debug.Log(BallInputPosition.ToString());
 				}
         	}
 

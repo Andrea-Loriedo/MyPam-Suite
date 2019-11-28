@@ -21,8 +21,8 @@ public class MarbleController : MonoBehaviour {
 
  // Update is called once per frame
 	void FixedUpdate () {
-		// MoveWithJoystick();
-		MoveWithMyPam();
+		MoveWithJoystick();
+		// MoveWithMyPam();
 	}
 
 	void MoveWithJoystick()
@@ -63,6 +63,10 @@ public class MarbleController : MonoBehaviour {
 		mousePosY = Input.GetAxis("Mouse Y") + mousePosY;
 		
 		// transform.Rotate(mousePosX * speed, 0f, mousePosY *speed);
+
+		Debug.Log(heading.ToString());
+
+		heading = cursor.myPam.BallInputPosition;
 
 		rb.AddForce(heading);
 	}

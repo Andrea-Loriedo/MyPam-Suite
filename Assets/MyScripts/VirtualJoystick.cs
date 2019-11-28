@@ -10,7 +10,7 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 	private Image knob;
 	private Vector3 input;
 
-	[SerializeField] SerialHandler myPam;
+	[SerializeField] public SerialHandler myPam;
 
 	private void Start()
 	{
@@ -46,8 +46,11 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 			{
 				input = input;
 			}
+			
+			float x = myPam.BallInputPosition.x;
+			float z = myPam.BallInputPosition.z;
 
-			knob.rectTransform.anchoredPosition = new Vector3(input.x * (background.rectTransform.sizeDelta.x/2), input.y * (background.rectTransform.sizeDelta.x/2));
+			knob.rectTransform.anchoredPosition = new Vector3(x * (background.rectTransform.sizeDelta.x/2), z * (background.rectTransform.sizeDelta.x/2));
 		}
 	}
 
@@ -55,6 +58,7 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 	{
 		OnDrag(ped);
 	}
+
 
 	public float MyPamHorizontal()
 	{
