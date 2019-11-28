@@ -20,6 +20,7 @@ public class SampleUserPolling_JustRead : MonoBehaviour
     void Start()
     {
         serialController = GameObject.Find("SerialController").GetComponent<SerialController>();
+        StartCoroutine(Poll(0.2f, "s"));
 	}
 
     // Executed each frame
@@ -29,7 +30,6 @@ public class SampleUserPolling_JustRead : MonoBehaviour
 
         if (message == null)
             return;
-
         // Check if the message is plain data or a connect/disconnect event.
         if (ReferenceEquals(message, SerialController.SERIAL_DEVICE_CONNECTED))
             Debug.Log("Connection established");
@@ -37,5 +37,16 @@ public class SampleUserPolling_JustRead : MonoBehaviour
             Debug.Log("Connection attempt failed or disconnection detected");
         else
             Debug.Log("Message arrived: " + message);
+        
+    }
+
+    IEnumerator Poll(float delayTime, string message)
+    {
+        while(true)
+        {
+            //Debug.Log("Polling");
+            serialController.SendSerialMessage(message);
+            yield return new WaitForSeconds(delayTime);
+        }
     }
 }

@@ -10,15 +10,12 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 	private Image knob;
 	private Vector3 input;
 
+	[SerializeField] SerialMessageListener myPam;
+
 	private void Start()
 	{
 		background = GetComponent<Image>(); 
 		knob = transform.GetChild(0).GetComponent<Image>();
-	}
-
-	public virtual void OnPointerDown(PointerEventData ped)
-	{
-		OnDrag(ped);
 	}
 
 	public virtual void OnPointerUp(PointerEventData ped)
@@ -55,6 +52,27 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 		}
 	}
 
+	public virtual void OnPointerDown(PointerEventData ped)
+	{
+		OnDrag(ped);
+	}
+
+	public float MyPamHorizontal()
+	{
+		if(myPam.x != 0)
+			return myPam.x;
+		else
+			return Input.GetAxis("Horizontal");
+	}
+
+	public float MyPamVertical()
+	{
+		if(myPam.y != 0)
+			return myPam.y;
+		else
+			return Input.GetAxis("Horizontal");
+	}
+
 	public float Horizontal()
 	{
 		if(input.x != 0)
@@ -62,6 +80,7 @@ public class VirtualJoystick : MonoBehaviour , IDragHandler, IPointerUpHandler, 
 		else
 			return Input.GetAxis("Horizontal");
 	}
+
 	public float Vertical()
 	{
 		if(input.y != 0)
