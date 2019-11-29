@@ -6,71 +6,68 @@ using System.Threading;
 
 public class SerialHandler: MonoBehaviour {
 
-	private bool _looping;
-	private SerialPort _port;
-	public string _comPort = "COM19";
-	private const int _baudRate = 9600;
+	private bool looping;
+	private SerialPort port;
+	public string comPort = "COM19";
+	private const int baudRate = 9600;
 	private Thread portReadingThread;
 	private string strData;
+
 	[HideInInspector] public float x, y;
+	[HideInInspector] public Vector3 MyPAMOrigin, MyPAMPosition, BallInputPosition;
 
 	private void OnEnable()
 	{
-		_looping = true;
-		portReadingThread = new Thread(ReadArduino);
+	 	looping = true;
+		portReadingThread = new Thread(ReadPort);
 		portReadingThread.Start();
 	}
 
 	private void OnDestroy()
 	{
-		_looping = false;  // This is a necessary command to stop the thread.
+	 	looping = false;  // this is a necessary command to stop the thread.
 						// if you comment this line, Unity gets frozen when you stop the game in the editor.                           
 		portReadingThread.Join();
 		portReadingThread.Abort();
-		_port.Close();
+		port.Close();
 	}
 
-	public Vector3 MyPAMOrigin,MyPAMPosition,BallInputPosition;
-
-
-	void ReadArduino()
+	void ReadPort()
 	{        
-		// For any COM number larger than 9, you should add prefix of \\\\.\\ to it. 
-		// For example for COM15, you should write it as "\\\\.\\COM15" instead of "COM15".
-		_port = new SerialPort(_comPort, _baudRate);
-		if (_port == null)
+		// for any COM number larger than 9, you should add prefix of \\\\.\\ to it. 
+		// for example for COM15, you should write it as "\\\\.\\COM15" instead of "COM15".
+		port = new SerialPort(comPort, baudRate);
+
+		if (port == null)
 		{
-			Debug.LogError("_port is null");
+			Debug.LogError("port is null");
 			return;
 		}
 
-		_port.Handshake = Handshake.None;
-		_port.DtrEnable = true;
+		port.Handshake = Handshake.None;
+		port.DtrEnable = true;
 		//myPort.RtsEnable = true;
-		_port.ReadTimeout = 500; // NOTE: Don't Reduce it or the communication might break!
-		_port.WriteTimeout = 1000;
-		_port.Parity = Parity.None;
-		_port.StopBits = StopBits.One;
-		_port.DataBits = 8;
-		_port.NewLine = "\n";
+		port.ReadTimeout = 500; // NOTE: Don't Reduce it or the communication might break!
+		port.WriteTimeout = 1000;
+		port.Parity = Parity.None;
+		port.StopBits = StopBits.One;
+		port.DataBits = 8;
+		port.NewLine = "\n";
 
-		_port.Open();
-		if (!_port.IsOpen)
-			print("PORT HAS NOT BEEN OPEN!");
-		// Send "START" command to the arduino.
-		_port.WriteLine("START");
-		// Start reading the data coming through the serial port.
-
-		while (_looping)
+		port.Open();
+		if (!port.IsOpen)
+			print("Port has not been open!");
+		// send "START" command to the port
+		port.WriteLine("Start");
+		
+		// start reading the data coming through the serial port
+		while (looping)
 		{
-			//-180,-160
-			strData = _port.ReadLine(); // blocking call.
-			
+			// origin at -180,-160
+			strData = port.ReadLine(); // blocking call
 
-			
-
-			MyPAMOrigin.x = -180;
-			MyPAMOrigin.z = -160;
+			MyPAMOrigin.x = -58;
+			MyPAMOrigin.z = -577;
 
         	string[] armCoordinates = strData.Split(','); // Separate values
 
@@ -85,10 +82,10 @@ public class SerialHandler: MonoBehaviour {
 
 					BallInputPosition = (MyPAMPosition - MyPAMOrigin) / 5;
 
-					//Debug.Log(BallInputPosition.ToString());
+					// Debug.Log(BallInputPosition.ToString());
 				}
         	}
-
+			
 			Thread.Sleep(0);
 		}
 	}
