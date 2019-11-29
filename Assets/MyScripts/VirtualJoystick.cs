@@ -61,18 +61,10 @@ public class VirtualJoystick : MonoBehaviour //, IDragHandler, IPointerUpHandler
 
 	public void Update()
 	{
-		Vector2 position;
+		input = new Vector2(myPam.myPamInput.x, myPam.myPamInput.y); 
+		Debug.Log(input);
 
-		position.x = myPam.x;
-		position.y = myPam.y;
-
-		// get position value between -1 and 0 
-		position.x = (position.x + 438)/(106 + 438);
-		position.y = (position.y + 385)/(-498 + 385);
-
-		// correct joystick "0" position
-		input = new Vector2(position.x*2 - 1, position.y*2 - 1); 
-
+		// constrain the joystick to its frame
 		if(input.magnitude > 1.0f)
 		{
 			input = input.normalized;
@@ -82,11 +74,8 @@ public class VirtualJoystick : MonoBehaviour //, IDragHandler, IPointerUpHandler
 			input = input;
 		}
 
-		Debug.Log(input);
-
 		knob.rectTransform.anchoredPosition = new Vector2(input.x * (background.rectTransform.sizeDelta.x/2), input.y * (background.rectTransform.sizeDelta.x/2));
 		// Debug.Log(knob.rectTransform.anchoredPosition);
-		
 	}
 
 	public virtual void OnPointerDown(PointerEventData ped)
@@ -97,7 +86,7 @@ public class VirtualJoystick : MonoBehaviour //, IDragHandler, IPointerUpHandler
 
 	public float MyPamHorizontal()
 	{
-		if(myPam.x != 0)
+		if(input.x != 0)
 			return input.x;
 		else
 			return Input.GetAxis("Horizontal");
@@ -105,13 +94,13 @@ public class VirtualJoystick : MonoBehaviour //, IDragHandler, IPointerUpHandler
 
 	public float MyPamVertical()
 	{
-		if(myPam.y != 0)
+		if(input.y != 0)
 			return input.y;
 		else
 			return Input.GetAxis("Horizontal");
 	}
 
-	public float Horizontal()
+	public float MouseHorizontal()
 	{
 		if(input.x != 0)
 			return input.x;
@@ -119,7 +108,7 @@ public class VirtualJoystick : MonoBehaviour //, IDragHandler, IPointerUpHandler
 			return Input.GetAxis("Horizontal");
 	}
 
-	public float Vertical()
+	public float MouseVertical()
 	{
 		if(input.y != 0)
 			return input.y;

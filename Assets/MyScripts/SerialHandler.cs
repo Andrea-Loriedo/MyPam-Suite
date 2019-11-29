@@ -14,7 +14,8 @@ public class SerialHandler: MonoBehaviour {
 	private string strData;
 
 	[HideInInspector] public float x, y;
-	[HideInInspector] public Vector3 MyPAMOrigin, MyPAMPosition, BallInputPosition;
+	[HideInInspector] public Vector2 MyPAMOrigin, MyPAMPosition, BallInputPosition;
+	public Vector2 myPamInput;
 
 	private void OnEnable()
 	{
@@ -30,6 +31,10 @@ public class SerialHandler: MonoBehaviour {
 		portReadingThread.Join();
 		portReadingThread.Abort();
 		port.Close();
+	}
+
+	public float Remap (float value, float from1, float to1, float from2, float to2) {
+    	return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
 	}
 
 	void ReadPort()
@@ -66,8 +71,9 @@ public class SerialHandler: MonoBehaviour {
 			// origin at -180,-160
 			strData = port.ReadLine(); // blocking call
 
-			MyPAMOrigin.x = -58;
-			MyPAMOrigin.z = -577;
+			MyPAMOrigin.x = - 156;
+			MyPAMOrigin.y = - 157;
+			int radius = 200;
 
         	string[] armCoordinates = strData.Split(','); // Separate values
 
@@ -78,9 +84,27 @@ public class SerialHandler: MonoBehaviour {
 					y = float.Parse(armCoordinates[i++]);
 
 					MyPAMPosition.x = x;
-					MyPAMPosition.z = y;
+					MyPAMPosition.y = y;
 
-					BallInputPosition = (MyPAMPosition - MyPAMOrigin) / 5;
+					// Debug.Log(MyPAMPosition);
+
+					BallInputPosition = (MyPAMPosition - MyPAMOrigin);
+
+					myPamInput.x = Remap(	MyPAMPosition.x,
+											(MyPAMOrigin.x - radius),
+											(MyPAMOrigin.x + radius),
+											-1,
+											1
+					);
+
+					myPamInput.y = Remap(	MyPAMPosition.y,
+											(MyPAMOrigin.y - radius),
+											(MyPAMOrigin.y + radius),
+											-1,
+											1
+					);
+
+					// Debug.Log(myPamInput);
 
 					// Debug.Log(BallInputPosition.ToString());
 				}
