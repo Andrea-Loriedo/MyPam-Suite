@@ -6,28 +6,29 @@ using System.Threading;
 
 public class SerialHandler: MonoBehaviour {
 
-	private bool looping;
-	private SerialPort port;
+	SerialPort port;
+	Thread portReadingThread;
 	public string comPort = "COM19";
-	private const int baudRate = 9600;
-	private Thread portReadingThread;
-	private string strData;
+	public const int baudRate = 9600;
+	string strData;
+	bool looping;
 
 	[HideInInspector] public float x, y;
-	[HideInInspector] public Vector2 MyPAMOrigin, MyPAMPosition, BallInputPosition;
-	public Vector2 myPamInput;
+	[HideInInspector] public Vector2 myPamOrigin, myPamPosition, myPamInput;
+	const int radius = 200;
 
 	private void OnEnable()
 	{
 	 	looping = true;
 		portReadingThread = new Thread(ReadPort);
 		portReadingThread.Start();
+		myPamOrigin.x = - 156;
+		myPamOrigin.y = - 157;
 	}
 
 	private void OnDestroy()
 	{
-	 	looping = false;  // this is a necessary command to stop the thread.
-						// if you comment this line, Unity gets frozen when you stop the game in the editor.                           
+	 	looping = false;  // stop the thread when the game stops                        
 		portReadingThread.Join();
 		portReadingThread.Abort();
 		port.Close();
@@ -68,45 +69,36 @@ public class SerialHandler: MonoBehaviour {
 		// start reading the data coming through the serial port
 		while (looping)
 		{
-			// origin at -180,-160
 			strData = port.ReadLine(); // blocking call
 
-			MyPAMOrigin.x = - 156;
-			MyPAMOrigin.y = - 157;
-			int radius = 200;
-
-        	string[] armCoordinates = strData.Split(','); // Separate values
+        	string[] coordinates = strData.Split(','); // Separate values
 
         	for(int i = 0; i < 2; i++){
-				if(armCoordinates[i] != "") //Check if all values are recieved
+				if(coordinates[i] != "") //Check if all values are recieved
 				{
-					x = float.Parse(armCoordinates[i++]);
-					y = float.Parse(armCoordinates[i++]);
+					x = float.Parse(coordinates[i++]);
+					y = float.Parse(coordinates[i++]);
 
-					MyPAMPosition.x = x;
-					MyPAMPosition.y = y;
+					myPamPosition.x = x;
+					myPamPosition.y = y;
 
-					// Debug.Log(MyPAMPosition);
+					// Debug.Log(myPamPosition);
 
-					BallInputPosition = (MyPAMPosition - MyPAMOrigin);
-
-					myPamInput.x = Remap(	MyPAMPosition.x,
-											(MyPAMOrigin.x - radius),
-											(MyPAMOrigin.x + radius),
+					myPamInput.x = Remap(	myPamPosition.x,
+											(myPamOrigin.x - radius),
+											(myPamOrigin.x + radius),
 											-1,
 											1
 					);
 
-					myPamInput.y = Remap(	MyPAMPosition.y,
-											(MyPAMOrigin.y - radius),
-											(MyPAMOrigin.y + radius),
+					myPamInput.y = Remap(	myPamPosition.y,
+											(myPamOrigin.y - radius),
+											(myPamOrigin.y + radius),
 											-1,
 											1
 					);
 
 					// Debug.Log(myPamInput);
-
-					// Debug.Log(BallInputPosition.ToString());
 				}
         	}
 			
