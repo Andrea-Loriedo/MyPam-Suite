@@ -19,6 +19,7 @@ public class MarbleController : MonoBehaviour {
 
 	void FixedUpdate () {
 		MoveMarble();
+		AddGravity();
 	}
 
 	void MoveMarble()
@@ -35,5 +36,10 @@ public class MarbleController : MonoBehaviour {
 		}
 
 		rb.AddForce(heading);
+	}
+
+	void AddGravity()
+	{
+		rb.AddForce(Physics.gravity * (rb.mass * rb.mass));
 	}
 }
