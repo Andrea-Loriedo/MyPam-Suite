@@ -12,15 +12,15 @@ public class TilemapGenerator : MonoBehaviour
 
     void Start()
     {
-        // GenerateFromJson();
-        PopulateGrid(16, 1, generator.GenerateMaze(16,16));
+        GenerateFromJson();
+        // PopulateGrid(16, 1, generator.GenerateMaze(16,16));
     }
 
     void PopulateGrid(int gridSize, int tileSize, int [,] tilemap)
     {
         for(int i = 0; i<gridSize; i++){
              for(int j= 0; j<gridSize; j++){
-                if(tilemap[i,j] == 0)
+                if(tilemap[i,j] == 1)
                 {
                     GameObject tile = Instantiate(tilePrefab); // Create new instance of the dart prefab
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
