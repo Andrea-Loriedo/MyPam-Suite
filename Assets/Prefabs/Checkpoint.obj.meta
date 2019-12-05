@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 7f56a40e3b838a247a208f42208a44d8
+guid: 58b752dda57a1934d9371ae0b45a5a5e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Camera
-    100002: Cube
-    100004: //RootNode
-    100006: Lamp
-    400000: Camera
-    400002: Cube
-    400004: //RootNode
-    400006: Lamp
-    2000000: Camera
-    2100000: Material
-    2300000: Cube
-    3300000: Cube
-    4300000: Cube
-    10800000: Lamp
+    100000: mesh897219909
+    100002: //RootNode
+    400000: mesh897219909
+    400002: //RootNode
+    2100000: mesh897219909Mat
+    2300000: mesh897219909
+    3300000: mesh897219909
+    4300000: mesh897219909
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -56,7 +50,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
