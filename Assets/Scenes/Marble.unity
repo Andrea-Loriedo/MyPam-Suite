@@ -262,7 +262,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 555695590}
   m_LocalRotation: {x: 0.074021436, y: 0, z: 0, w: 0.9972567}
-  m_LocalPosition: {x: 0, y: 2.55, z: -2.6}
+  m_LocalPosition: {x: -0.28, y: 3.09, z: -2.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 881215554}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 839676702}
   m_Layer: 0
   m_Name: Marble
-  m_TagString: Untagged
+  m_TagString: Marble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -707,7 +707,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839676696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.01, y: 3.12, z: 6.97}
+  m_LocalPosition: {x: 7.96, y: 3.819, z: 7.98}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forward: {x: 0, y: 0, z: 0}
   right: {x: 0, y: 0, z: 0}
-  speed: 20
+  speed: 30
   movement: {fileID: 1034954154}
 --- !u!1 &881215553
 GameObject:
@@ -1046,12 +1046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f847bd58eda330442926beac163333bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTile: {fileID: 1322099433363310, guid: 8182505faa4a49741981f86fec8e762b, type: 2}
-  tileWithBorders: {fileID: 1853702146769384, guid: c902377a2f1f5cc42a5b14b80b7d955b,
-    type: 2}
-  corner: {fileID: 1668244782905994, guid: d580182ccfdcbe945b371ed5e88af130, type: 2}
-  holeWithBorders: {fileID: 1321377114540720, guid: 65a3234afa8dfd3459fa5dd4747d0cb5,
-    type: 2}
+  plainTile: {fileID: 1939493160747742, guid: 5c73b64583a14034c9ec94761b206909, type: 2}
+  hole: {fileID: 1360591889669054, guid: 2c23e0f9d94cfd44fac88a63b69a8d36, type: 2}
+  wall: {fileID: 1119973528815884, guid: b844b39e15bc28c489bb94e905a5e934, type: 2}
   generator: {fileID: 223211720}
 --- !u!4 &1766633907
 Transform:

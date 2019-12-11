@@ -7,79 +7,44 @@ using MiniJSON;
 
 public class TilemapGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject startTile;
-    [SerializeField] GameObject tileWithBorders;
-    [SerializeField] GameObject corner;
-    [SerializeField] GameObject holeWithBorders;
-    [SerializeField] GameObject tile;
+    [SerializeField] GameObject plainTile;
+    [SerializeField] GameObject hole;
+    [SerializeField] GameObject wall;
     [SerializeField] RecursiveBacktracking generator;
-
-    List<GameObject> tiles;
-    Vector3 targetDir;
 
     void Awake()
     {
         GenerateFromJson();
-        tiles = new List<GameObject>();
-        // PopulateGrid(16, 1, generator.GenerateMaze(16,16));
+        // PopulateGrid(16, 1, generator.GenerateMaze(16,16)); // Generate Procedurally
     }
 
     void PopulateGrid(int gridSize, int tileSize, int [,] tilemap)
     {
         for(int i = 0; i<gridSize; i++){
              for(int j= 0; j<gridSize; j++){
-                if(tilemap[i,j] == 1)
+
+                if(tilemap[i,j] == 0)
                 {
-                    GameObject tile = Instantiate(startTile); // Create new instance of the dart prefab
+                    GameObject tile = Instantiate(wall); // Create new instance of the wall prefab
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
+                    tile.transform.localScale = new Vector3(tileSize + 0.2f, 1, tileSize + 0.2f);
+                    tile.transform.parent = transform;
+                }
+                else if(tilemap[i,j] == 1)
+                {
+                    GameObject tile = Instantiate(plainTile); // Create new instance of the tile prefab
+                    tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
+                    tile.transform.localScale = new Vector3(tileSize, 0.5f, tileSize);
                     tile.transform.parent = transform;
                 }
                 else if(tilemap[i,j] == 2)
                 {
-                    GameObject tile = Instantiate(tileWithBorders); // Create new instance of the dart prefab
+                    GameObject tile = Instantiate(hole); // Create new instance of the hole prefab
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize, 0.5f, tileSize);
-                    tile.transform.parent = transform;
-                }
-                else if(tilemap[i,j] == 3)
-                {
-                    GameObject tile = Instantiate(corner); // Create new instance of the dart prefab
-                    tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize, 0.5f, tileSize);
-                    tile.transform.parent = transform;
-                }
-                else if(tilemap[i,j] == 4)
-                {
-                    GameObject tile = Instantiate(holeWithBorders); // Create new instance of the dart prefab
-                    tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
+                    tile.transform.localScale = new Vector3(0.5f, 0.5f, 0.25f);
                     tile.transform.parent = transform;
                 }
             }
-        }
-    }
-
-    void AdjustTileOrientation()
-    {
-        Transform[] tiles = new Transform[transform.childCount];
-        Transform current;
-        Transform target;
-
-        int i = 0;
-
-        foreach (Transform nextTile in transform)
-        {
-            tiles[i] = nextTile;
-            i++;
-        }
-
-        for(int h = 0; h < tiles.Length-1; h++)
-        {
-            current = tiles[h];
-            target = GetClosestTile(tiles, h);
-            Vector3 targetDir = target.position - current.position;
-            target.rotation = Quaternion.LookRotation(targetDir);
         }
     }
 
@@ -104,29 +69,7 @@ public class TilemapGenerator : MonoBehaviour
         }
 
         PopulateGrid(rows.Count, 1, tileMap);
-        // AdjustTileOrientation();
     }
-
-    Transform GetClosestTile(Transform[] tiles, int i)
-    {
-        Transform closestTile = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Transform currentTile = tiles[i];
-        foreach(Transform tile in tiles)
-        {
-            Vector3 directionToTarget = tile.position - currentTile.position;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-
-            if(dSqrToTarget < closestDistanceSqr)
-            {
-                closestDistanceSqr = dSqrToTarget;
-                closestTile = tile;
-            }
-        }
-
-        return closestTile;
-    }
-
 }
 
 // {

@@ -3,23 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MarbleController : MonoBehaviour {
-
 	[HideInInspector] public Vector3 forward, right;
 	[SerializeField] float speed;
 	[SerializeField] VirtualJoystick movement;
 	Rigidbody rb;
+	GameObject hole;
+	HoleCollisionCheck fallDetection;
+	Vector3 initialPosition
+	{
+		get; set;
+	}
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
+		hole = GameObject.Find("Hole(Clone)");
+		fallDetection = hole.GetComponent<HoleCollisionCheck>();
+
 		forward = Camera.main.transform.forward; // vector aligned with the camera's forward vector
 		forward.y = 0; // ensure the y value is always going to be set to 0
 		forward = Vector3.Normalize(forward); // normalized vector for forward motion
 		right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // rotate right vector 90 degrees around the x axis to obtain -45 deg shift from the world x axis
+		initialPosition = transform.localPosition;
  	}
 
 	void FixedUpdate () {
 		MoveMarble();
 		AddGravity();
+		CheckFall();
 	}
 
 	void MoveMarble()
@@ -36,10 +46,20 @@ public class MarbleController : MonoBehaviour {
 		}
 
 		rb.AddForce(heading);
+		rb.AddTorque(heading * speed * Time.deltaTime);
 	}
 
 	void AddGravity()
 	{
-		rb.AddForce(Physics.gravity * (rb.mass * rb.mass));
+		rb.AddForce(Physics.gravity * (rb.mass * rb.mass)); // Have mass influence gravity
+	}
+
+	void CheckFall()
+	{
+		if(fallDetection.throughHole)
+		{
+			transform.position = initialPosition;
+		}
+		fallDetection.throughHole = false;
 	}
 }
