@@ -16,7 +16,7 @@ public class MarbleController : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
-		hole = GameObject.Find("Hole(Clone)");
+		hole = GameObject.FindWithTag("Hole");
 		fallDetection = hole.GetComponent<HoleCollisionCheck>();
 
 		forward = Camera.main.transform.forward; // vector aligned with the camera's forward vector

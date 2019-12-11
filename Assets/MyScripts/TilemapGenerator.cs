@@ -54,7 +54,7 @@ public class TilemapGenerator : MonoBehaviour
         string jsonString = file.ToString();
         var dict = Json.Deserialize(jsonString) as Dictionary<string,object>;
 
-        var rows = (List<object>)dict["tilemap"]; // store the JSON tilemap split into rows in a list
+        var rows = (List<object>)dict["3"]; // store the JSON tilemap split into rows in a list
 
         int [,] tileMap = new int[rows.Count,rows.Count];
 
