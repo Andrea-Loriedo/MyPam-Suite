@@ -12,13 +12,15 @@ public class TilemapGenerator : MonoBehaviour
     [SerializeField] GameObject wall;
     [SerializeField] RecursiveBacktracking generator;
 
+    float size = 1f;
+
     void Awake()
     {
         GenerateFromJson();
         // PopulateGrid(16, 1, generator.GenerateMaze(16,16)); // Generate Procedurally
     }
 
-    void PopulateGrid(int gridSize, int tileSize, int [,] tilemap)
+    void PopulateGrid(int gridSize, float tileSize, int [,] tilemap)
     {
         for(int i = 0; i<gridSize; i++){
              for(int j= 0; j<gridSize; j++){
@@ -27,21 +29,21 @@ public class TilemapGenerator : MonoBehaviour
                 {
                     GameObject tile = Instantiate(wall); // Create new instance of the wall prefab
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize + 0.2f, 1, tileSize + 0.2f);
+                    tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
                     tile.transform.parent = transform;
                 }
                 else if(tilemap[i,j] == 1)
                 {
                     GameObject tile = Instantiate(plainTile); // Create new instance of the tile prefab
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize, 0.5f, tileSize);
+                    tile.transform.localScale = new Vector3(tileSize, tileSize * 0.5f, tileSize);
                     tile.transform.parent = transform;
                 }
                 else if(tilemap[i,j] == 2)
                 {
                     GameObject tile = Instantiate(hole); // Create new instance of the hole prefab
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(0.5f, 0.5f, 0.25f);
+                    tile.transform.localScale = new Vector3(tileSize * 0.5f, tileSize * 0.5f, tileSize * 0.25f);
                     tile.transform.parent = transform;
                 }
             }
@@ -68,7 +70,7 @@ public class TilemapGenerator : MonoBehaviour
             }
         }
 
-        PopulateGrid(rows.Count, 1, tileMap);
+        PopulateGrid(rows.Count, size, tileMap);
     }
 }
 

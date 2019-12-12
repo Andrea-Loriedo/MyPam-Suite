@@ -9,11 +9,6 @@ public class HoleCollisionCheck : MonoBehaviour {
 		get; set;
 	}
 
-	void Start()
-	{
-
-	}
-
 	void OnTriggerExit(Collider other)
 	{
 		if(other.CompareTag("Marble"))
