@@ -11,7 +11,7 @@ public class TilemapGenerator : MonoBehaviour
     [SerializeField] GameObject holePrefab;
     [SerializeField] GameObject wall;
     [SerializeField] RecursiveBacktracking generator;
-    HoleCollisionCheck fallDetection;
+    [HideInInspector] public HoleCollisionCheck fallDetection;
     GameObject hole;
 
     int mapNumber;
@@ -29,7 +29,7 @@ public class TilemapGenerator : MonoBehaviour
         if(CheckFall() == true)
         {
             DestroyCurrentMap();
-            Debug.Log("Destroyed map number " + mapNumber);
+            // Debug.Log("Destroyed map number " + mapNumber);
             GenerateFromJson();
         }
     }
@@ -62,7 +62,7 @@ public class TilemapGenerator : MonoBehaviour
                 }
             }
         }
-        
+        // Get the instantiated hole object to access its collision detection method
         hole = GameObject.FindWithTag("Hole");
         fallDetection = hole.GetComponent<HoleCollisionCheck>();
     }
@@ -92,13 +92,13 @@ public class TilemapGenerator : MonoBehaviour
     string ShuffleMaps(int mapsCount)
     {
         mapNumber = UnityEngine.Random.Range(0, mapsCount);
-        previousMap = mapNumber;
 
         while (mapNumber == previousMap)
         {
             mapNumber = UnityEngine.Random.Range(0, mapsCount);
         }
-        Debug.Log("Generated map number " + mapNumber);
+        // Debug.Log("Generated map number " + mapNumber);
+        previousMap = mapNumber;
         return mapNumber.ToString();
     }
 
