@@ -6,9 +6,8 @@ public class MarbleController : MonoBehaviour {
 	[HideInInspector] public Vector3 forward, right;
 	[SerializeField] float speed;
 	[SerializeField] VirtualJoystick movement;
+	[SerializeField] TilemapGenerator map;
 	Rigidbody rb;
-	GameObject hole;
-	HoleCollisionCheck fallDetection;
 	Vector3 initialPosition
 	{
 		get; set;
@@ -16,8 +15,6 @@ public class MarbleController : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
-		hole = GameObject.FindWithTag("Hole");
-		fallDetection = hole.GetComponent<HoleCollisionCheck>();
 
 		forward = Camera.main.transform.forward; // vector aligned with the camera's forward vector
 		forward.y = 0; // ensure the y value is always going to be set to 0
@@ -29,7 +26,14 @@ public class MarbleController : MonoBehaviour {
 	void FixedUpdate () {
 		MoveMarble();
 		AddGravity();
-		CheckFall();
+	}
+
+	void Update()
+	{
+		if(map.CheckFall() == true)
+		{
+			transform.position = initialPosition;
+		}
 	}
 
 	void MoveMarble()
@@ -52,14 +56,5 @@ public class MarbleController : MonoBehaviour {
 	void AddGravity()
 	{
 		rb.AddForce(Physics.gravity * (rb.mass * rb.mass)); // Have mass influence gravity
-	}
-
-	void CheckFall()
-	{
-		if(fallDetection.throughHole)
-		{
-			transform.position = initialPosition;
-		}
-		fallDetection.throughHole = false;
 	}
 }

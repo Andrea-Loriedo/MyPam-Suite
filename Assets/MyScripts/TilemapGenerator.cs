@@ -8,16 +8,30 @@ using MiniJSON;
 public class TilemapGenerator : MonoBehaviour
 {
     [SerializeField] GameObject plainTile;
-    [SerializeField] GameObject hole;
+    [SerializeField] GameObject holePrefab;
     [SerializeField] GameObject wall;
     [SerializeField] RecursiveBacktracking generator;
+    HoleCollisionCheck fallDetection;
+    GameObject hole;
+
+    int mapNumber;
+    int previousMap;
 
     float size = 1f;
 
     void Awake()
     {
         GenerateFromJson();
-        // PopulateGrid(16, 1, generator.GenerateMaze(16,16)); // Generate Procedurally
+    }
+
+    void Update()
+    {
+        if(CheckFall() == true)
+        {
+            DestroyCurrentMap();
+            Debug.Log("Destroyed map number " + mapNumber);
+            GenerateFromJson();
+        }
     }
 
     void PopulateGrid(int gridSize, float tileSize, int [,] tilemap)
@@ -41,24 +55,27 @@ public class TilemapGenerator : MonoBehaviour
                 }
                 else if(tilemap[i,j] == 2)
                 {
-                    GameObject tile = Instantiate(hole); // Create new instance of the hole prefab
+                    GameObject tile = Instantiate(holePrefab); // Create new instance of the hole prefab
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
                     tile.transform.localScale = new Vector3(tileSize * 0.5f, tileSize * 0.5f, tileSize * 0.25f);
                     tile.transform.parent = transform;
                 }
             }
         }
+        
+        hole = GameObject.FindWithTag("Hole");
+        fallDetection = hole.GetComponent<HoleCollisionCheck>();
     }
 
     void GenerateFromJson()
     {
         TextAsset file = (TextAsset) Resources.Load("marble_settings", typeof(TextAsset));
         string jsonString = file.ToString();
-        var dict = Json.Deserialize(jsonString) as Dictionary<string,object>;
+        var dict = Json.Deserialize(jsonString) as Dictionary<string,object>; // Deserialize JSON dictionary containing tilemaps
 
-        var rows = (List<object>)dict["3"]; // store the JSON tilemap split into rows in a list
+        var rows = (List<object>)dict[ShuffleMaps(dict.Count)]; // store the randomly picked JSON tilemap split into rows inside a list
 
-        int [,] tileMap = new int[rows.Count,rows.Count];
+        int[,] tileMap = new int[rows.Count,rows.Count];
 
         // go through each row and column in the tilemap and store the values into a 2D array
         for (int row = 0; row < rows.Count; row++)
@@ -69,20 +86,30 @@ public class TilemapGenerator : MonoBehaviour
                 tileMap[row, col] = Convert.ToInt32(tiles[col]);
             }
         }
-
         PopulateGrid(rows.Count, size, tileMap);
     }
-}
 
-// {
-//     "tilemap": [
-//         ["1"," 1", "0", "1", "1", "1", "1", "1"],
-//         ["1"," 1", "0", "0", "0", "0", "0", "1"],
-//         ["1"," 0", "0", "1", "1", "1", "0", "1"],
-//         ["1"," 0", "1", "1", "0", "1", "0", "1"],
-//         ["1"," 0", "1", "0", "0", "1", "0", "1"],
-//         ["1"," 0", "1", "0", "1", "1", "0", "1"],
-//         ["1"," 0", "1", "0", "1", "0", "0", "1"],
-//         ["1"," 1", "1", "0", "1", "1", "1", "1"]
-//     ]
-// }
+    string ShuffleMaps(int mapsCount)
+    {
+        mapNumber = UnityEngine.Random.Range(0, mapsCount);
+        previousMap = mapNumber;
+
+        while (mapNumber == previousMap)
+        {
+            mapNumber = UnityEngine.Random.Range(0, mapsCount);
+        }
+        Debug.Log("Generated map number " + mapNumber);
+        return mapNumber.ToString();
+    }
+
+    void DestroyCurrentMap()
+    {
+        foreach (Transform child in transform)
+        GameObject.Destroy(child.gameObject);
+    }
+
+    public bool CheckFall()
+	{
+        return fallDetection.throughHole;
+	}
+}
