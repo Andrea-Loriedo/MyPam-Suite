@@ -1422,7 +1422,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1675672712}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1707,8 +1707,8 @@ Transform:
   m_LocalPosition: {x: 7.9361186, y: 3.0767584, z: 8.299803}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1388373334}
   - {fileID: 2071084419}
+  - {fileID: 1388373334}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d4e8fa913ef3142a06a955d255af26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionDetection: {fileID: 1766633906}
+  game: {fileID: 1766633906}
   scoreText: {fileID: 355173368}
 --- !u!114 &2071084416
 MonoBehaviour:
@@ -1858,7 +1858,7 @@ RectTransform:
   m_Children:
   - {fileID: 355173370}
   m_Father: {fileID: 1675672712}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

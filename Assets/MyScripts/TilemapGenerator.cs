@@ -16,11 +16,13 @@ public class TilemapGenerator : MonoBehaviour
 
     int mapNumber;
     int previousMap;
+    int score;
 
     float size = 1f;
 
     void Awake()
     {
+        score = 0;
         DontDestroyOnLoad(gameObject);
         GenerateFromJson();
     }
@@ -29,6 +31,7 @@ public class TilemapGenerator : MonoBehaviour
     {
         if(CheckFall() == true)
         {
+            score++;
             DestroyCurrentMap();
             // Debug.Log("Destroyed map number " + mapNumber);
             GenerateFromJson();
@@ -98,7 +101,7 @@ public class TilemapGenerator : MonoBehaviour
         {
             mapNumber = UnityEngine.Random.Range(0, mapsCount);
         }
-        // Debug.Log("Generated map number " + mapNumber);
+        Debug.Log("Generated map number " + mapNumber);
         previousMap = mapNumber;
         return mapNumber.ToString();
     }
@@ -113,4 +116,23 @@ public class TilemapGenerator : MonoBehaviour
 	{
         return fallDetection.throughHole;
 	}
+
+    // Needs optimising
+    public int GetScore()
+    {
+        return score;
+    }
 }
+
+    // "3": [
+    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+    //     ["0", "1", "1", "1", "1", "1", "1", "1", "1", "0"],
+    //     ["0", "1", "0", "0", "0", "0", "0", "0", "1", "0"],
+    //     ["0", "1", "0", "1", "1", "1", "1", "0", "1", "0"],
+    //     ["0", "1", "0", "1", "0", "0", "1", "1", "1", "0"],
+    //     ["0", "1", "0", "1", "1", "0", "0", "0", "0", "0"],
+    //     ["0", "1", "0", "0", "1", "1", "1", "1", "1", "0"],
+    //     ["0", "1", "0", "0", "0", "0", "0", "0", "1", "0"],
+    //     ["0", "2", "0", "0", "0", "0", "0", "0", "1", "0"],
+    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+    // ]

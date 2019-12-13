@@ -6,14 +6,14 @@ using TMPro;
 
 public class MarbleScoreController : MonoBehaviour {
 
-	[SerializeField] TilemapGenerator collisionDetection;
+	[SerializeField] TilemapGenerator game;
 	[SerializeField] TextMeshProUGUI scoreText;
 	int score;
 
 	// Use this for initialization
 	void Awake()
 	{
-		score = 0;
+		score = game.GetScore();
 		// Set the text
 		scoreText.text = "Score: " + score;
 	}
@@ -21,12 +21,10 @@ public class MarbleScoreController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		{
-			if(collisionDetection.CheckFall() == true)
-			{
-				score++;
-				scoreText.text = "Score: " + score;
-				Debug.Log("Score = " + score);
-			}
+			// Needs optimising
+			score = game.GetScore();
+			scoreText.text = "Score: " + score;
+			// Debug.Log("Score = " + score);
 		}
 	}
 }
