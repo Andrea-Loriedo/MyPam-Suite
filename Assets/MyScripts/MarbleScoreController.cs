@@ -14,8 +14,6 @@ public class MarbleScoreController : MonoBehaviour {
 	void Awake()
 	{
 		score = 0;
-		// Get a reference to an existing TextMeshPro component or Add one if needed.
-		// scoreText = GetComponent<TextMeshProUGUI>() ?? gameObject.AddComponent<TextMeshPro>();
 		// Set the text
 		scoreText.text = "Score: " + score;
 	}

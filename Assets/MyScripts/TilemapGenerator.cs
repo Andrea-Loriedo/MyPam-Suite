@@ -21,6 +21,7 @@ public class TilemapGenerator : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         GenerateFromJson();
     }
 

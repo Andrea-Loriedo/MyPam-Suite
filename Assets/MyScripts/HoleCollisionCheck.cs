@@ -12,7 +12,7 @@ public class HoleCollisionCheck : MonoBehaviour {
 		set
 		{
 			fall = value;
-			// Debug.Log("Through hole reset to " + fall);
+			Debug.Log("Through hole reset to " + fall);
 		}
 	}
 
