@@ -15,7 +15,7 @@ public class MarbleController : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
-
+		
 		forward = Camera.main.transform.forward; // vector aligned with the camera's forward vector
 		forward.y = 0; // ensure the y value is always going to be set to 0
 		forward = Vector3.Normalize(forward); // normalized vector for forward motion

@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
+using System;
+using System.IO;
+using System.Text.RegularExpressions;
+using UnityEngineInternal;
 
 public class HoleCollisionCheck : MonoBehaviour {
 
@@ -12,7 +15,7 @@ public class HoleCollisionCheck : MonoBehaviour {
 		set
 		{
 			fall = value;
-			Debug.Log("Through hole reset to " + fall);
+			Logger.Debug("Through hole reset to " + fall);
 		}
 	}
 

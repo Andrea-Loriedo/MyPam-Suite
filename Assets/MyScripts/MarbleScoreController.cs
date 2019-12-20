@@ -24,7 +24,6 @@ public class MarbleScoreController : MonoBehaviour {
 			// Needs optimising
 			score = game.GetScore();
 			scoreText.text = "Score: " + score;
-			// Debug.Log("Score = " + score);
 		}
 	}
 }

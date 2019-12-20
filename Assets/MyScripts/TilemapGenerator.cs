@@ -33,7 +33,7 @@ public class TilemapGenerator : MonoBehaviour
         {
             score++;
             DestroyCurrentMap();
-            // Debug.Log("Destroyed map number " + mapNumber);
+            Logger.Debug("Destroyed map number " + mapNumber);
             GenerateFromJson();
         }
     }
@@ -101,7 +101,7 @@ public class TilemapGenerator : MonoBehaviour
         {
             mapNumber = UnityEngine.Random.Range(0, mapsCount);
         }
-        Debug.Log("Generated map number " + mapNumber);
+        Logger.Debug("Generated map number " + mapNumber);
         previousMap = mapNumber;
         return mapNumber.ToString();
     }

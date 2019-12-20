@@ -46,7 +46,7 @@ public class SerialHandler: MonoBehaviour {
 
 		if (port == null)
 		{
-			Debug.LogError("port is null");
+			Logger.DebugError("port is null");
 			return;
 		}
 
@@ -82,7 +82,7 @@ public class SerialHandler: MonoBehaviour {
 					myPamPosition.x = x;
 					myPamPosition.y = y;
 
-					// Debug.Log(myPamPosition);
+					// Logger.Debug(myPamPosition);
 
 					myPamInput.x = Remap(	myPamPosition.x,
 											(myPamOrigin.x - radius),
@@ -98,7 +98,7 @@ public class SerialHandler: MonoBehaviour {
 											1
 					);
 
-					// Debug.Log(myPamInput);
+					// Logger.Debug(myPamInput);
 				}
         	}
 			
