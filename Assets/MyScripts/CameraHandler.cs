@@ -23,8 +23,6 @@ public class CameraHandler : MonoBehaviour {
 		sideCam.SetActive(false);
     }
 
-	
-	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(isoToggle))
 		{

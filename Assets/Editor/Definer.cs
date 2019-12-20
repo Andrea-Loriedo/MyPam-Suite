@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEditor;
  
-// Simple tool to enable/disable custom defines (e.g. log enabler)
+// Simple tool to add/remove custom defines (e.g. log enabler), accessible from the Tools menu
 public class Definer : EditorWindow
 {
-    [MenuItem("Tools/Definer")]
+    [MenuItem("Tools/Debug Messages")]
     private static void OpenWindow()
     {
         const float wndWidth = 200.0f;
@@ -12,7 +12,7 @@ public class Definer : EditorWindow
         var pos = new Vector2(0.5f * (Screen.currentResolution.width - wndWidth),
                               0.5f * (Screen.currentResolution.height - wndHeight));
         var window = GetWindow<Definer>();
-        window.titleContent = new GUIContent("Definer");
+        window.titleContent = new GUIContent("Logging");
         window.position = new Rect(pos, new Vector2(wndWidth, wndHeight));
     }
  
@@ -22,6 +22,7 @@ public class Definer : EditorWindow
         {
             EditorUtils.AddDefineIfNecessary("ENABLE_LOGS", BuildTargetGroup.Standalone);
         }
+
         if (GUILayout.Button("Disable"))
         {
             EditorUtils.RemoveDefineIfNecessary("ENABLE_LOGS", BuildTargetGroup.Standalone);
