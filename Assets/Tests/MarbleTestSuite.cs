@@ -6,12 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class MarbleTestSuite
 {
-    // A UnityTest behaves like a coroutine in PlayMode
-    // and allows you to yield null to skip a frame in EditMode
     [UnityTest]
-    public IEnumerator PlayModeTestingWithEnumeratorPasses() {
+    public IEnumerator GameIsInitialisedCorrectly() {
         SetupScene();
         yield return new WaitForSeconds(1);
+    }
+
+    [UnityTest]
+    public IEnumerator NewMazeIsGeneratedOnHoleCollision()
+    {
+        SetupScene();
+        Transform hole = GameObject.Find("Hole(Clone)").transform;
+        Transform marble = GameObject.Find("Marble").transform;
+
+        marble.transform.position = new Vector3(hole.position.x, hole.position.y, hole.position.z - 0.15f);
+
+        yield return new WaitForSeconds(0.1f);
+        
+        if(hole.GetComponent<TilemapGenerator>().CheckFall() == true)
+        {
+            yield break;
+        }
     }
 
     void SetupScene()

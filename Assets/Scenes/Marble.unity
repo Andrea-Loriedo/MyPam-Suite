@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e6d0c1a5d7c01468c2b55f92217641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comPort: COM19
+  comPort: COM15
   x: 0
   y: 0
   myPamOrigin: {x: 0, y: 0}

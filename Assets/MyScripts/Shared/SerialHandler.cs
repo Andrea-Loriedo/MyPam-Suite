@@ -8,22 +8,22 @@ public class SerialHandler: MonoBehaviour {
 
 	SerialPort port;
 	Thread portReadingThread;
-	public string comPort = "COM19";
+	public string comPort = "COM15";
 	public const int baudRate = 9600;
 	string strData;
 	bool looping;
 
 	[HideInInspector] public float x, y;
 	[HideInInspector] public Vector2 myPamOrigin, myPamPosition, myPamInput;
-	const int radius = 200;
+	const int radius = 100;
 
 	private void OnEnable()
 	{
 	 	looping = true;
 		portReadingThread = new Thread(ReadPort);
 		portReadingThread.Start();
-		myPamOrigin.x = - 156;
-		myPamOrigin.y = - 157;
+		myPamOrigin.x = 0;
+		myPamOrigin.y = 0;
 	}
 
 	private void OnDestroy()
@@ -62,7 +62,7 @@ public class SerialHandler: MonoBehaviour {
 
 		port.Open();
 		if (!port.IsOpen)
-			print("Port has not been open!");
+			Logger.Debug("Port has not been open!");
 		// send "START" command to the port
 		port.WriteLine("Start");
 		
@@ -98,7 +98,7 @@ public class SerialHandler: MonoBehaviour {
 											1
 					);
 
-					// Logger.Debug(myPamInput);
+					Logger.Debug(myPamInput);
 				}
         	}
 			

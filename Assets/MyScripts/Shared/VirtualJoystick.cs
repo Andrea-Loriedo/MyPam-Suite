@@ -10,28 +10,35 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	Image knob;
 	Vector2 input;
 
+	bool mouseControl;
+
 	public SerialHandler myPam;
 
 	private void Start ()
 	{
-		input = myPam.myPamInput;
+		mouseControl = false;
 		background = GetComponent<Image>(); 
 		knob = transform.GetChild(0).GetComponent<Image>();
 	}
 
 	public void Update ()
 	{
+		if(!mouseControl)
+		{
+			input = myPam.myPamInput;
+		}
 		MoveJoystick(input);
 	}
 
 	public virtual void OnPointerUp(PointerEventData ped)
 	{
-		input = myPam.myPamInput; // myPam override mouse control
+		mouseControl = false; // myPam override mouse control
 		knob.rectTransform.anchoredPosition = Vector2.zero;
 	}
 
 	public virtual void OnPointerDown(PointerEventData ped)
 	{
+		mouseControl = true;
 		OnDrag(ped);
 	}
 
