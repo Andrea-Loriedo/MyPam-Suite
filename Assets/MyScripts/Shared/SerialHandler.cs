@@ -69,38 +69,43 @@ public class SerialHandler: MonoBehaviour {
 		// start reading the data coming through the serial port
 		while (looping)
 		{
-			strData = port.ReadLine(); // blocking call
+			try{
+				strData = port.ReadLine(); // blocking call
 
-        	string[] coordinates = strData.Split(','); // Separate values
+				string[] coordinates = strData.Split(','); // Separate values
 
-        	for(int i = 0; i < 2; i++){
-				if(coordinates[i] != "") //Check if all values are recieved
-				{
-					x = float.Parse(coordinates[i++]);
-					y = float.Parse(coordinates[i++]);
+				for(int i = 0; i < 2; i++){
+					if(coordinates[i] != "") //Check if all values are recieved
+					{
+						x = float.Parse(coordinates[i++]);
+						y = float.Parse(coordinates[i++]);
 
-					myPamPosition.x = x;
-					myPamPosition.y = y;
+						myPamPosition.x = x;
+						myPamPosition.y = y;
 
-					// Logger.Debug(myPamPosition);
+						// Logger.Debug(myPamPosition);
 
-					myPamInput.x = Remap(	myPamPosition.x,
-											(myPamOrigin.x - radius),
-											(myPamOrigin.x + radius),
-											-1,
-											1
-					);
+						myPamInput.x = Remap(	myPamPosition.x,
+												(myPamOrigin.x - radius),
+												(myPamOrigin.x + radius),
+												-1,
+												1
+						);
 
-					myPamInput.y = Remap(	myPamPosition.y,
-											(myPamOrigin.y - radius),
-											(myPamOrigin.y + radius),
-											-1,
-											1
-					);
+						myPamInput.y = Remap(	myPamPosition.y,
+												(myPamOrigin.y - radius),
+												(myPamOrigin.y + radius),
+												-1,
+												1
+						);
 
-					Logger.Debug(myPamInput);
+						Logger.Debug(myPamInput);
+					}
 				}
-        	}
+			}	
+			catch(TimeoutException) {
+				throw;
+			}        	
 			
 			Thread.Sleep(0);
 		}

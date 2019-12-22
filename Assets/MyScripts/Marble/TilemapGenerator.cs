@@ -7,6 +7,7 @@ using MiniJSON;
 
 public class TilemapGenerator : MonoBehaviour
 {
+    string fileName = "marble_tilemaps.json";
     [SerializeField] GameObject plainTile;
     [SerializeField] GameObject holePrefab;
     [SerializeField] GameObject wall;
@@ -45,21 +46,24 @@ public class TilemapGenerator : MonoBehaviour
 
                 if(tilemap[i,j] == 0)
                 {
-                    GameObject tile = Instantiate(wall); // Create new instance of the wall prefab
+                    // Create new instance of the wall prefab
+                    GameObject tile = (GameObject)Instantiate(wall); 
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
                     tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
                     tile.transform.parent = transform;
                 }
                 else if(tilemap[i,j] == 1)
                 {
-                    GameObject tile = Instantiate(plainTile); // Create new instance of the tile prefab
+                    // Create new instance of the tile prefab
+                    GameObject tile = (GameObject)Instantiate(plainTile); 
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
                     tile.transform.localScale = new Vector3(tileSize, tileSize * 0.5f, tileSize);
                     tile.transform.parent = transform;
                 }
                 else if(tilemap[i,j] == 2)
                 {
-                    GameObject tile = Instantiate(holePrefab); // Create new instance of the hole prefab
+                    // Create new instance of the hole prefab
+                    GameObject tile = (GameObject)Instantiate(holePrefab); 
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
                     tile.transform.localScale = new Vector3(tileSize * 0.5f, tileSize * 0.5f, tileSize * 0.25f);
                     tile.transform.parent = transform;
@@ -73,12 +77,10 @@ public class TilemapGenerator : MonoBehaviour
 
     void GenerateFromJson()
     {
-        TextAsset file = (TextAsset) Resources.Load("marble_settings", typeof(TextAsset));
-        string jsonString = file.ToString();
-        var dict = Json.Deserialize(jsonString) as Dictionary<string,object>; // Deserialize JSON dictionary containing tilemaps
+        Dictionary<string,object> maps = LoadTilemaps();
 
-        var rows = (List<object>)dict[ShuffleMaps(dict.Count)]; // store the randomly picked JSON tilemap split into rows inside a list
-
+        // store the randomly picked JSON tilemap split into rows inside a list
+        var rows = (List<object>)maps[ShuffleMaps(maps.Count)]; 
         int[,] tileMap = new int[rows.Count,rows.Count];
 
         // go through each row and column in the tilemap and store the values into a 2D array
@@ -91,6 +93,24 @@ public class TilemapGenerator : MonoBehaviour
             }
         }
         PopulateGrid(rows.Count, size, tileMap);
+    }
+
+    Dictionary<string,object> LoadTilemaps()
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        if(File.Exists(filePath))
+        {
+            // Read the json from the file into a string
+            string jsonString = File.ReadAllText(filePath);   
+            // Deserialize JSON dictionary containing tilemaps
+            var dict = Json.Deserialize(jsonString) as Dictionary<string,object>; 
+            return dict;
+        }
+        else
+        {
+            Logger.DebugError("Couldn't load tilemap");
+            return null;
+        }
     }
 
     string ShuffleMaps(int mapsCount)
