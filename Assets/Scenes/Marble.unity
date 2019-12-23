@@ -1739,9 +1739,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f847bd58eda330442926beac163333bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plainTile: {fileID: 1939493160747742, guid: 5c73b64583a14034c9ec94761b206909, type: 2}
-  holePrefab: {fileID: 1544746082040886, guid: e26aa6bcfdd9bde41892a3241d4b9766, type: 2}
-  wall: {fileID: 1119973528815884, guid: b844b39e15bc28c489bb94e905a5e934, type: 2}
+  _plainTile: {fileID: 1939493160747742, guid: 5c73b64583a14034c9ec94761b206909, type: 2}
+  _hole: {fileID: 1544746082040886, guid: e26aa6bcfdd9bde41892a3241d4b9766, type: 2}
+  _wall: {fileID: 1119973528815884, guid: b844b39e15bc28c489bb94e905a5e934, type: 2}
   generator: {fileID: 223211720}
   fallDetection: {fileID: 0}
 --- !u!4 &1766633907

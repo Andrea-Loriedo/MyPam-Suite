@@ -1,36 +1,82 @@
 ﻿using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.SceneManagement;
 using NUnit.Framework;
 using System.Collections;
-using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using UnityEditor;
+using System;
+using System.IO;
 
-public class MarbleTestSuite
+namespace Tests
 {
-    [UnityTest]
-    public IEnumerator GameIsInitialisedCorrectly() {
-        SetupScene();
-        yield return new WaitForSeconds(1);
-    }
-
-    [UnityTest]
-    public IEnumerator NewMazeIsGeneratedOnHoleCollision()
+    public class HoleCollisionDetection
     {
-        SetupScene();
-        Transform hole = GameObject.Find("Hole(Clone)").transform;
-        Transform marble = GameObject.Find("Marble").transform;
 
-        marble.transform.position = new Vector3(hole.position.x, hole.position.y, hole.position.z - 0.15f);
-
-        yield return new WaitForSeconds(0.1f);
-        
-        if(hole.GetComponent<TilemapGenerator>().CheckFall() == true)
-        {
-            yield break;
+        [UnityTest]     
+        public IEnumerator GameIsInitialisedCorrectly() {
+            SetupScene();
+            yield return new WaitForSeconds(1);
         }
-    }
 
-    void SetupScene()
-    {
-        SceneManager.LoadScene("Marble");   
+        [UnityTest] 
+        public IEnumerator InstantitesHoleFromPrefab()
+        {
+            SetupScene();
+
+            LogAssert.ignoreFailingMessages = true;
+
+            GameObject hole = Resources.Load("Tests/Hole") as GameObject;
+            var tilemapGenerator = new GameObject().AddComponent<TilemapGenerator>();
+            tilemapGenerator.Construct(hole);
+
+            yield return null;
+
+            var spawnedHole = tilemapGenerator.transform.Find("Hole(Clone)");
+            var prefabOfTheSpawnedHole = PrefabUtility.GetCorrespondingObjectFromSource(spawnedHole);
+
+            Assert.AreEqual(spawnedHole, prefabOfTheSpawnedHole);
+        }
+        
+        [UnityTest]
+        public IEnumerator MarbleFallTriggersHole()
+        {
+            SetupScene();
+
+            LogAssert.ignoreFailingMessages = true;
+
+            bool fall = false;
+            GameObject hole = Resources.Load("Tests/Hole") as GameObject;
+            var collision = new GameObject().AddComponent<HoleCollisionCheck>();
+            var marble = new GameObject().AddComponent<MarbleController>();
+            var collider = hole.GetComponent<BoxCollider>();
+
+            collision.Construct(fall);
+
+            hole.transform.position = Vector3.zero;
+            marble.transform.position = collider.center;
+            
+            yield return new WaitForFixedUpdate(); 
+
+            Assert.IsFalse(fall);
+        }
+
+        [TearDown]
+        public void AfterEveryTest()
+        {
+            foreach (var gameObject in GameObject.FindGameObjectsWithTag("Hole"))
+            {
+                GameObject.Destroy(gameObject);
+            }
+            foreach (var gameObject in GameObject.FindObjectsOfType<TilemapGenerator>())
+            {
+                GameObject.Destroy(gameObject);
+            }
+        }
+
+        void SetupScene()
+        {
+            SceneManager.LoadScene("Marble");   
+        }
     }
 }

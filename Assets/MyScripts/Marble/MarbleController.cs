@@ -31,7 +31,7 @@ public class MarbleController : MonoBehaviour {
 
 	void Update()
 	{
-		if(map.CheckFall() == true)
+		if(map.LevelComplete() == true)
 		{
 			transform.position = initialPosition;
 		}

@@ -7,16 +7,22 @@ using UnityEngineInternal;
 
 public class HoleCollisionCheck : MonoBehaviour {
 
-	static bool fall; // Static makes it accessible across different instances of the Hole object
+	static bool _fall; // Static makes it accessible across different instances of the Hole object
+
 	[HideInInspector] public bool throughHole
 	{
-		get { return fall; }
+		get { return _fall; }
 		
 		set
 		{
-			fall = value;
-			Logger.Debug("Through hole reset to " + fall);
+			_fall = value;
+			Logger.Debug("Through hole reset to " + _fall);
 		}
+	}
+
+	public void Construct(bool fall)
+	{
+		_fall = fall;
 	}
 
 	void Awake()

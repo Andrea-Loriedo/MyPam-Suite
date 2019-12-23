@@ -8,9 +8,9 @@ using MiniJSON;
 public class TilemapGenerator : MonoBehaviour
 {
     string fileName = "marble_tilemaps.json";
-    [SerializeField] GameObject plainTile;
-    [SerializeField] GameObject holePrefab;
-    [SerializeField] GameObject wall;
+    [SerializeField] GameObject _plainTile;
+    [SerializeField] GameObject _hole;
+    [SerializeField] GameObject _wall;
     [SerializeField] RecursiveBacktracking generator;
     [HideInInspector] public HoleCollisionCheck fallDetection;
     GameObject hole;
@@ -21,6 +21,11 @@ public class TilemapGenerator : MonoBehaviour
 
     float size = 1f;
 
+    public void Construct(GameObject hole)
+    {
+        _hole = hole;
+    }
+
     void Awake()
     {
         score = 0;
@@ -30,7 +35,7 @@ public class TilemapGenerator : MonoBehaviour
 
     void Update()
     {
-        if(CheckFall() == true)
+        if(LevelComplete() == true)
         {
             score++;
             DestroyCurrentMap();
@@ -46,8 +51,8 @@ public class TilemapGenerator : MonoBehaviour
 
                 if(tilemap[i,j] == 0)
                 {
-                    // Create new instance of the wall prefab
-                    GameObject tile = (GameObject)Instantiate(wall); 
+                    // Create new instance of the _wall prefab
+                    GameObject tile = (GameObject)Instantiate(_wall); 
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
                     tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
                     tile.transform.parent = transform;
@@ -55,7 +60,7 @@ public class TilemapGenerator : MonoBehaviour
                 else if(tilemap[i,j] == 1)
                 {
                     // Create new instance of the tile prefab
-                    GameObject tile = (GameObject)Instantiate(plainTile); 
+                    GameObject tile = (GameObject)Instantiate(_plainTile); 
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
                     tile.transform.localScale = new Vector3(tileSize, tileSize * 0.5f, tileSize);
                     tile.transform.parent = transform;
@@ -63,7 +68,7 @@ public class TilemapGenerator : MonoBehaviour
                 else if(tilemap[i,j] == 2)
                 {
                     // Create new instance of the hole prefab
-                    GameObject tile = (GameObject)Instantiate(holePrefab); 
+                    GameObject tile = (GameObject)Instantiate(_hole); 
                     tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
                     tile.transform.localScale = new Vector3(tileSize * 0.5f, tileSize * 0.5f, tileSize * 0.25f);
                     tile.transform.parent = transform;
@@ -132,7 +137,7 @@ public class TilemapGenerator : MonoBehaviour
         GameObject.Destroy(child.gameObject);
     }
 
-    public bool CheckFall()
+    public bool LevelComplete()
 	{
         return fallDetection.throughHole;
 	}
