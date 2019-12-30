@@ -4,7 +4,8 @@ using System;
 using System.IO.Ports;
 using System.Threading;
 
-public class SerialHandler: MonoBehaviour {
+public class SerialHandler : MonoBehaviour
+{
 
 	SerialPort port;
 	Thread portReadingThread;
@@ -13,7 +14,7 @@ public class SerialHandler: MonoBehaviour {
 	string strData;
 	bool looping;
 
-	[HideInInspector] public float x, y;
+	public float x, y;
 	[HideInInspector] public Vector2 myPamOrigin, myPamPosition, myPamInput;
 	const int radius = 100;
 

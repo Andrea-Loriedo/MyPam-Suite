@@ -81,7 +81,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	}
 
 	// returns the horizontal component for marble direction based on the control input
-	public float Horizontal()
+	float Horizontal()
 	{
 		if(input.x != 0)
 			return input.x; 
@@ -90,11 +90,17 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	}
 
 	// returns the vertical component for marble direction based on the control input
-	public float Vertical()
+	float Vertical()
 	{
 		if(input.y != 0)
 			return input.y;
 		else
 			return Input.GetAxis("Vertical");
+	}
+
+	public Vector2 GetInput()
+	{
+		Vector2 inputVector = new Vector2(Horizontal(), Vertical());
+		return inputVector;
 	}
 }

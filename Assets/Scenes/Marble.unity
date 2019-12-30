@@ -1001,7 +1001,6 @@ MonoBehaviour:
   forward: {x: 0, y: 0, z: 0}
   right: {x: 0, y: 0, z: 0}
   speed: 30
-  movement: {fileID: 1034954154}
   map: {fileID: 1766633906}
 --- !u!1 &881215553
 GameObject:
@@ -1191,7 +1190,7 @@ GameObject:
   - component: {fileID: 1034954154}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Joystick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

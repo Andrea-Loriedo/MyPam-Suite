@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarbleController : MonoBehaviour {
-
+public class MarbleController : MonoBehaviour
+{
 	[HideInInspector] public Vector3 forward, right;
-	[SerializeField] float speed;
-	[SerializeField] VirtualJoystick movement;
+	[SerializeField] float speed; 
 	[SerializeField] TilemapGenerator map;
+	[SerializeField] VirtualJoystick input;
+	[HideInInspector] public IPlayerInput PlayerInput { get; set; }
 	Rigidbody rb;
-	Vector3 initialPosition
+	Vector3 initialPosition { get; set; }
+
+	void Awake()
 	{
-		get; set;
+		rb = GetComponent<Rigidbody>();
 	}
 
 	void Start () {
-		rb = GetComponent<Rigidbody>();
-		
-		forward = Camera.main.transform.forward; // vector aligned with the camera's forward vector
-		forward.y = 0; // ensure the y value is always going to be set to 0
-		forward = Vector3.Normalize(forward); // normalized vector for forward motion
-		right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // rotate right vector 90 degrees around the x axis to obtain -45 deg shift from the world x axis
+		InitCamera();
+		InitPlayer();
 		initialPosition = transform.localPosition;
  	}
 
 	void FixedUpdate () {
-		MoveMarble();
+ 		MoveMarble(PlayerInput.Input);
 		AddGravity();
 	}
 
@@ -37,14 +36,14 @@ public class MarbleController : MonoBehaviour {
 		}
 	}
 
-	void MoveMarble()
+	void MoveMarble(Vector2 input)
 	{
 		// define diamond workspace
-		Vector3 rightMovement = right * movement.Horizontal(); // define the "right" direction
-		Vector3 upMovement = forward * movement.Vertical(); // define the "forward" direction
+		Vector3 rightMovement = right * input.x; // define the "right" direction
+		Vector3 upMovement = forward * input.y; // define the "forward" direction
 		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * speed;
 
-		Vector3 direction = new Vector3(movement.Horizontal(), 0f, movement.Vertical()); 
+		Vector3 direction = new Vector3(input.x, 0f, input.y); 
 
 		if (direction != Vector3.zero) {
 			transform.forward = heading; // transform the world forward vector into the orthographic forward vector
@@ -56,6 +55,23 @@ public class MarbleController : MonoBehaviour {
 
 	void AddGravity()
 	{
-		rb.AddForce(Physics.gravity * (rb.mass * rb.mass)); // Have mass influence gravity
+		// Have mass influence gravity
+		rb.AddForce(Physics.gravity * (rb.mass * rb.mass)); 
+	}
+
+	void InitCamera()
+	{
+		forward = Camera.main.transform.forward; // vector aligned with the camera's forward vector
+		forward.y = 0; // ensure the y value is always going to be set to 0
+		forward = Vector3.Normalize(forward); // normalized vector for forward motion
+		// rotate right vector 90 degrees around the x axis to obtain -45 deg shift from the world x axis
+		right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; 
+	}
+
+	void InitPlayer()
+	{
+		// Create a new player input
+		if(PlayerInput == null)
+			PlayerInput = new PlayerInput();
 	}
 }
