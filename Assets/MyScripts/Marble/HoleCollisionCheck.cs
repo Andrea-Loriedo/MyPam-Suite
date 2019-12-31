@@ -33,6 +33,8 @@ public class HoleCollisionCheck : MonoBehaviour {
 	void OnTriggerExit(Collider other)
 	{
 		if(other.CompareTag("Marble"))
+		{
 			throughHole = true;
+		}
 	}
 }

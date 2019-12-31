@@ -4,7 +4,7 @@ public class PlayerInput : IPlayerInput
 {
    public VirtualJoystick input;
 
-   void Awake()
+   public PlayerInput()
    {
       input = GameObject.FindGameObjectsWithTag("Joystick")[0].GetComponent<VirtualJoystick>();
    }

@@ -100,7 +100,7 @@ public class SerialHandler : MonoBehaviour
 												1
 						);
 
-						// Logger.Debug(myPamInput);
+						Logger.Debug(myPamInput);
 					}
 				}
 			}	

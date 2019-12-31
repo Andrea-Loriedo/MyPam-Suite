@@ -15,7 +15,7 @@ public class TilemapGenerator : MonoBehaviour
     [HideInInspector] public HoleCollisionCheck fallDetection;
     GameObject hole;
 
-    [HideInInspector] public int mapNumber;
+    int mapNumber;
     int previousMap;
     int score;
 
@@ -38,7 +38,7 @@ public class TilemapGenerator : MonoBehaviour
         if(LevelComplete() == true)
         {
             score++;
-            DestroyCurrent();
+            DestroyCurrentMap();
             Logger.Debug("Destroyed map number " + mapNumber);
             GenerateFromJson();
         }
@@ -80,12 +80,12 @@ public class TilemapGenerator : MonoBehaviour
         fallDetection = hole.GetComponent<HoleCollisionCheck>();
     }
 
-    public void GenerateFromJson()
+    void GenerateFromJson()
     {
         Dictionary<string,object> maps = LoadTilemaps();
 
         // store the randomly picked JSON tilemap split into rows inside a list
-        var rows = (List<object>)maps[Shuffle(maps.Count)]; 
+        var rows = (List<object>)maps[ShuffleMaps(maps.Count)]; 
         int[,] tileMap = new int[rows.Count,rows.Count];
 
         // go through each row and column in the tilemap and store the values into a 2D array
@@ -97,7 +97,6 @@ public class TilemapGenerator : MonoBehaviour
                 tileMap[row, col] = Convert.ToInt32(tiles[col]);
             }
         }
-        
         PopulateGrid(rows.Count, size, tileMap);
     }
 
@@ -119,7 +118,7 @@ public class TilemapGenerator : MonoBehaviour
         }
     }
 
-    string Shuffle(int mapsCount)
+    string ShuffleMaps(int mapsCount)
     {
         mapNumber = UnityEngine.Random.Range(0, mapsCount);
 
@@ -132,13 +131,13 @@ public class TilemapGenerator : MonoBehaviour
         return mapNumber.ToString();
     }
 
-    public void DestroyCurrent()
+    void DestroyCurrentMap()
     {
         foreach (Transform child in transform)
         GameObject.Destroy(child.gameObject);
     }
 
-        public bool LevelComplete()
+    public bool LevelComplete()
 	{
         return fallDetection.throughHole;
 	}
