@@ -20,7 +20,7 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
 
     public void OnFall(Collider other)
     {
-        mazeGen.score++;
+        MyPamSessionManager.Instance.player.score++;
         other.gameObject.transform.position = marble.initialPosition;
         mazeGen.DestroyCurrent();
         Logger.Debug("Destroyed map number " + mazeGen.mapNumber);

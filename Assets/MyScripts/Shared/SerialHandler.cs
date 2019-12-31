@@ -14,7 +14,6 @@ public class SerialHandler : MonoBehaviour
 	string strData;
 	bool looping;
 
-	public float x, y;
 	[HideInInspector] public Vector2 myPamOrigin, myPamPosition, myPamInput;
 	const int radius = 100;
 
@@ -78,11 +77,8 @@ public class SerialHandler : MonoBehaviour
 				for (int i = 0; i < 2; i++){
 					if (coordinates[i] != "") //Check if all values are recieved
 					{
-						x = float.Parse(coordinates[i++]);
-						y = float.Parse(coordinates[i++]);
-
-						myPamPosition.x = x;
-						myPamPosition.y = y;
+						myPamPosition.x = float.Parse(coordinates[i++]);;
+						myPamPosition.y = float.Parse(coordinates[i++]);;
 
 						// Logger.Debug(myPamPosition);
 

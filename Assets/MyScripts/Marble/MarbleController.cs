@@ -19,21 +19,13 @@ public class MarbleController : MonoBehaviour
 
 	void Start () {
 		InitCamera();
-		InitPlayer();
+		InitInput();
 		initialPosition = transform.localPosition;
  	}
 
 	void FixedUpdate () {
  		MoveMarble(PlayerInput.Input);
 		AddGravity();
-	}
-
-	void Update()
-	{
-		// if(map.LevelComplete() == true)
-		// {
-		// 	transform.position = initialPosition;
-		// }
 	}
 
 	void MoveMarble(Vector2 input)
@@ -68,7 +60,7 @@ public class MarbleController : MonoBehaviour
 		right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; 
 	}
 
-	void InitPlayer()
+	void InitInput()
 	{
 		// Create a new player input
 		if (PlayerInput == null)

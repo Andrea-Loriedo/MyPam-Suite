@@ -6,14 +6,13 @@ using TMPro;
 
 public class MarbleScoreController : MonoBehaviour {
 
-	[SerializeField] TilemapGenerator game;
 	[SerializeField] TextMeshProUGUI scoreText;
 	int score;
 
 	// Use this for initialization
 	void Awake()
 	{
-		score = game.GetScore();
+		score = MyPamSessionManager.Instance.player.score;
 		// Set the text
 		scoreText.text = "Score: " + score;
 	}
@@ -22,7 +21,7 @@ public class MarbleScoreController : MonoBehaviour {
 	void Update () 
 	{
 		// Needs optimising
-		score = game.GetScore();
+		score = MyPamSessionManager.Instance.player.score;
 		scoreText.text = "Score: " + score;
 	}
 }
