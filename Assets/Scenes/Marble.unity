@@ -1001,7 +1001,6 @@ MonoBehaviour:
   forward: {x: 0, y: 0, z: 0}
   right: {x: 0, y: 0, z: 0}
   speed: 30
-  map: {fileID: 1766633906}
 --- !u!1 &881215553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,6 +1742,7 @@ MonoBehaviour:
   _wall: {fileID: 1119973528815884, guid: b844b39e15bc28c489bb94e905a5e934, type: 2}
   generator: {fileID: 223211720}
   fallDetection: {fileID: 0}
+  mapNumber: 0
 --- !u!4 &1766633907
 Transform:
   m_ObjectHideFlags: 0
@@ -1786,7 +1786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d4e8fa913ef3142a06a955d255af26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 1766633906}
   scoreText: {fileID: 355173368}
 --- !u!114 &2071084416
 MonoBehaviour:
