@@ -19,11 +19,10 @@ public class MarbleScoreController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
-		{
-			// Needs optimising
-			score = game.GetScore();
-			scoreText.text = "Score: " + score;
-		}
+	void Update () 
+	{
+		// Needs optimising
+		score = game.GetScore();
+		scoreText.text = "Score: " + score;
 	}
 }

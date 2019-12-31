@@ -24,28 +24,28 @@ public class CameraHandler : MonoBehaviour {
     }
 
 	void Update () {
-		if(Input.GetKeyDown(isoToggle))
+		if (Input.GetKeyDown(isoToggle))
 		{
 			isoCam.SetActive(true);
 			perspectiveCam.SetActive(false);
 			topDownCam.SetActive(false);
 			sideCam.SetActive(false);
 		}
-		else if(Input.GetKeyDown(perspToggle))
+		else if (Input.GetKeyDown(perspToggle))
 		{
 			isoCam.SetActive(false);
 			perspectiveCam.SetActive(true);
 			topDownCam.SetActive(false);
 			sideCam.SetActive(false);
 		}
-		else if(Input.GetKeyDown(topDownToggle))
+		else if (Input.GetKeyDown(topDownToggle))
 		{
 			isoCam.SetActive(false);
 			perspectiveCam.SetActive(false);
 			topDownCam.SetActive(true);
 			sideCam.SetActive(false);
 		}
-		else if(Input.GetKeyDown(sideToggle))
+		else if (Input.GetKeyDown(sideToggle))
 		{
 			isoCam.SetActive(false);
 			perspectiveCam.SetActive(false);

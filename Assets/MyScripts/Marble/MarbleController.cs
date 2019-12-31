@@ -9,8 +9,8 @@ public class MarbleController : MonoBehaviour
 	[SerializeField] TilemapGenerator map;
 	[SerializeField] VirtualJoystick input;
 	[HideInInspector] public IPlayerInput PlayerInput { get; set; }
+	[HideInInspector] public Vector3 initialPosition { get; set; }
 	Rigidbody rb;
-	Vector3 initialPosition { get; set; }
 
 	void Awake()
 	{
@@ -30,10 +30,10 @@ public class MarbleController : MonoBehaviour
 
 	void Update()
 	{
-		if(map.LevelComplete() == true)
-		{
-			transform.position = initialPosition;
-		}
+		// if(map.LevelComplete() == true)
+		// {
+		// 	transform.position = initialPosition;
+		// }
 	}
 
 	void MoveMarble(Vector2 input)
@@ -71,7 +71,7 @@ public class MarbleController : MonoBehaviour
 	void InitPlayer()
 	{
 		// Create a new player input
-		if(PlayerInput == null)
+		if (PlayerInput == null)
 			PlayerInput = new PlayerInput();
 	}
 }

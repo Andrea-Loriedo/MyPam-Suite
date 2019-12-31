@@ -15,9 +15,9 @@ public class TilemapGenerator : MonoBehaviour
     [HideInInspector] public HoleCollisionCheck fallDetection;
     GameObject hole;
 
-    int mapNumber;
+    [HideInInspector] public int mapNumber;
     int previousMap;
-    int score;
+    [HideInInspector] public int score;
 
     float size = 1f;
 
@@ -35,21 +35,21 @@ public class TilemapGenerator : MonoBehaviour
 
     void Update()
     {
-        if(LevelComplete() == true)
-        {
-            score++;
-            DestroyCurrentMap();
-            Logger.Debug("Destroyed map number " + mapNumber);
-            GenerateFromJson();
-        }
+        // if(LevelComplete() == true)
+        // {
+        //     score++;
+        //     DestroyCurrentMap();
+        //     Logger.Debug("Destroyed map number " + mapNumber);
+        //     GenerateFromJson();
+        // }
     }
 
     void PopulateGrid(int gridSize, float tileSize, int [,] tilemap)
     {
-        for(int i = 0; i<gridSize; i++){
-             for(int j= 0; j<gridSize; j++){
+        for (int i = 0; i<gridSize; i++){
+             for (int j= 0; j<gridSize; j++){
 
-                if(tilemap[i,j] == 0)
+                if (tilemap[i,j] == 0)
                 {
                     // Create new instance of the _wall prefab
                     GameObject tile = (GameObject)Instantiate(_wall); 
@@ -57,7 +57,7 @@ public class TilemapGenerator : MonoBehaviour
                     tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
                     tile.transform.parent = transform;
                 }
-                else if(tilemap[i,j] == 1)
+                else if (tilemap[i,j] == 1)
                 {
                     // Create new instance of the tile prefab
                     GameObject tile = (GameObject)Instantiate(_plainTile); 
@@ -65,7 +65,7 @@ public class TilemapGenerator : MonoBehaviour
                     tile.transform.localScale = new Vector3(tileSize, tileSize * 0.5f, tileSize);
                     tile.transform.parent = transform;
                 }
-                else if(tilemap[i,j] == 2)
+                else if (tilemap[i,j] == 2)
                 {
                     // Create new instance of the hole prefab
                     GameObject tile = (GameObject)Instantiate(_hole); 
@@ -80,12 +80,12 @@ public class TilemapGenerator : MonoBehaviour
         fallDetection = hole.GetComponent<HoleCollisionCheck>();
     }
 
-    void GenerateFromJson()
+    public void GenerateFromJson()
     {
         Dictionary<string,object> maps = LoadTilemaps();
 
         // store the randomly picked JSON tilemap split into rows inside a list
-        var rows = (List<object>)maps[ShuffleMaps(maps.Count)]; 
+        var rows = (List<object>)maps[Shuffle(maps.Count)]; 
         int[,] tileMap = new int[rows.Count,rows.Count];
 
         // go through each row and column in the tilemap and store the values into a 2D array
@@ -103,7 +103,7 @@ public class TilemapGenerator : MonoBehaviour
     Dictionary<string,object> LoadTilemaps()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
-        if(File.Exists(filePath))
+        if (File.Exists(filePath))
         {
             // Read the json from the file into a string
             string jsonString = File.ReadAllText(filePath);   
@@ -118,7 +118,7 @@ public class TilemapGenerator : MonoBehaviour
         }
     }
 
-    string ShuffleMaps(int mapsCount)
+    string Shuffle(int mapsCount)
     {
         mapNumber = UnityEngine.Random.Range(0, mapsCount);
 
@@ -131,16 +131,16 @@ public class TilemapGenerator : MonoBehaviour
         return mapNumber.ToString();
     }
 
-    void DestroyCurrentMap()
+    public void DestroyCurrent()
     {
         foreach (Transform child in transform)
         GameObject.Destroy(child.gameObject);
     }
 
-    public bool LevelComplete()
-	{
-        return fallDetection.throughHole;
-	}
+    // public bool LevelComplete()
+	// {
+    //     return fallDetection.throughHole;
+	// }
 
     // Needs optimising
     public int GetScore()

@@ -50,7 +50,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	void MoveJoystick(Vector2 controllerInput)
 	{
 		// clamp the joystick to its frame
-		if(input.magnitude > 1.0f)
+		if (input.magnitude > 1.0f)
 		{
 			input = input.normalized;
 		}
@@ -83,7 +83,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	// returns the horizontal component for marble direction based on the control input
 	float Horizontal()
 	{
-		if(input.x != 0)
+		if (input.x != 0)
 			return input.x; 
 		else
 			return Input.GetAxis("Horizontal");
@@ -92,7 +92,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	// returns the vertical component for marble direction based on the control input
 	float Vertical()
 	{
-		if(input.y != 0)
+		if (input.y != 0)
 			return input.y;
 		else
 			return Input.GetAxis("Vertical");

@@ -75,8 +75,8 @@ public class SerialHandler : MonoBehaviour
 
 				string[] coordinates = strData.Split(','); // Separate values
 
-				for(int i = 0; i < 2; i++){
-					if(coordinates[i] != "") //Check if all values are recieved
+				for (int i = 0; i < 2; i++){
+					if (coordinates[i] != "") //Check if all values are recieved
 					{
 						x = float.Parse(coordinates[i++]);
 						y = float.Parse(coordinates[i++]);
@@ -104,7 +104,7 @@ public class SerialHandler : MonoBehaviour
 					}
 				}
 			}	
-			catch(TimeoutException) {
+			catch (TimeoutException) {
 				throw;
 			}        	
 			
