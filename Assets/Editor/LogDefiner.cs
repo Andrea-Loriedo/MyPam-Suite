@@ -2,7 +2,7 @@
 using UnityEditor;
  
 // Simple tool to add/remove custom defines (e.g. log enabler), accessible from the Tools menu
-public class Definer : EditorWindow
+public class LogDefiner : EditorWindow
 {
     [MenuItem("Tools/Debug Messages")]
     private static void OpenWindow()
@@ -11,7 +11,7 @@ public class Definer : EditorWindow
         const float wndHeight = 200.0f;
         var pos = new Vector2(0.5f * (Screen.currentResolution.width - wndWidth),
                               0.5f * (Screen.currentResolution.height - wndHeight));
-        var window = GetWindow<Definer>();
+        var window = GetWindow<LogDefiner>();
         window.titleContent = new GUIContent("Logging");
         window.position = new Rect(pos, new Vector2(wndWidth, wndHeight));
     }

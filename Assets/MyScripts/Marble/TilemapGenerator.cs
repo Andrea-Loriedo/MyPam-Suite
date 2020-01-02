@@ -12,7 +12,6 @@ public class TilemapGenerator : MonoBehaviour
     [SerializeField] GameObject _hole;
     [SerializeField] GameObject _wall;
     [SerializeField] RecursiveBacktracking generator;
-    [HideInInspector] public HoleCollisionCheck fallDetection;
     GameObject hole;
 
     [HideInInspector] public int mapNumber;
@@ -75,9 +74,6 @@ public class TilemapGenerator : MonoBehaviour
                 }
             }
         }
-        // Get the instantiated hole object to access its collision detection method
-        hole = GameObject.FindWithTag("Hole");
-        fallDetection = hole.GetComponent<HoleCollisionCheck>();
     }
 
     public void GenerateFromJson()
@@ -136,11 +132,6 @@ public class TilemapGenerator : MonoBehaviour
         foreach (Transform child in transform)
         GameObject.Destroy(child.gameObject);
     }
-
-    // public bool LevelComplete()
-	// {
-    //     return fallDetection.throughHole;
-	// }
 
     // Needs optimising
     public int GetScore()

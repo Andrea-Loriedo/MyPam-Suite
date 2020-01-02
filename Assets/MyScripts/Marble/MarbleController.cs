@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class MarbleController : MonoBehaviour
 {
-	[HideInInspector] public Vector3 forward, right;
-	[SerializeField] float speed; 
-	[SerializeField] TilemapGenerator map;
-	[SerializeField] VirtualJoystick input;
-	[HideInInspector] public IPlayerInput PlayerInput { get; set; }
 	[HideInInspector] public Vector3 initialPosition { get; set; }
-	Rigidbody rb;
+	[HideInInspector] public Vector3 forward, right;
+	[HideInInspector] public Rigidbody rb;
+	[SerializeField] float speed = 30f; 
 
 	void Awake()
 	{
-		rb = GetComponent<Rigidbody>();
+		InitPhysics();
 	}
 
 	void Start () {
 		InitCamera();
-		InitInput();
 		initialPosition = transform.localPosition;
  	}
 
 	void FixedUpdate () {
- 		MoveMarble(PlayerInput.Input);
+ 		MoveMarble(GetInput());
+		#if !ENABLE_TESTING
 		AddGravity();
+		#endif
 	}
 
 	void MoveMarble(Vector2 input)
@@ -37,18 +36,14 @@ public class MarbleController : MonoBehaviour
 
 		Vector3 direction = new Vector3(input.x, 0f, input.y); 
 
+		#if !ENABLE_TESTING
 		if (direction != Vector3.zero) {
 			transform.forward = heading; // transform the world forward vector into the orthographic forward vector
+			// rb.AddTorque(heading * speed * Time.deltaTime);
 		}
+		#endif
 
 		rb.AddForce(heading);
-		rb.AddTorque(heading * speed * Time.deltaTime);
-	}
-
-	void AddGravity()
-	{
-		// Have mass influence gravity
-		rb.AddForce(Physics.gravity * (rb.mass * rb.mass)); 
 	}
 
 	void InitCamera()
@@ -60,10 +55,22 @@ public class MarbleController : MonoBehaviour
 		right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; 
 	}
 
-	void InitInput()
+	void InitPhysics()
 	{
-		// Create a new player input
-		if (PlayerInput == null)
-			PlayerInput = new PlayerInput();
+		rb = GetComponent<Rigidbody>();
+		rb.useGravity = true;
+		rb.mass = 3;
+		rb.drag = 4;
+	}
+	
+	void AddGravity()
+	{
+		// Have mass influence gravity
+		rb.AddForce(Physics.gravity * (rb.mass * rb.mass)); 
+	}
+
+	Vector2 GetInput()
+	{
+		return MyPamSessionManager.Instance.player.PlayerInput.Input;
 	}
 }
