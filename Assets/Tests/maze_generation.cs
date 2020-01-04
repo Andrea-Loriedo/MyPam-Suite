@@ -2,20 +2,48 @@
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 
 public class maze_generation {
 
     [Test]
-    public void maze_generationSimplePasses() {
-        // Use the Assert class to test conditions.
+    public void next_maze_is_never_the_same_as_previous()
+    {
+        // ARRANGE
+        TilemapGenerator maze = new TilemapGenerator();
+
+        // ACT
+        Dictionary<string,object> maps = maze.LoadTilemaps();
+        int n = maps.Count;
+        int previousMaze = int.Parse(maze.Shuffle(n));
+
+        // ASSERT
+        for (int i = 0; i < n-1; i++) 
+        {
+            int currentMaze = int.Parse(maze.Shuffle(n));
+            if (i != 0)
+                Assert.AreNotEqual(currentMaze, previousMaze);
+            previousMaze = currentMaze;
+        }
     }
 
-    // A UnityTest behaves like a coroutine in PlayMode
-    // and allows you to yield null to skip a frame in EditMode
-    [UnityTest]
-    public IEnumerator maze_generationWithEnumeratorPasses() {
-        // Use the Assert class to test conditions.
-        // yield to skip a frame
-        yield return null;
+    [Test]
+    public void mazes_are_cycled_through_without_repetition()
+    {
+        // ARRANGE
+        TilemapGenerator maze = new TilemapGenerator();
+
+        // ACT
+        Dictionary<string,object> maps = maze.LoadTilemaps();
+        int n = maps.Count;
+        List<int> usedMaps = new List<int>();
+
+        // ASSERT
+        for (int i = 0; i < n-1; i++) 
+        {
+            int currentMaze = int.Parse(maze.Shuffle(n));
+            Assert.IsFalse(usedMaps.Contains(currentMaze));
+            usedMaps.Add(currentMaze);
+        }
     }
 }

@@ -1,12 +1,14 @@
-﻿{
-	"name": "Tests",
-	"references": [
+{
+    "name": "Tests",
+    "references": [
         "MyPamAssembly"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false
 }

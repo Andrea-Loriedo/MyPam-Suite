@@ -11,19 +11,15 @@ public class TilemapGenerator
     [HideInInspector] public int mapNumber;
     [HideInInspector] public int score;
     List<int> usedMaps = new List<int>();
-
-    float size = 1f;
-    int previousMap;
+    float _tileSize = 1f;
 
     public Map GenerateFromJson()
     {
         Map maze = new Map();
         Dictionary<string,object> maps = LoadTilemaps();
-
         // store the randomly picked JSON tilemap split into rows inside a list
         var rows = (List<object>)maps[Shuffle(maps.Count)]; 
         int[,] tileMap = new int[rows.Count,rows.Count];
-
         // go through each row and column in the tilemap and store the values into a 2D array
         for (int row = 0; row < rows.Count; row++)
         {
@@ -31,15 +27,13 @@ public class TilemapGenerator
             for (int col = 0; col < rows.Count; col++)
                 tileMap[row, col] = Convert.ToInt32(tiles[col]);
         }
-
         maze.gridSize = rows.Count;
-        maze.tileSize = size;
+        maze.tileSize = _tileSize;
         maze.tileMap = tileMap;
-
         return maze;
     }
 
-    Dictionary<string,object> LoadTilemaps()
+    public Dictionary<string,object> LoadTilemaps()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         if (File.Exists(filePath))
@@ -49,7 +43,7 @@ public class TilemapGenerator
             // Deserialize JSON dictionary containing tilemaps
             var dict = Json.Deserialize(jsonString) as Dictionary<string,object>; 
             return dict;
-        }
+        } 
         else
         {
             Logger.DebugError("Couldn't load tilemap. Please make sure maps are included as a .json file");
@@ -57,7 +51,7 @@ public class TilemapGenerator
         }
     }
 
-    string Shuffle(int mapsCount)
+    public string Shuffle(int mapsCount)
     {
         int lastMap = UnityEngine.Random.Range(0, mapsCount);
         mapNumber = UnityEngine.Random.Range(0, mapsCount);
@@ -79,7 +73,7 @@ public class TilemapGenerator
         Logger.Debug("Generated map number " + mapNumber);
         return mapNumber.ToString();
     }
-}
+}  
 
 public struct Map
 {
