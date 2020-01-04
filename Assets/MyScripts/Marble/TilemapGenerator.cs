@@ -8,18 +8,22 @@ using MiniJSON;
 public class TilemapGenerator
 {
     string fileName = "marble_tilemaps.json";
-    [HideInInspector] public int mapNumber;
-    [HideInInspector] public int score;
-    List<int> usedMaps = new List<int>();
+    Dictionary<string,object> maps;
+    [HideInInspector] public static int mapNumber;
+    static List<int> usedMaps = new List<int>();
     float _tileSize = 1f;
+
+    public TilemapGenerator()
+    {
+        maps = LoadTilemaps();
+    }
 
     public Map GenerateFromJson()
     {
         Map maze = new Map();
-        Dictionary<string,object> maps = LoadTilemaps();
         // store the randomly picked JSON tilemap split into rows inside a list
         var rows = (List<object>)maps[Shuffle(maps.Count)]; 
-        int[,] tileMap = new int[rows.Count,rows.Count];
+        int[,] tileMap = new int[rows.Count, rows.Count];
         // go through each row and column in the tilemap and store the values into a 2D array
         for (int row = 0; row < rows.Count; row++)
         {
@@ -27,6 +31,8 @@ public class TilemapGenerator
             for (int col = 0; col < rows.Count; col++)
                 tileMap[row, col] = Convert.ToInt32(tiles[col]);
         }
+        // if ()
+        //     RotateTilemap(tileMap, rows.Count);
         maze.gridSize = rows.Count;
         maze.tileSize = _tileSize;
         maze.tileMap = tileMap;
@@ -51,7 +57,7 @@ public class TilemapGenerator
         }
     }
 
-    public string Shuffle(int mapsCount)
+    public static string Shuffle(int mapsCount)
     {
         int lastMap = UnityEngine.Random.Range(0, mapsCount);
         mapNumber = UnityEngine.Random.Range(0, mapsCount);
@@ -73,6 +79,19 @@ public class TilemapGenerator
         Logger.Debug("Generated map number " + mapNumber);
         return mapNumber.ToString();
     }
+
+    static int[,] RotateTilemap(int[,] tileMap, int n) 
+    {
+        int[,] rotatedTilemap = new int[n, n];
+
+        // Transpose and reverse each row
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                rotatedTilemap[i, j] = tileMap[n - j - 1, i]; 
+            }
+        }
+        return rotatedTilemap;
+    }
 }  
 
 public struct Map
@@ -81,7 +100,6 @@ public struct Map
     public float tileSize;
     public int [,] tileMap;
 }
-
 
 // "x": [
 //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],

@@ -15,12 +15,12 @@ public class maze_generation {
         // ACT
         Dictionary<string,object> maps = maze.LoadTilemaps();
         int n = maps.Count;
-        int previousMaze = int.Parse(maze.Shuffle(n));
+        int previousMaze = int.Parse(TilemapGenerator.Shuffle(n));
 
         // ASSERT
         for (int i = 0; i < n-1; i++) 
         {
-            int currentMaze = int.Parse(maze.Shuffle(n));
+            int currentMaze = int.Parse(TilemapGenerator.Shuffle(n));
             if (i != 0)
                 Assert.AreNotEqual(currentMaze, previousMaze);
             previousMaze = currentMaze;
@@ -41,7 +41,7 @@ public class maze_generation {
         // ASSERT
         for (int i = 0; i < n-1; i++) 
         {
-            int currentMaze = int.Parse(maze.Shuffle(n));
+            int currentMaze = int.Parse(TilemapGenerator.Shuffle(n));
             Assert.IsFalse(usedMaps.Contains(currentMaze));
             usedMaps.Add(currentMaze);
         }

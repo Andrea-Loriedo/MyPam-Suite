@@ -8,7 +8,7 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
     void Start()
     {
         #if !ENABLE_TESTING
-        GameObject mazeObj = transform.root.gameObject;
+        GameObject mazeObj = transform.parent.gameObject;
         marble = GameObject.FindGameObjectsWithTag("Marble")[0].GetComponent<MarbleController>();
         maze = mazeObj.GetComponent<Maze>();
         #endif
@@ -27,7 +27,7 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
     {
         #if !ENABLE_TESTING
         MyPamSessionManager.Instance.player.score++;
-        other.gameObject.transform.position = marble.initialPosition;
+        // other.gameObject.transform.position = marble.initialPosition;
         maze.DestroyCurrent();
         Logger.Debug($"Current score: {MyPamSessionManager.Instance.player.score}");
         maze.BuildMaze();
