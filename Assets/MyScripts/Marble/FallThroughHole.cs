@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class FallThroughHole: MonoBehaviour, IFallThrough
 {
-    TilemapGenerator mazeGen;
+    Maze maze;
     MarbleController marble;
 
     void Start()
     {
         #if !ENABLE_TESTING
-        GameObject maze = transform.root.gameObject;
+        GameObject mazeObj = transform.root.gameObject;
         marble = GameObject.FindGameObjectsWithTag("Marble")[0].GetComponent<MarbleController>();
-        mazeGen = maze.GetComponent<TilemapGenerator>();
+        maze = mazeObj.GetComponent<Maze>();
         #endif
     }
 
@@ -28,10 +28,9 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
         #if !ENABLE_TESTING
         MyPamSessionManager.Instance.player.score++;
         other.gameObject.transform.position = marble.initialPosition;
-        mazeGen.DestroyCurrent();
-        Logger.Debug("Destroyed map number " + mazeGen.mapNumber);
-        Logger.Debug($"Current score: {mazeGen.score}");
-        mazeGen.GenerateFromJson();
+        maze.DestroyCurrent();
+        Logger.Debug($"Current score: {MyPamSessionManager.Instance.player.score}");
+        maze.BuildMaze();
         #endif
     }
 }

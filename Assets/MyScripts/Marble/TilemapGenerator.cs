@@ -5,79 +5,19 @@ using System;
 using System.IO;
 using MiniJSON;
 
-public class TilemapGenerator : MonoBehaviour
+public class TilemapGenerator
 {
     string fileName = "marble_tilemaps.json";
-    [SerializeField] GameObject _plainTile;
-    [SerializeField] GameObject _hole;
-    [SerializeField] GameObject _wall;
-    [SerializeField] RecursiveBacktracking generator;
-    GameObject hole;
-
     [HideInInspector] public int mapNumber;
-    int previousMap;
     [HideInInspector] public int score;
+    List<int> usedMaps = new List<int>();
 
     float size = 1f;
+    int previousMap;
 
-    public void Construct(GameObject hole)
+    public Map GenerateFromJson()
     {
-        _hole = hole;
-    }
-
-    void Awake()
-    {
-        score = 0;
-        DontDestroyOnLoad(gameObject);
-        GenerateFromJson();
-    }
-
-    void Update()
-    {
-        // if(LevelComplete() == true)
-        // {
-        //     score++;
-        //     DestroyCurrentMap();
-        //     Logger.Debug("Destroyed map number " + mapNumber);
-        //     GenerateFromJson();
-        // }
-    }
-
-    void PopulateGrid(int gridSize, float tileSize, int [,] tilemap)
-    {
-        for (int i = 0; i<gridSize; i++){
-             for (int j= 0; j<gridSize; j++){
-
-                if (tilemap[i,j] == 0)
-                {
-                    // Create new instance of the _wall prefab
-                    GameObject tile = (GameObject)Instantiate(_wall); 
-                    tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
-                    tile.transform.parent = transform;
-                }
-                else if (tilemap[i,j] == 1)
-                {
-                    // Create new instance of the tile prefab
-                    GameObject tile = (GameObject)Instantiate(_plainTile); 
-                    tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize, tileSize * 0.5f, tileSize);
-                    tile.transform.parent = transform;
-                }
-                else if (tilemap[i,j] == 2)
-                {
-                    // Create new instance of the hole prefab
-                    GameObject tile = (GameObject)Instantiate(_hole); 
-                    tile.transform.position = new Vector3(i*tileSize, 0, j*tileSize);
-                    tile.transform.localScale = new Vector3(tileSize * 0.5f, tileSize * 0.5f, tileSize * 0.25f);
-                    tile.transform.parent = transform;
-                }
-            }
-        }
-    }
-
-    public void GenerateFromJson()
-    {
+        Map maze = new Map();
         Dictionary<string,object> maps = LoadTilemaps();
 
         // store the randomly picked JSON tilemap split into rows inside a list
@@ -89,11 +29,14 @@ public class TilemapGenerator : MonoBehaviour
         {
             var tiles = (List<object>)rows[row];
             for (int col = 0; col < rows.Count; col++)
-            {
                 tileMap[row, col] = Convert.ToInt32(tiles[col]);
-            }
         }
-        PopulateGrid(rows.Count, size, tileMap);
+
+        maze.gridSize = rows.Count;
+        maze.tileSize = size;
+        maze.tileMap = tileMap;
+
+        return maze;
     }
 
     Dictionary<string,object> LoadTilemaps()
@@ -109,46 +52,52 @@ public class TilemapGenerator : MonoBehaviour
         }
         else
         {
-            Logger.DebugError("Couldn't load tilemap");
+            Logger.DebugError("Couldn't load tilemap. Please make sure maps are included as a .json file");
             return null;
         }
     }
 
     string Shuffle(int mapsCount)
     {
+        int lastMap = UnityEngine.Random.Range(0, mapsCount);
         mapNumber = UnityEngine.Random.Range(0, mapsCount);
 
-        while (mapNumber == previousMap)
+        // Always pick a map different from all the previously used ones
+        while (usedMaps.Contains(mapNumber) || mapNumber == lastMap)
         {
             mapNumber = UnityEngine.Random.Range(0, mapsCount);
         }
+        
+        usedMaps.Add(mapNumber);
+
+        if(usedMaps.Count == mapsCount)
+        {
+            lastMap = usedMaps[usedMaps.Count-1];
+            usedMaps.Clear();
+        }
+
         Logger.Debug("Generated map number " + mapNumber);
-        previousMap = mapNumber;
         return mapNumber.ToString();
-    }
-
-    public void DestroyCurrent()
-    {
-        foreach (Transform child in transform)
-        GameObject.Destroy(child.gameObject);
-    }
-
-    // Needs optimising
-    public int GetScore()
-    {
-        return score;
     }
 }
 
-    // "x": [
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
-    //     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
-    // ]
+public struct Map
+{
+    public int gridSize;
+    public float tileSize;
+    public int [,] tileMap;
+}
+
+
+// "x": [
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+// ]
