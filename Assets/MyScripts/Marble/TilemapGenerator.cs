@@ -7,11 +7,11 @@ using MiniJSON;
 
 public class TilemapGenerator
 {
-    string fileName = "marble_tilemaps.json";
     Dictionary<string,object> maps;
     [HideInInspector] public static int mapNumber;
     static List<int> usedMaps = new List<int>();
-    float _tileSize = 1f;
+    float tileSize = 1f;
+    string fileName = "marble_tilemaps.json";
 
     public TilemapGenerator()
     {
@@ -34,7 +34,7 @@ public class TilemapGenerator
         // if ()
         //     RotateTilemap(tileMap, rows.Count);
         maze.gridSize = rows.Count;
-        maze.tileSize = _tileSize;
+        maze.tileSize = tileSize;
         maze.tileMap = tileMap;
         return maze;
     }
@@ -78,19 +78,6 @@ public class TilemapGenerator
 
         Logger.Debug("Generated map number " + mapNumber);
         return mapNumber.ToString();
-    }
-
-    static int[,] RotateTilemap(int[,] tileMap, int n) 
-    {
-        int[,] rotatedTilemap = new int[n, n];
-
-        // Transpose and reverse each row
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                rotatedTilemap[i, j] = tileMap[n - j - 1, i]; 
-            }
-        }
-        return rotatedTilemap;
     }
 }  
 

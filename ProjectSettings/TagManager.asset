@@ -9,6 +9,7 @@ TagManager:
   - Hole
   - Joystick
   - Maze
+  - Start
   layers:
   - Default
   - TransparentFX

@@ -28,7 +28,6 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
         #if !ENABLE_TESTING
         MyPamSessionManager.Instance.player.score++;
         // other.gameObject.transform.position = marble.initialPosition;
-        maze.DestroyCurrent();
         Logger.Debug($"Current score: {MyPamSessionManager.Instance.player.score}");
         maze.BuildMaze();
         #endif

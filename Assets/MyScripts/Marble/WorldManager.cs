@@ -4,40 +4,60 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
-    int counter;
-    Maze [] level;
+    Transform[] levels;
+
+    // public static Maze nextMaze { get; private set; }
+    // public static Maze currentMaze { get; private set; }
 
     void Start()
     {
-        counter = MyPamSessionManager.Instance.player.score;
-        GetLevels();
+        levels = GetLevels();
+        StartCoroutine(AdjustWorldOrientation());
     }
 
-    void Update()
+    IEnumerator AdjustWorldOrientation()
     {
-        // while
+        for (int i = 0; i < levels.Length-1; i++) {
+            if (levels[i+1] != null)
+                while (GetHolePos(levels[i]) != GetStartPos(levels[i+1]))
+                    levels[i+1].Rotate(90, 0, 0);
+        }
+        yield return null;
+    } 
+
+    Transform[] GetLevels()
+    {
+        Transform[] levels = new Transform[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
+           levels[i] = transform.GetChild(i);
+        return levels;
     }
 
-    void AdjustWorldOrientation()
+    Vector2 GetHolePos(Transform level)
     {
-        // while (FindHole.transform.position.z)
+        Vector2 holePos = new Vector2();
+
+        foreach (Transform child in level)
+        {
+            if (child.tag == "Hole") {
+                holePos.x = child.position.x;
+                holePos.y = child.position.y;
+            }      
+        }
+        return holePos;
     }
 
-    void GetLevels()
+    Vector2 GetStartPos(Transform level)
     {
-        for (int i = 0; i < 3; i++)
-           level[i] = GameObject.FindGameObjectsWithTag("Maze")[i].GetComponent<Maze>();
-    }
+        Vector2 startPos = new Vector2();
 
-    GameObject FindHole(Maze level)
-    {
-        GameObject hole = level.FindGameObjectsWithTag("Hole")[0];
-        return startTile;
-    }
-
-    GameObject FindStartTile(Maze level)
-    {
-        GameObject startTile = level.FindGameObjectsWithTag("Start")[0];
-        return startTile;
+        foreach (Transform child in level)
+        {
+            if (child.tag == "Start") {
+                startPos.x = child.position.z;
+                startPos.y = child.position.x;
+            }      
+        }
+        return startPos;
     }
 }

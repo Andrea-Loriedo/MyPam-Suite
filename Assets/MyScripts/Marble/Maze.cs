@@ -8,9 +8,6 @@ public class Maze : MonoBehaviour
     [SerializeField] GameObject _plainTile;
     [SerializeField] GameObject _hole;
     [SerializeField] GameObject _wall;
-    // public static Maze nextMaze { get; private set; }
-    // public static Maze currentMaze { get; private set; }
-    // public static Maze previousMaze { get; private set; }
 
     void Awake()
     {
@@ -22,6 +19,7 @@ public class Maze : MonoBehaviour
     public void BuildMaze()
     {
         Map maze = generator.GenerateFromJson();
+        DestroyCurrent();
 
         for (int i = 0; i < maze.gridSize; i++){
              for (int j = 0; j < maze.gridSize; j++){
@@ -50,10 +48,7 @@ public class Maze : MonoBehaviour
                     GameObject hole = (GameObject)Instantiate(_hole); 
                     hole.transform.parent = transform;
                     hole.transform.localPosition = new Vector3(i * maze.tileSize, Vector3.zero.y, j * maze.tileSize);
-                    hole.transform.localScale = new Vector3(    maze.tileSize * 0.5f,
-                                                                maze.tileSize * 0.5f, 
-                                                                maze.tileSize * 0.25f
-                    );
+                    hole.transform.localScale = new Vector3(maze.tileSize * 0.5f, maze.tileSize * 0.5f, maze.tileSize * 0.25f);
                 }
             }
         }
@@ -61,14 +56,20 @@ public class Maze : MonoBehaviour
 
     void AddStartTileTag(int row, int  column, Map maze, GameObject startTile)
     {
-        int firstTile = maze.gridSize - 1;
-        if (row == firstTile == column)
-            startTile.tag == "Start";
+        // Default gridSize = 10 (counting borders)
+        int mapLength = maze.gridSize;
+        int mapHeight = maze.gridSize;
+
+        if (row == mapLength-2 && column == mapLength-2)
+        {
+            startTile.tag = "Start";
+        }
     }
 
-    public void DestroyCurrent()
+    void DestroyCurrent()
     {
         foreach (Transform child in transform)
-        GameObject.Destroy(child.gameObject);
+            if(child != null)
+                GameObject.Destroy(child.gameObject);
     }
 }

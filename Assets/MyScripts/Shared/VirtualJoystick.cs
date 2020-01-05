@@ -54,10 +54,6 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 		{
 			input = input.normalized;
 		}
-		else
-		{
-			input = input;
-		}
 
 		knob.rectTransform.anchoredPosition = new Vector2(input.x * (background.rectTransform.sizeDelta.x/2), input.y * (background.rectTransform.sizeDelta.x/2));
 	}
