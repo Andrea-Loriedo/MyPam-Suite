@@ -12,6 +12,7 @@ public class TilemapGenerator
     static List<int> usedMaps = new List<int>();
     float tileSize = 1f;
     string fileName = "marble_tilemaps.json";
+    // [HideInInspector] public int gridSize;
 
     public TilemapGenerator()
     {
@@ -31,8 +32,7 @@ public class TilemapGenerator
             for (int col = 0; col < rows.Count; col++)
                 tileMap[row, col] = Convert.ToInt32(tiles[col]);
         }
-        // if ()
-        //     RotateTilemap(tileMap, rows.Count);
+
         maze.gridSize = rows.Count;
         maze.tileSize = tileSize;
         maze.tileMap = tileMap;

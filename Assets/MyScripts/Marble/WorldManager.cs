@@ -4,60 +4,92 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
-    Transform[] levels;
+    // TilemapGenerator generator;
+    Maze [] levels;
 
     // public static Maze nextMaze { get; private set; }
     // public static Maze currentMaze { get; private set; }
 
+    void Awake()
+    {
+        // generator = new TilemapGenerator();
+    }
+
     void Start()
     {
         levels = GetLevels();
-        StartCoroutine(AdjustWorldOrientation());
     }
 
-    IEnumerator AdjustWorldOrientation()
+    // void Update()
+    // {
+    //     Vector2 holePos = GetHolePos(levels[0]);
+    //     Vector2 startPos = GetStartPos(levels[1]);
+    //     Logger.Debug($"hole: {holePos}, start: {startPos}");
+    // }
+
+    int[] [,] AdjustWorldOrientation()
     {
+        List<Vector2> hole = FindHole();
+        List<Vector2> start = FindStart();
+        int[] [,] rotatedTilemap = new int [levels.Length-1] [,];
+
         for (int i = 0; i < levels.Length-1; i++) {
             if (levels[i+1] != null)
-                while (GetHolePos(levels[i]) != GetStartPos(levels[i+1]))
-                    levels[i+1].Rotate(90, 0, 0);
+                while (hole[i+1] != start[i])
+                rotatedTilemap[i] = RotateTilemap(levels[i].maze.tileMap, levels[i].maze.gridSize);
         }
-        yield return null;
+        return rotatedTilemap;
     } 
 
-    Transform[] GetLevels()
+    Maze [] GetLevels()
     {
-        Transform[] levels = new Transform[transform.childCount];
+        Maze [] levels = new Maze[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
-           levels[i] = transform.GetChild(i);
+           levels[i] = gameObject.GetComponentInChildren<Maze>();
         return levels;
     }
-
-    Vector2 GetHolePos(Transform level)
+    
+    int[,] RotateTilemap(int[,] tileMap, int n) 
     {
-        Vector2 holePos = new Vector2();
+        int[,] rotatedTilemap = new int[n, n];
 
-        foreach (Transform child in level)
-        {
-            if (child.tag == "Hole") {
-                holePos.x = child.position.x;
-                holePos.y = child.position.y;
-            }      
+        // Transpose and reverse each row
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                rotatedTilemap[i, j] = tileMap[n - j - 1, i]; 
+            }
         }
-        return holePos;
+        return rotatedTilemap;
     }
 
-    Vector2 GetStartPos(Transform level)
+    List<Vector2> FindStart()
     {
-        Vector2 startPos = new Vector2();
+        List<Vector2> startTiles = new List<Vector2>();
 
-        foreach (Transform child in level)
+        foreach(Maze level in levels) 
         {
-            if (child.tag == "Start") {
-                startPos.x = child.position.z;
-                startPos.y = child.position.x;
-            }      
+            Vector2 startPos = new Vector2(     level.maze.gridSize-2,
+                                                level.maze.gridSize-2
+            );
+            startTiles.Add(startPos);
         }
-        return startPos;
+        return startTiles;
+    }
+
+    List<Vector2> FindHole()
+    {
+        List<Vector2> holes = new List<Vector2>();
+
+        foreach(Maze level in levels) {
+            for (int i = 0; i < level.maze.gridSize; i++){
+                for (int j = 0; j < level.maze.gridSize; j++){
+                    if (level.maze.tileMap[i,j] == 2) {
+                        Vector2 holePos = new Vector2(i,j);
+                        holes.Add(holePos);
+                    }
+                }
+            }
+        }
+        return holes;
     }
 }

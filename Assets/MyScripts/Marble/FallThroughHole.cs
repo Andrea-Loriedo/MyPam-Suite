@@ -4,6 +4,13 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
 {
     Maze maze;
     MarbleController marble;
+    TilemapGenerator generator;
+    Map map;
+
+    void Awake()
+    {
+        generator = new TilemapGenerator();
+    }
 
     void Start()
     {
@@ -28,8 +35,9 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
         #if !ENABLE_TESTING
         MyPamSessionManager.Instance.player.score++;
         // other.gameObject.transform.position = marble.initialPosition;
-        Logger.Debug($"Current score: {MyPamSessionManager.Instance.player.score}");
-        maze.BuildMaze();
+        // Logger.Debug($"Current score: {MyPamSessionManager.Instance.player.score}");
+        // maze.CreateNew();
+        // maze.BuildMaze(map);
         #endif
     }
 }

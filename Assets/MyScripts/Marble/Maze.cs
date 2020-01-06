@@ -8,17 +8,23 @@ public class Maze : MonoBehaviour
     [SerializeField] GameObject _plainTile;
     [SerializeField] GameObject _hole;
     [SerializeField] GameObject _wall;
-
+    [HideInInspector] public Map maze;
+    
     void Awake()
     {
         // DontDestroyOnLoad(gameObject);
         generator = new TilemapGenerator();
-        BuildMaze();
+        CreateNew();
+        BuildMaze(maze);
     }    
 
-    public void BuildMaze()
+    public void CreateNew()
     {
-        Map maze = generator.GenerateFromJson();
+        maze = generator.GenerateFromJson();
+    }
+
+    public void BuildMaze(Map maze)
+    {
         DestroyCurrent();
 
         for (int i = 0; i < maze.gridSize; i++){
@@ -31,7 +37,6 @@ public class Maze : MonoBehaviour
                     wall.transform.parent = transform;
                     wall.transform.localPosition = new Vector3(i * maze.tileSize, Vector3.zero.y, j * maze.tileSize);
                     wall.transform.localScale = new Vector3(maze.tileSize, 1, maze.tileSize);
-
                 }
                 else if (maze.tileMap[i,j] == 1)
                 {
