@@ -5,50 +5,89 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     // TilemapGenerator generator;
-    Maze [] levels;
-
-    // public static Maze nextMaze { get; private set; }
-    // public static Maze currentMaze { get; private set; }
+    Map[] world;
+    Maze[] levels;
+    int[] [,] maps;
 
     void Awake()
     {
-        // generator = new TilemapGenerator();
+        
     }
-
     void Start()
     {
-        levels = GetLevels();
+        // generator = new TilemapGenerator();
+        levels = GetLevelsInScene(); // Gets every maze component in the scene
+        CreateInitialWorld();
     }
 
-    // void Update()
-    // {
-    //     Vector2 holePos = GetHolePos(levels[0]);
-    //     Vector2 startPos = GetStartPos(levels[1]);
-    //     Logger.Debug($"hole: {holePos}, start: {startPos}");
-    // }
-
-    int[] [,] AdjustWorldOrientation()
+    void Update()
     {
-        List<Vector2> hole = FindHole();
-        List<Vector2> start = FindStart();
-        int[] [,] rotatedTilemap = new int [levels.Length-1] [,];
-
-        for (int i = 0; i < levels.Length-1; i++) {
-            if (levels[i+1] != null)
-                while (hole[i+1] != start[i])
-                rotatedTilemap[i] = RotateTilemap(levels[i].maze.tileMap, levels[i].maze.gridSize);
+        if (Input.GetKeyDown("space"))
+        {
+            RotateTilemap(world[1].currentMap, TilemapGenerator.gridSize);
+            world = BuildWorld(); // Gotta updatw world
+            Logger.Debug($"Start: {world[1].startPos}, Hole: {world[1].previousHolePos}");
         }
-        return rotatedTilemap;
-    } 
+    }
 
-    Maze [] GetLevels()
+    Maze[] GetLevelsInScene()
     {
         Maze [] levels = new Maze[transform.childCount];
-        for (int i = 0; i < transform.childCount; i++)
-           levels[i] = gameObject.GetComponentInChildren<Maze>();
+
+        for (int i = 0; i < levels.Length; i++){
+            levels[i] = transform.GetChild(i).GetComponent<Maze>();
+        }
         return levels;
     }
-    
+
+    void CreateInitialWorld()
+    {
+        maps = new int[levels.Length] [,];
+        // Generate initial tilemap for each level in the scene
+        for (int i = 0; i < levels.Length; i++)
+            maps[i] = TilemapGenerator.GenerateFromJson();
+        
+        world = BuildWorld();
+
+        // StartCoroutine(AdjustOrientation(world));
+
+        for (int i = 0; i < levels.Length; i++)
+        {
+            levels[i].BuildMaze(world[i].currentMap);
+        }
+    }
+
+    Map[] BuildWorld()
+    {
+        Map[] world = new Map[levels.Length];
+
+        // Assign world parameters to each map and store into a Map struct
+        for (int i = 1; i < levels.Length; i++)
+        {
+            world[i].previousMap = maps[i-1];
+            world[i].currentMap = maps[i];
+            world[i].previousHolePos = FindHole(world[i].previousMap);
+            world[i].startPos = FindStart(world[i].currentMap);
+        }
+        world[0].currentMap = maps[0];
+        world[0].previousMap = world[0].currentMap;
+        world[0].startPos = FindStart(world[0].currentMap);
+        return world;
+    }
+
+    IEnumerator AdjustOrientation(Map[] world)
+    {
+        int[] [,] rotatedTilemaps = new int[levels.Length] [,];
+        // Top map is what every other rotation is based off, hence
+        world[0].rotatedMap = world[0].currentMap;
+        for (int i = 1; i < levels.Length; i++)
+            while (world[i].previousHolePos != world[i].startPos)
+                world[i].rotatedMap = RotateTilemap(     world[i].currentMap, 
+                                                    TilemapGenerator.gridSize
+        );
+        yield return null;
+    } 
+
     int[,] RotateTilemap(int[,] tileMap, int n) 
     {
         int[,] rotatedTilemap = new int[n, n];
@@ -62,34 +101,36 @@ public class WorldManager : MonoBehaviour
         return rotatedTilemap;
     }
 
-    List<Vector2> FindStart()
+    Vector2 FindHole(int [,] tileMap)
     {
-        List<Vector2> startTiles = new List<Vector2>();
+        Vector2 holePos = new Vector2();
 
-        foreach(Maze level in levels) 
-        {
-            Vector2 startPos = new Vector2(     level.maze.gridSize-2,
-                                                level.maze.gridSize-2
-            );
-            startTiles.Add(startPos);
-        }
-        return startTiles;
+        for (int i = 0; i < TilemapGenerator.gridSize; i++)
+            for (int j = 0; j < TilemapGenerator.gridSize; j++)
+                if (tileMap[i,j] == 2)
+                    holePos = new Vector2(i,j);
+        return holePos;
     }
 
-    List<Vector2> FindHole()
+    Vector2 FindStart(int [,] tileMap)
     {
-        List<Vector2> holes = new List<Vector2>();
+        Vector2 startPos = new Vector2();
 
-        foreach(Maze level in levels) {
-            for (int i = 0; i < level.maze.gridSize; i++){
-                for (int j = 0; j < level.maze.gridSize; j++){
-                    if (level.maze.tileMap[i,j] == 2) {
-                        Vector2 holePos = new Vector2(i,j);
-                        holes.Add(holePos);
-                    }
-                }
-            }
-        }
-        return holes;
+        for (int i = 0; i < TilemapGenerator.gridSize; i++)
+            for (int j = 0; j < TilemapGenerator.gridSize; j++)
+                if (tileMap[i,j] == 3)
+                    startPos = new Vector2(i,j);
+        return startPos;
     }
 }
+
+    // [System.Serializable]
+    public struct Map
+    {
+        public string internalName;
+        public int[,] previousMap;
+        public int[,] currentMap;
+        public int[,] rotatedMap;
+        public Vector2 previousHolePos;
+        public Vector2 startPos;
+    }

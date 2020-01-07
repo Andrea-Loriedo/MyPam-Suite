@@ -4,12 +4,11 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
 {
     Maze maze;
     MarbleController marble;
-    TilemapGenerator generator;
-    Map map;
+    // TilemapGenerator generator;
 
     void Awake()
     {
-        generator = new TilemapGenerator();
+        // generator = new TilemapGenerator();
     }
 
     void Start()

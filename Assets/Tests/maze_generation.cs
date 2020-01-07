@@ -10,10 +10,10 @@ public class maze_generation {
     public void next_maze_is_never_the_same_as_previous()
     {
         // ARRANGE
-        TilemapGenerator maze = new TilemapGenerator();
+        // TilemapGenerator maze = new TilemapGenerator();
 
         // ACT
-        Dictionary<string,object> maps = maze.LoadTilemaps();
+        Dictionary<string,object> maps = TilemapGenerator.LoadTilemaps();
         int n = maps.Count;
         int previousMaze = int.Parse(TilemapGenerator.Shuffle(n));
 
@@ -31,10 +31,10 @@ public class maze_generation {
     public void mazes_are_cycled_through_without_repetition()
     {
         // ARRANGE
-        TilemapGenerator maze = new TilemapGenerator();
+        // TilemapGenerator maze = new TilemapGenerator();
 
         // ACT
-        Dictionary<string,object> maps = maze.LoadTilemaps();
+        Dictionary<string,object> maps = TilemapGenerator.LoadTilemaps();
         int n = maps.Count;
         List<int> usedMaps = new List<int>();
 
