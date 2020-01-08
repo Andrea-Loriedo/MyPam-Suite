@@ -74,7 +74,7 @@ public static class TilemapGenerator
             usedMaps.Clear();
         }
 
-        Logger.Debug("Generated map number " + mapNumber);
+        // Logger.Debug("Generated map number " + mapNumber);
         return mapNumber.ToString();
     }
 }  

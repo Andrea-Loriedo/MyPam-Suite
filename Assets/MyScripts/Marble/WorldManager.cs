@@ -5,87 +5,105 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     // TilemapGenerator generator;
-    Map[] world;
+    Map[] maps;
     Maze[] levels;
-    int[] [,] maps;
+                Vector2 prevHole;
+            Vector2 start;
 
-    void Awake()
-    {
-        
-    }
+
     void Start()
     {
-        // generator = new TilemapGenerator();
-        levels = GetLevelsInScene(); // Gets every maze component in the scene
-        CreateInitialWorld();
+        levels = GetLevelsInScene();
+        maps = new Map[levels.Length];
+
+        // Generate an initial random map for each level
+        for (int i = 0; i < levels.Length; i++)
+            maps[i].currentMap = GenerateNewMap();
+        
+        // // Define the level hierarchy
+        for (int i = 0; i < levels.Length; i++)
+            UpdateHierarchy(maps[i], i);
+
+        // Adjust level orientation based on position in hierarchy
+        for (int i = 0; i < levels.Length; i++)
+            AdjustOrientation(maps[i]);
+
+        // Build each maze based on updated tilemaps
+        for (int i = 0; i < levels.Length; i++)
+            levels[i].BuildMaze(maps[i].currentMap);
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            RotateTilemap(world[1].currentMap, TilemapGenerator.gridSize);
-            world = BuildWorld(); // Gotta updatw world
-            Logger.Debug($"Start: {world[1].startPos}, Hole: {world[1].previousHolePos}");
-        }
+        // if (Input.GetKeyDown("space"))
+        // {
+        //     Vector2 prevHole = FindHole(maps[0].currentMap);
+        //     Vector2 start = FindStart(maps[1].currentMap);
+        //     AdjustOrientation(maps[1]);
+        //     for (int i = 0; i < levels.Length; i++)
+        //         UpdateHierarchy(maps[i], i);
+        //     Logger.Debug($"Hole: {prevHole}, Start: {start}");
+        
+        // }
+        // if (Input.GetKeyDown("space"))
+        // {
+        //     maps[1].currentMap = RotateTilemap(maps[1].currentMap,  TilemapGenerator.gridSize);
+        //     prevHole = FindHole(maps[0].currentMap);
+        //     start = FindStart(maps[1].currentMap);
+        //     for (int i = 0; i < levels.Length; i++)
+        //         UpdateHierarchy(maps[i], i);
+        //     Logger.Debug($"Hole: {prevHole}, Start: {start}");
+        //     levels[0].BuildMaze(maps[0].currentMap);
+        //     levels[1].BuildMaze(maps[1].currentMap);
+
+        // }
+        
     }
 
     Maze[] GetLevelsInScene()
     {
         Maze [] levels = new Maze[transform.childCount];
 
-        for (int i = 0; i < levels.Length; i++){
+        for (int i = 0; i < levels.Length; i++)
             levels[i] = transform.GetChild(i).GetComponent<Maze>();
-        }
         return levels;
     }
 
-    void CreateInitialWorld()
+    int[,] GenerateNewMap()
     {
-        maps = new int[levels.Length] [,];
-        // Generate initial tilemap for each level in the scene
-        for (int i = 0; i < levels.Length; i++)
-            maps[i] = TilemapGenerator.GenerateFromJson();
-        
-        world = BuildWorld();
+        int[,] map = new int[TilemapGenerator.gridSize, TilemapGenerator.gridSize];
+        map = TilemapGenerator.GenerateFromJson();
+        return map;
+    }
 
-        // StartCoroutine(AdjustOrientation(world));
-
-        for (int i = 0; i < levels.Length; i++)
+    void UpdateHierarchy(Map map, int i)
+    {
+        if (i == 0)
         {
-            levels[i].BuildMaze(world[i].currentMap);
+            map.previousMap = map.currentMap;
+            map.previousHolePos = FindStart(map.currentMap);
+            map.startPos = FindStart(map.currentMap);
+        }
+        else
+        {
+            map.previousMap = maps[i-1].currentMap;
+            map.previousHolePos = FindHole(map.previousMap);
+            map.startPos = FindStart(map.currentMap);
         }
     }
 
-    Map[] BuildWorld()
+    void AdjustOrientation(Map map)
     {
-        Map[] world = new Map[levels.Length];
-
-        // Assign world parameters to each map and store into a Map struct
-        for (int i = 1; i < levels.Length; i++)
-        {
-            world[i].previousMap = maps[i-1];
-            world[i].currentMap = maps[i];
-            world[i].previousHolePos = FindHole(world[i].previousMap);
-            world[i].startPos = FindStart(world[i].currentMap);
+        // Compute max 4 rotations to match previous hole position
+        for (int j = 0; j < 4; j++){
+            if (map.previousHolePos != map.startPos)
+            {
+                map.currentMap = RotateTilemap(map.currentMap, TilemapGenerator.gridSize);
+                Logger.Debug($"Computed {j} rotations");
+            }
+            else return;
         }
-        world[0].currentMap = maps[0];
-        world[0].previousMap = world[0].currentMap;
-        world[0].startPos = FindStart(world[0].currentMap);
-        return world;
-    }
-
-    IEnumerator AdjustOrientation(Map[] world)
-    {
-        int[] [,] rotatedTilemaps = new int[levels.Length] [,];
-        // Top map is what every other rotation is based off, hence
-        world[0].rotatedMap = world[0].currentMap;
-        for (int i = 1; i < levels.Length; i++)
-            while (world[i].previousHolePos != world[i].startPos)
-                world[i].rotatedMap = RotateTilemap(     world[i].currentMap, 
-                                                    TilemapGenerator.gridSize
-        );
-        yield return null;
     } 
 
     int[,] RotateTilemap(int[,] tileMap, int n) 
@@ -124,13 +142,12 @@ public class WorldManager : MonoBehaviour
     }
 }
 
-    // [System.Serializable]
-    public struct Map
-    {
-        public string internalName;
-        public int[,] previousMap;
-        public int[,] currentMap;
-        public int[,] rotatedMap;
-        public Vector2 previousHolePos;
-        public Vector2 startPos;
-    }
+// [System.Serializable]
+public struct Map
+{
+    // public string internalName;
+    public int[,] previousMap;
+    public int[,] currentMap;
+    public Vector2 previousHolePos;
+    public Vector2 startPos;
+}
