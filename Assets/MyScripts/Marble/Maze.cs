@@ -7,7 +7,6 @@ public class Maze : MonoBehaviour
     [SerializeField] GameObject _plainTile;
     [SerializeField] GameObject _hole;
     [SerializeField] GameObject _wall;
-    // [HideInInspector] public int[,] maze;
     int gridSize;
     float tileSize;
     
@@ -18,7 +17,7 @@ public class Maze : MonoBehaviour
 
     public void BuildMaze(int[,] maze)
     {
-        DestroyCurrent();
+        Destroy();
 
         tileSize = TilemapGenerator.tileSize;
         gridSize = TilemapGenerator.gridSize;
@@ -32,7 +31,7 @@ public class Maze : MonoBehaviour
                     GameObject wall = (GameObject)Instantiate(_wall); 
                     wall.transform.parent = transform;
                     wall.transform.localPosition = new Vector3(i * tileSize, Vector3.zero.y, j * tileSize);
-                    wall.transform.localScale = new Vector3(tileSize, 1, tileSize);
+                    wall.transform.localScale = new Vector3(tileSize, 1.25f, tileSize);
                 }
                 else if (maze[i,j] == 1 || maze[i,j] == 3)
                 {
@@ -54,7 +53,7 @@ public class Maze : MonoBehaviour
         }
     }
 
-    void DestroyCurrent()
+    public void Destroy()
     {
         foreach (Transform child in transform)
             if(child != null)

@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
-    // TilemapGenerator generator;
+    [HideInInspector] public Maze[] levels;
     Map[] maps;
-    Maze[] levels;
-    Vector2 prevHole;
-    Vector2 start;
+    LevelUp levelUp;
+    int stackIndex;
 
     void Start()
     {
+        levelUp = gameObject.GetComponent<LevelUp>();
         levels = GetLevelsInScene();
         maps = new Map[levels.Length];
+        stackIndex = levels.Length - 1;
 
         for (int i = 0; i < levels.Length; i++) {
             // Generate an initial random map for each level
@@ -31,9 +32,23 @@ public class WorldManager : MonoBehaviour
         }
     }
 
+    public void SpawnNewLevel()
+    {
+        Vector3 destination = new Vector3(0, gameObject.transform.position.y + levelUp.levelGap, 0);
+        StartCoroutine(levelUp.ShiftLevels(destination, 5f));
+        levels[0].Destroy();
+        levels[0].gameObject.transform.SetAsLastSibling();
+        levels[0].gameObject.transform.localPosition = new Vector3(0, levels[2].gameObject.transform.localPosition.y - levelUp.levelGap, 0);
+        levels = GetLevelsInScene();
+        maps[2].previousMap = maps[2].currentMap;
+        maps[2].currentMap = GenerateNewMap();
+        maps[2].currentMap = AdjustOrientation(maps[2], 2);
+        levels[2].BuildMaze(maps[2].currentMap);
+    }
+
     int[,] AdjustOrientation(Map map, int i)
     {
-        // Compute max 4 rotations to match previous hole position
+        // Compute max 3 rotations to match previous hole position
         for (int j = 0; j < 3; j++){
             if (i != 0 && (FindHole(map.previousMap) != FindStart(map.currentMap)))
                 map.currentMap = RotateTilemap(map.currentMap, TilemapGenerator.gridSize);                
@@ -41,7 +56,7 @@ public class WorldManager : MonoBehaviour
         return map.currentMap;
     } 
 
-    Maze[] GetLevelsInScene()
+    public Maze[] GetLevelsInScene()
     {
         Maze [] levels = new Maze[transform.childCount];
 

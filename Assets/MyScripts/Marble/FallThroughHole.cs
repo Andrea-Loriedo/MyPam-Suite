@@ -4,8 +4,8 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
 {
     Maze maze;
     MarbleController marble;
-    // TilemapGenerator generator;
-
+    WorldManager levels;
+    
     void Awake()
     {
         // generator = new TilemapGenerator();
@@ -15,7 +15,9 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
     {
         #if !ENABLE_TESTING
         GameObject mazeObj = transform.parent.gameObject;
+        GameObject world = transform.root.gameObject;
         marble = GameObject.FindGameObjectsWithTag("Marble")[0].GetComponent<MarbleController>();
+        levels = world.GetComponent<WorldManager>();
         maze = mazeObj.GetComponent<Maze>();
         #endif
     }
@@ -23,20 +25,15 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Marble"))
-        {
             OnFall(other);
-            Logger.Debug("Level complete!");
-        }
     }
 
     public void OnFall(Collider other)
     {
         #if !ENABLE_TESTING
         MyPamSessionManager.Instance.player.score++;
-        // other.gameObject.transform.position = marble.initialPosition;
-        // Logger.Debug($"Current score: {MyPamSessionManager.Instance.player.score}");
-        // maze.CreateNew();
-        // maze.BuildMaze(map);
+        levels.SpawnNewLevel();
+        Logger.Debug("Level complete!");
         #endif
     }
 }
