@@ -7,59 +7,39 @@ public class WorldManager : MonoBehaviour
     // TilemapGenerator generator;
     Map[] maps;
     Maze[] levels;
-                Vector2 prevHole;
-            Vector2 start;
-
+    Vector2 prevHole;
+    Vector2 start;
 
     void Start()
     {
         levels = GetLevelsInScene();
         maps = new Map[levels.Length];
 
-        // Generate an initial random map for each level
-        for (int i = 0; i < levels.Length; i++)
+        for (int i = 0; i < levels.Length; i++) {
+            // Generate an initial random map for each level
             maps[i].currentMap = GenerateNewMap();
-        
-        // // Define the level hierarchy
-        for (int i = 0; i < levels.Length; i++)
-            UpdateHierarchy(maps[i], i);
-
-        // Adjust level orientation based on position in hierarchy
-        for (int i = 0; i < levels.Length; i++)
-            AdjustOrientation(maps[i]);
-
-        // Build each maze based on updated tilemaps
-        for (int i = 0; i < levels.Length; i++)
+            maps[i].previousMap = new int[TilemapGenerator.gridSize, TilemapGenerator.gridSize];
+            // Define the level hierarchy
+            if (i == 0)
+                maps[i].previousMap = maps[i].currentMap;
+            else 
+                maps[i].previousMap = maps[i-1].currentMap;
+            // Adjust level orientation based on position in hierarchy
+            maps[i].currentMap = AdjustOrientation(maps[i], i);
+            // Build each maze based on updated tilemaps
             levels[i].BuildMaze(maps[i].currentMap);
-
+        }
     }
 
-    void Update()
+    int[,] AdjustOrientation(Map map, int i)
     {
-        // if (Input.GetKeyDown("space"))
-        // {
-        //     Vector2 prevHole = FindHole(maps[0].currentMap);
-        //     Vector2 start = FindStart(maps[1].currentMap);
-        //     AdjustOrientation(maps[1]);
-        //     for (int i = 0; i < levels.Length; i++)
-        //         UpdateHierarchy(maps[i], i);
-        //     Logger.Debug($"Hole: {prevHole}, Start: {start}");
-        
-        // }
-        // if (Input.GetKeyDown("space"))
-        // {
-        //     maps[1].currentMap = RotateTilemap(maps[1].currentMap,  TilemapGenerator.gridSize);
-        //     prevHole = FindHole(maps[0].currentMap);
-        //     start = FindStart(maps[1].currentMap);
-        //     for (int i = 0; i < levels.Length; i++)
-        //         UpdateHierarchy(maps[i], i);
-        //     Logger.Debug($"Hole: {prevHole}, Start: {start}");
-        //     levels[0].BuildMaze(maps[0].currentMap);
-        //     levels[1].BuildMaze(maps[1].currentMap);
-
-        // }
-        
-    }
+        // Compute max 4 rotations to match previous hole position
+        for (int j = 0; j < 3; j++){
+            if (i != 0 && (FindHole(map.previousMap) != FindStart(map.currentMap)))
+                map.currentMap = RotateTilemap(map.currentMap, TilemapGenerator.gridSize);                
+        }
+        return map.currentMap;
+    } 
 
     Maze[] GetLevelsInScene()
     {
@@ -77,35 +57,7 @@ public class WorldManager : MonoBehaviour
         return map;
     }
 
-    void UpdateHierarchy(Map map, int i)
-    {
-        if (i == 0)
-        {
-            map.previousMap = map.currentMap;
-            map.previousHolePos = FindStart(map.currentMap);
-            map.startPos = FindStart(map.currentMap);
-        }
-        else
-        {
-            map.previousMap = maps[i-1].currentMap;
-            map.previousHolePos = FindHole(map.previousMap);
-            map.startPos = FindStart(map.currentMap);
-        }
-    }
-
-    void AdjustOrientation(Map map)
-    {
-        // Compute max 4 rotations to match previous hole position
-        for (int j = 0; j < 4; j++){
-            if (map.previousHolePos != map.startPos)
-            {
-                map.currentMap = RotateTilemap(map.currentMap, TilemapGenerator.gridSize);
-                Logger.Debug($"Computed {j} rotations");
-            }
-            else return;
-        }
-    } 
-
+    
     int[,] RotateTilemap(int[,] tileMap, int n) 
     {
         int[,] rotatedTilemap = new int[n, n];
@@ -142,12 +94,8 @@ public class WorldManager : MonoBehaviour
     }
 }
 
-// [System.Serializable]
 public struct Map
 {
-    // public string internalName;
     public int[,] previousMap;
     public int[,] currentMap;
-    public Vector2 previousHolePos;
-    public Vector2 startPos;
 }
