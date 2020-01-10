@@ -15,7 +15,6 @@ public class marble_movement
 		GameObject playerGameObject = new GameObject("Player");
 		Player player = playerGameObject.AddComponent<Player>();
 		player.PlayerInput = Substitute.For<IPlayerInput>();
-		MyPamSessionManager session = playerGameObject.AddComponent<MyPamSessionManager>();
 		MarbleController marble = playerGameObject.AddComponent<MarbleController>();
 		marble.rb.useGravity = false;
 

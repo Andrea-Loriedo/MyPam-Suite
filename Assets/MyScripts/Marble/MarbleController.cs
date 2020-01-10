@@ -8,7 +8,7 @@ public class MarbleController : MonoBehaviour
 	[HideInInspector] public Vector3 initialPosition { get; set; }
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
-	[SerializeField] float speed = 30f; 
+	[SerializeField] float speed = 6f; 
 	[SerializeField] Material skin; 
 	ParticleSystem particles;
 

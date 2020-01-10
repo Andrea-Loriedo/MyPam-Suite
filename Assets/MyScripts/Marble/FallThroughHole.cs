@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class FallThroughHole: MonoBehaviour, IFallThrough
 {
-    Maze maze;
     MarbleController marble;
     WorldManager levels;
     
-    void Awake()
-    {
-        // generator = new TilemapGenerator();
-    }
-
     void Start()
     {
         #if !ENABLE_TESTING
@@ -18,7 +12,6 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
         GameObject world = transform.root.gameObject;
         marble = GameObject.FindGameObjectsWithTag("Marble")[0].GetComponent<MarbleController>();
         levels = world.GetComponent<WorldManager>();
-        maze = mazeObj.GetComponent<Maze>();
         #endif
     }
 
@@ -34,7 +27,6 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
         MyPamSessionManager.Instance.player.score++;
         marble.PlayParticles();
         levels.SpawnNewLevel();
-        Logger.Debug("Level complete!");
         #endif
     }
 }
