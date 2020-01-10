@@ -9,10 +9,14 @@ public class MarbleController : MonoBehaviour
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
 	[SerializeField] float speed = 30f; 
+	[SerializeField] Material skin; 
+	ParticleSystem particles;
 
 	void Awake()
 	{
 		InitPhysics();
+		particles = gameObject.GetComponent<ParticleSystem>();
+		gameObject.GetComponent<Renderer>().material = skin;
 	}
 
 	void Start () {
@@ -34,16 +38,8 @@ public class MarbleController : MonoBehaviour
 		Vector3 upMovement = forward * input.y; // define the "forward" direction
 		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * speed;
 
-		Vector3 direction = new Vector3(input.x, 0f, input.y); 
-
-		#if !ENABLE_TESTING
-		if (direction != Vector3.zero) {
-			transform.forward = heading; // transform the world forward vector into the orthographic forward vector
-			// rb.AddTorque(heading * speed * Time.deltaTime);
-		}
-		#endif
-
-		rb.AddForce(heading);
+		rb.AddForce(heading * speed);
+		// rb.AddTorque(heading);
 	}
 
 	void InitCamera()
@@ -72,5 +68,10 @@ public class MarbleController : MonoBehaviour
 	Vector2 GetInput()
 	{
 		return MyPamSessionManager.Instance.player.PlayerInput.Input;
+	}
+
+	public void PlayParticles()
+	{
+		particles.Play();
 	}
 }

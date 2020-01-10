@@ -32,6 +32,7 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
     {
         #if !ENABLE_TESTING
         MyPamSessionManager.Instance.player.score++;
+        marble.PlayParticles();
         levels.SpawnNewLevel();
         Logger.Debug("Level complete!");
         #endif
