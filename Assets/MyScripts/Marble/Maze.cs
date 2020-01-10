@@ -7,18 +7,14 @@ public class Maze : MonoBehaviour
     [SerializeField] GameObject _plainTile;
     [SerializeField] GameObject _hole;
     [SerializeField] GameObject _wall;
+    [SerializeField] Material high;
+    [SerializeField] Material medium;
+    [SerializeField] Material low;
     int gridSize;
     float tileSize;
-    
-    void Start()
-    {
-        // DontDestroyOnLoad(gameObject);
-    }    
 
-    public void BuildMaze(int[,] maze)
+    public void BuildMaze(int[,] maze) //LevelHighlight highlight)
     {
-        Destroy();
-
         tileSize = TilemapGenerator.tileSize;
         gridSize = TilemapGenerator.gridSize;
 
@@ -51,6 +47,29 @@ public class Maze : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetMazeHighLight(LevelHighlight highlight)
+    {
+        switch(highlight)
+        {
+            case LevelHighlight.high:
+                SetMaterial(high);
+                break;
+            case LevelHighlight.medium:   
+                SetMaterial(medium);
+                break;
+            case LevelHighlight.low:   
+                SetMaterial(low);
+                break;
+        }
+    }
+
+    void SetMaterial(Material material)
+    {
+        foreach (Transform child in transform)
+            if(child != null)
+                child.GetComponent<Renderer>().material = material;
     }
 
     public void Destroy()

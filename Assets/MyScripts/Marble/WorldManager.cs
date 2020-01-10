@@ -5,16 +5,17 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     [HideInInspector] public Maze[] levels;
+    LevelHighlight saturation;
     Map[] maps;
     LevelUp levelUp;
-    int stackIndex;
 
     void Start()
     {
         levelUp = gameObject.GetComponent<LevelUp>();
         levels = GetLevelsInScene();
         maps = new Map[levels.Length];
-        stackIndex = levels.Length - 1;
+
+        // SetHighlights();
 
         for (int i = 0; i < levels.Length; i++) {
             // Generate an initial random map for each level
@@ -29,7 +30,15 @@ public class WorldManager : MonoBehaviour
             maps[i].currentMap = AdjustOrientation(maps[i], i);
             // Build each maze based on updated tilemaps
             levels[i].BuildMaze(maps[i].currentMap);
+            UpdateHighlights();
         }
+    }
+
+    void UpdateHighlights()
+    {
+        levels[0].SetMazeHighLight(LevelHighlight.high);
+        levels[1].SetMazeHighLight(LevelHighlight.medium);
+        levels[2].SetMazeHighLight(LevelHighlight.low);
     }
 
     public void SpawnNewLevel()
@@ -44,6 +53,7 @@ public class WorldManager : MonoBehaviour
         maps[2].currentMap = GenerateNewMap();
         maps[2].currentMap = AdjustOrientation(maps[2], 2);
         levels[2].BuildMaze(maps[2].currentMap);
+        UpdateHighlights();
     }
 
     int[,] AdjustOrientation(Map map, int i)
@@ -71,7 +81,6 @@ public class WorldManager : MonoBehaviour
         map = TilemapGenerator.GenerateFromJson();
         return map;
     }
-
     
     int[,] RotateTilemap(int[,] tileMap, int n) 
     {
