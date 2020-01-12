@@ -9,14 +9,12 @@ public class MarbleController : MonoBehaviour
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
 	[SerializeField] float speed = 6f; 
-	[SerializeField] Material skin; 
 	ParticleSystem particles;
 
 	void Awake()
 	{
 		InitPhysics();
 		particles = gameObject.GetComponent<ParticleSystem>();
-		gameObject.GetComponent<Renderer>().material = skin;
 	}
 
 	void Start () {

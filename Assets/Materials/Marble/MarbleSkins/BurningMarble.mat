@@ -95,7 +95,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FireIntensity: 1.5
+    - _FireIntensity: 1
     - _FireSpeed: 7.7
     - _Float0: 0
     - _GlossMapScale: 1

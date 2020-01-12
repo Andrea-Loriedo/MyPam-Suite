@@ -5,7 +5,7 @@ Shader "MyShaders/Burn"
 	Properties
 	{
 		_Albedo("Albedo", 2D) = "white" {}
-		_Normal("Normal", 2D) = "bump" {}
+		_Normal("Normal", 2D) = "white" {}
 		_Mask("Mask", 2D) = "white" {}
 		_WoodSpecular("WoodSpecular", 2D) = "white" {}
 		_FireEffectTexture("FireEffectTexture", 2D) = "white" {}
@@ -84,7 +84,7 @@ Shader "MyShaders/Burn"
 		void surf( Input i , inout SurfaceOutputStandardSpecularCustom o )
 		{
 			float2 uv_Normal = i.uv_texcoord * _Normal_ST.xy + _Normal_ST.zw;
-			o.Normal = UnpackNormal( tex2D( _Normal, uv_Normal ) );
+			o.Normal = tex2D( _Normal, uv_Normal ).rgb;
 			float2 uv_Albedo = i.uv_texcoord * _Albedo_ST.xy + _Albedo_ST.zw;
 			o.Albedo = tex2D( _Albedo, uv_Albedo ).rgb;
 			float2 uv_Mask = i.uv_texcoord * _Mask_ST.xy + _Mask_ST.zw;
@@ -93,8 +93,8 @@ Shader "MyShaders/Burn"
 			float2 uv_WoodSpecular = i.uv_texcoord * _WoodSpecular_ST.xy + _WoodSpecular_ST.zw;
 			o.Specular = tex2D( _WoodSpecular, uv_WoodSpecular ).rgb;
 			o.Occlusion = _Smoothness;
-			float3 temp_cast_3 = (_Metallic).xxx;
-			o.Transmission = temp_cast_3;
+			float3 temp_cast_4 = (_Metallic).xxx;
+			o.Transmission = temp_cast_4;
 			o.Alpha = 1;
 		}
 
@@ -105,20 +105,20 @@ Shader "MyShaders/Burn"
 }
 /*ASEBEGIN
 Version=17500
-0.6666667;22.66667;1279;657;1281.604;-379.7775;1.025525;True;True
+6.666667;24;1267;651;1090.112;283.7097;1.573786;True;True
 Node;AmplifyShaderEditor.TimeNode;9;-967.6232,723.0865;Inherit;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;12;-883.4595,931.8878;Inherit;False;Property;_FireSpeed;FireSpeed;7;0;Create;True;0;0;False;0;0;0;0;25;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;8;-971.6458,577.2086;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;11;-682.5293,827.1585;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.PannerNode;7;-647.2219,571.9153;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.SamplerNode;3;-396.9678,347.4381;Inherit;True;Property;_Mask;Mask;2;0;Create;True;0;0;False;0;-1;36be8d528a4fa024faa4680d7658642c;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;5;-387.3094,577.6264;Inherit;True;Property;_FireEffectTexture;FireEffectTexture;4;0;Create;True;0;0;False;0;-1;f7e96904e8667e1439548f0f86389447;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;1;-400.205,-153.5916;Inherit;True;Property;_Albedo;Albedo;0;0;Create;True;0;0;False;0;-1;7130c16fd8005b546b111d341310a9a4;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;2;-392.3573,109.3108;Inherit;True;Property;_Normal;Normal;1;0;Create;True;0;0;False;0;-1;11f03d9db1a617e40b7ece71f0a84f6f;None;True;0;True;bump;Auto;True;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;3;-396.9678,347.4381;Inherit;True;Property;_Mask;Mask;2;0;Create;True;0;0;False;0;-1;36be8d528a4fa024faa4680d7658642c;36be8d528a4fa024faa4680d7658642c;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;5;-387.3094,577.6264;Inherit;True;Property;_FireEffectTexture;FireEffectTexture;4;0;Create;True;0;0;False;0;-1;f7e96904e8667e1439548f0f86389447;f7e96904e8667e1439548f0f86389447;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;1;-400.205,-153.5916;Inherit;True;Property;_Albedo;Albedo;0;0;Create;True;0;0;False;0;-1;7130c16fd8005b546b111d341310a9a4;7130c16fd8005b546b111d341310a9a4;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;2;-392.3573,109.3108;Inherit;True;Property;_Normal;Normal;1;0;Create;True;0;0;False;0;-1;11f03d9db1a617e40b7ece71f0a84f6f;9a4a55d8d2e54394d97426434477cdcf;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;6;-13.85555,522.4581;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.SamplerNode;4;-411.4942,-391.5443;Inherit;True;Property;_WoodSpecular;WoodSpecular;3;0;Create;True;0;0;False;0;-1;6618005f6bafebf40b3d09f498401fba;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;10;17.39484,183.2995;Inherit;False;Property;_Smoothness;Smoothness;5;0;Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;4;-411.4942,-391.5443;Inherit;True;Property;_WoodSpecular;WoodSpecular;3;0;Create;True;0;0;False;0;-1;6618005f6bafebf40b3d09f498401fba;6618005f6bafebf40b3d09f498401fba;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;13;21.46619,286.4657;Inherit;False;Property;_Metallic;Metallic;6;0;Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;10;-3.405159,170.2995;Inherit;False;Property;_Smoothness;Smoothness;5;0;Create;True;0;0;False;0;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;231.2527,-1.64009;Float;False;True;-1;2;ASEMaterialInspector;0;0;StandardSpecular;MyShaders/Burn;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Back;0;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;0;Opaque;0.5;True;True;0;False;Opaque;;Geometry;ForwardOnly;14;all;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;True;0;0;False;-1;0;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;False;0.1;False;-1;0;False;-1;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT3;0,0,0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
 WireConnection;11;0;9;1
 WireConnection;11;1;12;0
@@ -134,4 +134,4 @@ WireConnection;0;3;4;0
 WireConnection;0;5;10;0
 WireConnection;0;6;13;0
 ASEEND*/
-//CHKSM=8E890D344F0D6757AD2D5497B10A13E08264A44F
+//CHKSM=C0A38CC1A3AD2791435BE68769664FD27B57D807
