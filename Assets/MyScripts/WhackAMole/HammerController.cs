@@ -34,17 +34,25 @@ public class HammerController : MonoBehaviour
 		Vector3 rightMovement = right * input.x; // define the "right" direction
 		Vector3 upMovement = forward * input.y; // define the "forward" direction
 		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * speed;
-		Vector3 circleCentre = new Vector3(0f, 3f, 0f);
+        Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
+
         rb.AddForce(heading * speed);
 
-        Vector3 offset = transform.position - initialPosition;
+        if (input == Vector2.zero)
+            transform.position = initialPosition;
+    
+        else if (pos2D.magnitude >= radius)
+            transform.position = ConstrainToCircle();
+	}
+
+    Vector3 ConstrainToCircle()
+    {
+		Vector3 circleCentre = new Vector3(0f, 3f, 0f);
+        Vector3 offset = transform.position - circleCentre;
         offset.Normalize();
         offset = offset * radius;
-        transform.position = offset;
-
-        // if (heading == Vector3.zero)
-        //     transform.position = initialPosition;
-	}
+        return circleCentre + offset;
+    }
 
 	void InitCamera()
 	{

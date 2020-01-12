@@ -227,7 +227,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &47069402
 MonoBehaviour:
@@ -936,6 +936,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 75db70fe1af5bea4ba049a544c3fe49b, type: 2}
+    - target: {fileID: 1025140840035980, guid: ca6943a929336ec479edf6526ba012e0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca6943a929336ec479edf6526ba012e0, type: 2}
   m_IsPrefabAsset: 0
@@ -1348,7 +1352,7 @@ MonoBehaviour:
   forward: {x: 0, y: 0, z: 0}
   right: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
-  speed: 10
+  speed: 15
 --- !u!54 &1183226239
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1870,7 +1874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: c869523620764f049bc89d51274bddb5, type: 2}
+  profile: {fileID: 11400000, guid: 818b5651c1f87274db72ab859c48281b, type: 2}
 --- !u!81 &1757079223
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2025,7 +2029,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: d932482f9f35e1944bebba07f1fbe098, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.65
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: d932482f9f35e1944bebba07f1fbe098, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2261,7 +2265,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1914965243}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bdeadb8c6f1a4d8439d128cb7c2bb937, type: 2}
   m_CullingMode: 0
@@ -2488,7 +2492,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 516700493}
     m_Modifications:
     - target: {fileID: 4911700428316944, guid: da122005dcc7e7f4c9c8865156b37ddd, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2520,7 +2524,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4911700428316944, guid: da122005dcc7e7f4c9c8865156b37ddd, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 23140086885069114, guid: da122005dcc7e7f4c9c8865156b37ddd,
         type: 2}
