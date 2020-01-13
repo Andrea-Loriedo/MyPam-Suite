@@ -6,10 +6,12 @@ using UnityEngine;
 public class HammerController : MonoBehaviour
 {
 	[HideInInspector] public Vector3 initialPosition { get; set; }
+    [HideInInspector] public Quaternion initialRotation { get; set; }
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
+	[SerializeField] Interactor interactor;
 	[SerializeField] float speed = 6f; 
-    float radius = 3f;
+    public float radius = 3f;
 
 	void Awake()
 	{
@@ -20,7 +22,7 @@ public class HammerController : MonoBehaviour
     {
 		InitCamera();
 		initialPosition = transform.position;
-        transform.position = initialPosition;
+        initialRotation = transform.rotation;
  	}
 
 	void FixedUpdate () 
@@ -36,10 +38,20 @@ public class HammerController : MonoBehaviour
 		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * speed;
         Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
 
+        Vector3 direction = new Vector3(input.x, 0f, input.y); 
+
+		if (direction != Vector3.zero) {
+			transform.LookAt(heading); // transform the world forward vector into the orthographic forward vector
+            transform.Rotate(65, 0, 0);
+		}
+
         rb.AddForce(heading * speed);
 
         if (input == Vector2.zero)
+        {
             transform.position = initialPosition;
+            transform.rotation = initialRotation;
+        }
     
         else if (pos2D.magnitude >= radius)
             transform.position = ConstrainToCircle();
