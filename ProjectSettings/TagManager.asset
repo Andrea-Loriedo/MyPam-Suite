@@ -11,6 +11,7 @@ TagManager:
   - Maze
   - Start
   - Interactable
+  - Highlightable
   layers:
   - Default
   - TransparentFX

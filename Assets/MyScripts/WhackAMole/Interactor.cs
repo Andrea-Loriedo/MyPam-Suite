@@ -6,13 +6,13 @@ public class Interactor : MonoBehaviour
     // Equivalent to public delegate void OnCanInteract(Interactable target)
     public Interactable activeInteractable { get; private set; }
 
-    void Update()
+    void FixedUpdate()
     {
         // In case we move the object, we want to check if there have been any interaction changes.
-        // if (transform.hasChanged)
-        // {
+        if (transform.hasChanged)
+        {
             CheckIfInRange();
-        // }
+        }
     }
 
     public bool TryInteract()
@@ -30,26 +30,29 @@ public class Interactor : MonoBehaviour
 
     private void CheckIfInRange()
     {
-        Vector3 down = transform.TransformDirection(Vector3.down);
+        Vector3 down = transform.TransformDirection(Vector3.left);
         GameObject target;
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, down, out hit, 10))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
+            Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             target = hit.collider.gameObject;
-                            Logger.Debug("Interact!");
-
 
             if (target.CompareTag("Interactable"))
             {
-                var interactable = target.GetComponent<Interactable>(); 
-                if (interactable != null)
+                var newInteractable = target.GetComponent<Interactable>(); 
+                if (newInteractable != null && newInteractable != activeInteractable)
                 {
-                    activeInteractable = interactable;
-                    activeInteractable.Focus(true);
+                    newInteractable.Focus(true);
+                    if(activeInteractable != null)
+                        activeInteractable.Focus(false);
+                    
+                    activeInteractable = newInteractable;
                 }
             }
+            else if (!target.CompareTag("Interactable") && activeInteractable != null)
+                activeInteractable.Focus(false);
         }
     }
 }

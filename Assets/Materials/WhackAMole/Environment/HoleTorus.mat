@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TriplanarSimple 1
+  m_Name: HoleTorus
   m_Shader: {fileID: 4800000, guid: 9630a95d775354042b835d9eeee659d9, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5

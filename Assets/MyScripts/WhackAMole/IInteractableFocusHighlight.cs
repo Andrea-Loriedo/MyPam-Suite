@@ -11,6 +11,7 @@ public class IInteractableFocusHighlight : MonoBehaviour, IInteractable
 
     public void InteractionFocus(bool focused)
     {
-        gameObject.GetComponent<Renderer>().material = (focused) ? highlightMaterial : baseMaterial;
+        foreach (Transform child in transform)
+            child.GetComponent<Renderer>().material = (focused) ? highlightMaterial : baseMaterial;
     }
 }
