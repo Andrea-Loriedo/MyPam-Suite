@@ -4,6 +4,7 @@ using UnityEngine;
 public class MoleController : MonoBehaviour
 {
     [HideInInspector] public float spawnSpeed = 0.1f;
+    [HideInInspector] public float waitTime = 1.0f;
     Vector3 aboveGround = new Vector3(0f, 0.75f, 0f);
     Vector3 belowGround = new Vector3(0f, -0.1f, 0f);
 	private float tmpTime = 0;
@@ -16,7 +17,7 @@ public class MoleController : MonoBehaviour
 
     void Update () 
 	{
-
+        CheckState();
 	}
 
     void CheckState()
@@ -31,7 +32,7 @@ public class MoleController : MonoBehaviour
             case MoleState.ABOVE_GROUND:
                 tmpTime += Time.deltaTime;
                 
-                if (tmpTime > spawnTime) 
+                if (tmpTime > waitTime) 
                     state = MoleState.DOWN;
             break;
 
@@ -55,24 +56,24 @@ public class MoleController : MonoBehaviour
 
     public void Up()
 	{
-		if (state == MoleState.UNDER_GROUND) 
+		if (state == MoleState.BELOW_GROUND) 
 		{
-			state = State.UP;
+            gameObject.setActive(true);
+			state = MoleState.UP;
 		}
 	}
 
     public bool Whack()
 	{
 		// Don't whack if the mole is hidden
-		if (state == MoleState.UNDER_GROUND) 
+		if (state == MoleState.BELOW_GROUND) 
 		{
 			return false;
 		}
 
 		// Send back underground
-		transform.position = new Vector3(transform.position.x, BOTTOM, transform.position.z);
-
-		state = MoleState.UNDER_GROUND;
+		transform.position = belowGround;
+		state = MoleState.BELOW_GROUND;
 
 		return true;
 	}
