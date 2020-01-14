@@ -11,6 +11,9 @@ public class HammerController : MonoBehaviour
 	[HideInInspector] public Rigidbody rb;
 	[SerializeField] Interactor interactor;
 	[SerializeField] float speed = 6f; 
+	[SerializeField] AnimationClip whack;
+	Animation anim;
+
     public float radius = 3f;
 
 	void Awake()
@@ -23,11 +26,15 @@ public class HammerController : MonoBehaviour
 		InitCamera();
 		initialPosition = transform.position;
         initialRotation = transform.rotation;
+		anim = gameObject.GetComponent<Animation>();
  	}
 
 	void FixedUpdate () 
     {
  		MoveHammer(GetInput());
+		// if (Input.GetKeyDown(KeyCode.E))
+		// {
+		// }
 	}
 
 	void MoveHammer(Vector2 input)

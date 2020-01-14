@@ -1724,6 +1724,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: d932482f9f35e1944bebba07f1fbe098,
     type: 3}
   m_PrefabInternal: {fileID: 1773748113}
+--- !u!111 &1183226237
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1183226236}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &1183226238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1740,6 +1754,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   interactor: {fileID: 233511587}
   speed: 15
+  whack: {fileID: 7400000, guid: 496d1ef8b0ee76b47a6bac4366bf2f33, type: 2}
   radius: 2.5
 --- !u!54 &1183226239
 Rigidbody:

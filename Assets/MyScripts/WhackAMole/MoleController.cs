@@ -4,16 +4,11 @@ using UnityEngine;
 public class MoleController : MonoBehaviour
 {
     [HideInInspector] public float spawnSpeed = 0.001f;
-    [HideInInspector] public float waitTime = 1.0f;
+    [HideInInspector] public float waitTime = 3f;
     Vector3 aboveGround = new Vector3(0f, 0.75f, 0f);
     Vector3 belowGround = new Vector3(0f, -0.15f, 0f);
 	private float tmpTime = 0;
 	[HideInInspector] public MoleState state;
-
-    void Start()
-    {
-        // state = MoleState.BELOW_GROUND;
-    }
 
     void Update () 
 	{

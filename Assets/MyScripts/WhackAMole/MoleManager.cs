@@ -16,14 +16,12 @@ public class MoleManager : MonoBehaviour
     void Start()
     {
         spawn = true;
+        StartCoroutine(SpawnRandom(spawnFrequency));
     }
 
     void Update()
     {
-       if (Input.GetKeyDown("space"))
-       {
-            StartCoroutine(SpawnRandom(spawnFrequency));
-       }
+
     }
 
     IEnumerator SpawnRandom(float frequency)
