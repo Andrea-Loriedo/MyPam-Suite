@@ -36,9 +36,12 @@ public class MoleManager : MonoBehaviour
             randomMole.transform.parent = transform;
             // Place in a random hole
             randomMole.transform.position = randomHole;
-            randomMole.GetComponent<MoleController>().Up();				
+            MoleController controller = randomMole.GetComponent<MoleController>();
+            if (controller != null)
+                controller.Up();
             yield return new WaitForSeconds (frequency);
         }
+
 	}
 
     public int Shuffle(int molesCount)

@@ -18,7 +18,7 @@ public class MoleController : MonoBehaviour
     void Update () 
 	{
         CheckState();
-        Logger.Debug($"State: {state}");
+        // Logger.Debug($"State: {state}");
 	}
 
     void CheckState()
@@ -60,7 +60,6 @@ public class MoleController : MonoBehaviour
 	{
 		if (state == MoleState.BELOW_GROUND) 
 			state = MoleState.UP;
-            Logger.Debug("UP!");
 	}
 
     public bool Whack()
