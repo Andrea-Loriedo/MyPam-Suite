@@ -3,43 +3,45 @@ using UnityEngine;
 
 public class MoleController : MonoBehaviour
 {
-    [HideInInspector] public float spawnSpeed = 0.1f;
+    [HideInInspector] public float spawnSpeed = 0.001f;
     [HideInInspector] public float waitTime = 1.0f;
     Vector3 aboveGround = new Vector3(0f, 0.75f, 0f);
-    Vector3 belowGround = new Vector3(0f, -0.1f, 0f);
+    Vector3 belowGround = new Vector3(0f, -0.15f, 0f);
 	private float tmpTime = 0;
 	[HideInInspector] public MoleState state;
 
     void Start()
     {
-        state = MoleState.BELOW_GROUND;
+        // state = MoleState.BELOW_GROUND;
     }
 
     void Update () 
 	{
         CheckState();
+        Logger.Debug($"State: {state}");
 	}
 
     void CheckState()
     {
-        switch (state)
+        if(state == MoleState.UP)
         {
-            case MoleState.UP:
-                Move(aboveGround);
-                state = MoleState.ABOVE_GROUND;
-            break;
+            Move(aboveGround);
+            state = MoleState.ABOVE_GROUND;
+        }
 
-            case MoleState.ABOVE_GROUND:
-                tmpTime += Time.deltaTime;
-                
-                if (tmpTime > waitTime) 
-                    state = MoleState.DOWN;
-            break;
+        if(state == MoleState.ABOVE_GROUND)
+        {
+            tmpTime += Time.deltaTime;
+            
+            if (tmpTime > waitTime) 
+                state = MoleState.DOWN;
+        }
 
-            case MoleState.DOWN:
-                Move(belowGround);
-                state = MoleState.BELOW_GROUND;
-            break;
+        if(state == MoleState.DOWN)
+        {
+            Move(belowGround);
+            state = MoleState.BELOW_GROUND;
+            Destroy(gameObject);
         }
     }
 
@@ -57,26 +59,21 @@ public class MoleController : MonoBehaviour
     public void Up()
 	{
 		if (state == MoleState.BELOW_GROUND) 
-		{
-            gameObject.setActive(true);
 			state = MoleState.UP;
-		}
+            Logger.Debug("UP!");
 	}
 
     public bool Whack()
 	{
 		// Don't whack if the mole is hidden
 		if (state == MoleState.BELOW_GROUND) 
-		{
 			return false;
-		}
 
+        Logger.Debug($"Whacked {gameObject}!");
 		// Send back underground
 		transform.position = belowGround;
 		state = MoleState.BELOW_GROUND;
-
+        Destroy(gameObject);
 		return true;
 	}
-
-
 }

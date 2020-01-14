@@ -6,38 +6,39 @@ using UnityEngine.UI;
 public class MoleManager : MonoBehaviour
 {
     [Tooltip("Mole prefabs to be randomly instanced")]
-    List<MoleController> moles = new List<MoleController>();	
+    [SerializeField] public GameObject[] moles;
     [SerializeField] public HolePositioner holePositioner;
-    List<int> previousMoles;
+    List<int> previousMoles = new List<int>();
     int moleIndex;
+    float spawnFrequency = 4f;
     bool spawn;
 
     void Start()
     {
-        spawn = false;
-
-        foreach (Transform child in transform)
-            moles.Add(child.GetComponent<MoleController>());
+        spawn = true;
     }
 
-    public void StartSpawn()
-	{
-        // StartCoroutine ("SpawnRandom");
-	}
+    void Update()
+    {
+       if (Input.GetKeyDown("space"))
+       {
+            StartCoroutine(SpawnRandom(spawnFrequency));
+       }
+    }
 
-    public void StopSpawn()
+    IEnumerator SpawnRandom(float frequency)
 	{
-		spawn = false;
-	}
-
-    void SpawnRandom()
-	{
-        Vector3 randomHole = holePositioner.holes[holePositioner.Shuffle()];
-        MoleController randomMole = moles[Shuffle(moles.Count)];
-        // // Spawn a random mole
-        randomMole.gameObject.transform.position = randomMole;
-        randomMole.Up();				
-            // yield return new WaitForSeconds (waitTime);
+        while(spawn)
+        {
+            // Instantiate a random mole
+            GameObject randomMole = (GameObject)Instantiate(moles[Shuffle(moles.Length)]);
+            Vector3 randomHole = holePositioner.holes[holePositioner.Shuffle()];
+            randomMole.transform.parent = transform;
+            // Place in a random hole
+            randomMole.transform.position = randomHole;
+            randomMole.GetComponent<MoleController>().Up();				
+            yield return new WaitForSeconds (frequency);
+        }
 	}
 
     public int Shuffle(int molesCount)

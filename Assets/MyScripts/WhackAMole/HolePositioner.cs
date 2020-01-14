@@ -5,12 +5,12 @@ public class HolePositioner : MonoBehaviour
 {
     [SerializeField] GameObject holePrefab;
     [HideInInspector] public List<Vector3> holes = new List<Vector3>();
-    List<int> previousHoles;
+    List<int> previousHoles = new List<int>();
     int holeIndex;
     int holesCount = 8;
     float radius = 3f;
 
-    void Start()
+    void Awake()
     {
         PlaceHoles();
     }
@@ -25,6 +25,8 @@ public class HolePositioner : MonoBehaviour
         while (previousHoles.Contains(holeIndex) || holeIndex == lastHole)
             holeIndex = UnityEngine.Random.Range(0, holesCount);
         
+        previousHoles.Add(holeIndex); 
+
         if(previousHoles.Count == holesCount)
         {
             lastHole = previousHoles[previousHoles.Count-1];
@@ -34,6 +36,7 @@ public class HolePositioner : MonoBehaviour
         // Logger.Debug("Generated map number " + mapNumber);
         return holeIndex;
     }
+
     void PlaceHoles()
     {
         for (int i = 0; i < holesCount; i++)

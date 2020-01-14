@@ -12,6 +12,7 @@ public class Interactor : MonoBehaviour
         if (transform.hasChanged)
         {
             CheckIfInRange();
+            TryWhack();
         }
     }
 
