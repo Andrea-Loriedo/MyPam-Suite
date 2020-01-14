@@ -15,19 +15,6 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    public bool TryInteract()
-    {
-        if (activeInteractable != null)
-        {
-            activeInteractable.Interact();
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     private void CheckIfInRange()
     {
         Vector3 down = transform.TransformDirection(Vector3.left);
@@ -39,20 +26,28 @@ public class Interactor : MonoBehaviour
             Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             target = hit.collider.gameObject;
 
-            if (target.CompareTag("Interactable"))
-            {
                 var newInteractable = target.GetComponent<Interactable>(); 
                 if (newInteractable != null && newInteractable != activeInteractable)
                 {
                     newInteractable.Focus(true);
-                    if(activeInteractable != null)
-                        activeInteractable.Focus(false);
-                    
                     activeInteractable = newInteractable;
+                    newInteractable = null;
                 }
-            }
-            else if (!target.CompareTag("Interactable") && activeInteractable != null)
+            else if (newInteractable == null && activeInteractable != null)
                 activeInteractable.Focus(false);
+        }
+    }
+
+    public bool TryWhack()
+    {
+        if (activeInteractable != null && activeInteractable.CompareTag("Mole"))
+        {
+            activeInteractable.Interact();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
