@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.46317208, b: 0.8006593, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.46317208, b: 0.80209565, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -241,8 +241,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b939b84fcb561f54287eace1dde5309e, type: 2}
-  m_sharedMaterial: {fileID: 21199826141140174, guid: b939b84fcb561f54287eace1dde5309e,
+  m_fontAsset: {fileID: 11400000, guid: c5a5a87f6ea291843b56fa5c257a64f3, type: 2}
+  m_sharedMaterial: {fileID: 21953855382881890, guid: c5a5a87f6ea291843b56fa5c257a64f3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6141,8 +6141,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: MARBLE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b939b84fcb561f54287eace1dde5309e, type: 2}
-  m_sharedMaterial: {fileID: 21199826141140174, guid: b939b84fcb561f54287eace1dde5309e,
+  m_fontAsset: {fileID: 11400000, guid: c5a5a87f6ea291843b56fa5c257a64f3, type: 2}
+  m_sharedMaterial: {fileID: 21953855382881890, guid: c5a5a87f6ea291843b56fa5c257a64f3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6167,8 +6167,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.65
-  m_fontSizeBase: 16.65
+  m_fontSize: 17.28
+  m_fontSizeBase: 17.28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6263,7 +6263,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 21199826141140174, guid: b939b84fcb561f54287eace1dde5309e, type: 2}
+  - {fileID: 21953855382881890, guid: c5a5a87f6ea291843b56fa5c257a64f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

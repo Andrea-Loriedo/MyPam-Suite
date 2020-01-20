@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d932482f9f35e1944bebba07f1fbe098
+guid: c3f8706ff69b0af4381a89016311be46
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -9,36 +9,20 @@ ModelImporter:
     400000: mesh1013718620
     400002: mesh1183535789
     400004: //RootNode
-    2100000: mat17
-    2100002: mat8
-    2100004: mat12
+    2100000: mesh1013718620Mat
+    2100002: mesh1183535789Mat
     2300000: mesh1013718620
     2300002: mesh1183535789
     3300000: mesh1013718620
     3300002: mesh1183535789
     4300000: mesh1013718620
     4300002: mesh1183535789
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat12
-    second: {fileID: 2100000, guid: 933b11528129cd74e9bece9bbdbf39d1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat17
-    second: {fileID: 2100000, guid: 6259716568220bf45ba1d05dfcc82762, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat8
-    second: {fileID: 2100000, guid: f7821ab9b57b3da4181cc91c592484d8, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
