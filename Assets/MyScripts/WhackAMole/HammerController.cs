@@ -11,7 +11,7 @@ public class HammerController : MonoBehaviour
 	[HideInInspector] public Rigidbody rb;
 	[SerializeField] Interactor interactor;
 	[SerializeField] float speed = 15f; 
-	[SerializeField] Animator whack;
+	[SerializeField] Animator animator;
 
     public float radius = 3f;
 
@@ -31,10 +31,8 @@ public class HammerController : MonoBehaviour
 	void FixedUpdate () 
     {
  		MoveHammer(GetInput());
-		if (Input.GetKeyDown(KeyCode.E))
-			whack.SetBool("Whack", true);
-		else if(Input.GetKeyUp(KeyCode.E))
-			whack.SetBool("Whack", false);
+		if (Input.GetKeyDown("space"))
+			StartCoroutine(PlayWhackAnimation());
 	}
 
 	void MoveHammer(Vector2 input)
@@ -73,6 +71,18 @@ public class HammerController : MonoBehaviour
         return circleCentre + offset;
     }
 
+	IEnumerator PlayWhackAnimation()
+	{
+		animator.SetTrigger("Whack");
+		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+		animator.SetTrigger("Idle");
+	}
+
+	public void Animate()
+	{
+		StartCoroutine(PlayWhackAnimation());
+	}
+
 	void InitCamera()
 	{
 		forward = Camera.main.transform.forward; // vector aligned with the camera's forward vector
@@ -96,4 +106,4 @@ public class HammerController : MonoBehaviour
 	}
 }
 
-// Last home commit
+// https://free3d.com/3d-model/hand-v2--144793.html hand asset

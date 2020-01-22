@@ -5,9 +5,13 @@ using UnityEngine;
 public class InteractableWhack : MonoBehaviour, IInteractable
 {
     MoleController mole;
-    public void Interact() 
+    void Start()
     {
         mole = gameObject.GetComponent<MoleController>();
+    }
+
+    public void Interact() 
+    {
         if (mole != null)
             mole.Whack();
     }

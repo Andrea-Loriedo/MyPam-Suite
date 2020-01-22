@@ -5,6 +5,12 @@ public class Interactor : MonoBehaviour
 {
     // Equivalent to public delegate void OnCanInteract(Interactable target)
     public Interactable activeInteractable { get; private set; }
+    HammerController hammer;
+
+    void Start()
+    {
+        hammer = GetComponentInParent<HammerController>();
+    }
 
     void FixedUpdate()
     {
@@ -44,6 +50,9 @@ public class Interactor : MonoBehaviour
         if (activeInteractable != null && activeInteractable.CompareTag("Mole"))
         {
             activeInteractable.Interact();
+            if (hammer != null)
+                hammer.Animate();
+
             return true;
         }
         else

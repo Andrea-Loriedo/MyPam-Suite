@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class MoleController : MonoBehaviour
 {
+    [HideInInspector] public MoleState state;
     [HideInInspector] public float spawnSpeed = 0.001f;
     [HideInInspector] public float waitTime = 3f;
     Vector3 aboveGround = new Vector3(0f, 0.75f, 0f);
     Vector3 belowGround = new Vector3(0f, -0.15f, 0f);
-	private float tmpTime = 0;
-	[HideInInspector] public MoleState state;
+	private float timer = 0;
 
     void Update () 
 	{
@@ -26,9 +26,9 @@ public class MoleController : MonoBehaviour
 
         if(state == MoleState.ABOVE_GROUND)
         {
-            tmpTime += Time.deltaTime;
+            timer += Time.deltaTime;
             
-            if (tmpTime > waitTime) 
+            if (timer > waitTime) 
                 state = MoleState.DOWN;
         }
 
@@ -64,6 +64,7 @@ public class MoleController : MonoBehaviour
 			return false;
 
         Logger.Debug($"Whacked {gameObject}!");
+
 		// Send back underground
 		transform.position = belowGround;
 		state = MoleState.BELOW_GROUND;
