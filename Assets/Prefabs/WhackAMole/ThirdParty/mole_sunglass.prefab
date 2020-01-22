@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114572551521428872}
   - component: {fileID: 114442027319437800}
   m_Layer: 0
-  m_Name: mole_sunglass 1
+  m_Name: mole_sunglass
   m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,6 +641,7 @@ MonoBehaviour:
   state: 0
   spawnSpeed: 0.001
   waitTime: 3
+  particles: []
 --- !u!114 &114572551521428872
 MonoBehaviour:
   m_ObjectHideFlags: 1

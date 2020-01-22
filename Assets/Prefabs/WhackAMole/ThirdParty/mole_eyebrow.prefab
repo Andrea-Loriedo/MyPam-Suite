@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 114302432098879726}
   - component: {fileID: 114601057723405390}
   m_Layer: 0
-  m_Name: mole_eyebrow 1
+  m_Name: mole_eyebrow
   m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,6 +641,9 @@ MonoBehaviour:
   state: 0
   spawnSpeed: 0.001
   waitTime: 3
+  particles:
+  - {fileID: 198582509264711278}
+  - {fileID: 198250968294331498}
 --- !u!114 &114696476391490322
 MonoBehaviour:
   m_ObjectHideFlags: 1

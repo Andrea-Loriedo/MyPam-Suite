@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114913399201878358}
   - component: {fileID: 114146071181066540}
   m_Layer: 0
-  m_Name: mole_hat 1
+  m_Name: mole_hat
   m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,6 +641,9 @@ MonoBehaviour:
   state: 0
   spawnSpeed: 0.001
   waitTime: 3
+  particles:
+  - {fileID: 198592396927475882}
+  - {fileID: 198369251740840796}
 --- !u!114 &114913399201878358
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 114126211332433512}
   - component: {fileID: 114892389935553770}
   m_Layer: 0
-  m_Name: mole_hair 1
+  m_Name: mole_hair
   m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,6 +652,9 @@ MonoBehaviour:
   state: 0
   spawnSpeed: 0.001
   waitTime: 3
+  particles:
+  - {fileID: 198443971721351264}
+  - {fileID: 198736180821252372}
 --- !u!135 &135968946996244428
 SphereCollider:
   m_ObjectHideFlags: 1

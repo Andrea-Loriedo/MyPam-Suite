@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 114916862581661160}
   - component: {fileID: 114505413839959340}
   m_Layer: 0
-  m_Name: mole_dr 1
+  m_Name: mole_dr
   m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -557,6 +557,9 @@ MonoBehaviour:
   state: 0
   spawnSpeed: 0.001
   waitTime: 3
+  particles:
+  - {fileID: 198570700238169218}
+  - {fileID: 198250241592426090}
 --- !u!114 &114916862581661160
 MonoBehaviour:
   m_ObjectHideFlags: 1

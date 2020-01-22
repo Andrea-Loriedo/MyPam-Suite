@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 114075886880377386}
   - component: {fileID: 114474800106579496}
   m_Layer: 0
-  m_Name: mole_pickaxe 1
+  m_Name: mole_pickaxe
   m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,6 +652,9 @@ MonoBehaviour:
   state: 0
   spawnSpeed: 0.001
   waitTime: 3
+  particles:
+  - {fileID: 198159148943226968}
+  - {fileID: 198280155946584596}
 --- !u!135 &135651538544032402
 SphereCollider:
   m_ObjectHideFlags: 1

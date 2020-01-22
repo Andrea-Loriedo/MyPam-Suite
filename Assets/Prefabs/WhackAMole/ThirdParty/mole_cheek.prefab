@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114092560710548622}
   - component: {fileID: 114031252985359156}
   m_Layer: 0
-  m_Name: mole_cheek 1
+  m_Name: mole_cheek
   m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
