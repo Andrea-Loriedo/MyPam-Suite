@@ -7,7 +7,7 @@ public class IInteractableFocusHighlight : MonoBehaviour, IInteractable
     [SerializeField] Material baseMaterial;
     [SerializeField] Material highlightMaterial;
 
-    public void Interact() {}
+    public void Interact() { }
 
     public void InteractionFocus(bool focused)
     {

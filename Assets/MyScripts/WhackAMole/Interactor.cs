@@ -30,7 +30,7 @@ public class Interactor : MonoBehaviour
 
         if (Physics.Raycast(transform.position, down, out hit, 10))
         {
-            Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
+            // Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             target = hit.collider.gameObject;
 
                 var newInteractable = target.GetComponent<Interactable>(); 

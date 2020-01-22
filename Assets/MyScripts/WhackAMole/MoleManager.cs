@@ -19,11 +19,6 @@ public class MoleManager : MonoBehaviour
         StartCoroutine(SpawnRandom(spawnFrequency));
     }
 
-    void Update()
-    {
-
-    }
-
     IEnumerator SpawnRandom(float frequency)
 	{
         while(spawn)

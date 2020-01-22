@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractableWhack : MonoBehaviour, IInteractable
 {
     MoleController mole;
+
     void Start()
     {
         mole = gameObject.GetComponent<MoleController>();
@@ -13,7 +14,10 @@ public class InteractableWhack : MonoBehaviour, IInteractable
     public void Interact() 
     {
         if (mole != null)
+        {
+            // mole.PlayParticles();
             mole.Whack();
+        }
     }
 
     public void InteractionFocus(bool focused) {}
