@@ -22,5 +22,6 @@ public class ParticleEventTrigger : MonoBehaviour
         foreach (ParticleSystem system in particles)
             system.Play();
         shaker.Shake();
+        MyPamSessionManager.Instance.player.score++;
     }
 }

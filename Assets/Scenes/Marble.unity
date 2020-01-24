@@ -228,7 +228,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 355173367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 1453722849, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -241,8 +241,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c5a5a87f6ea291843b56fa5c257a64f3, type: 2}
-  m_sharedMaterial: {fileID: 21953855382881890, guid: c5a5a87f6ea291843b56fa5c257a64f3,
+  m_fontAsset: {fileID: 11400000, guid: b2773266343a5284bbcf4808f278a3c3, type: 2}
+  m_sharedMaterial: {fileID: 21613949718058644, guid: b2773266343a5284bbcf4808f278a3c3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -267,8 +267,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 68.06
-  m_fontSizeBase: 68.06
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -246.71356, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 355173368}
     characterCount: 0
@@ -6128,7 +6128,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1388373333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Script: {fileID: -806885394, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -6141,8 +6141,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: MARBLE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c5a5a87f6ea291843b56fa5c257a64f3, type: 2}
-  m_sharedMaterial: {fileID: 21953855382881890, guid: c5a5a87f6ea291843b56fa5c257a64f3,
+  m_fontAsset: {fileID: 11400000, guid: b2773266343a5284bbcf4808f278a3c3, type: 2}
+  m_sharedMaterial: {fileID: 21613949718058644, guid: b2773266343a5284bbcf4808f278a3c3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6167,8 +6167,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 17.28
-  m_fontSizeBase: 17.28
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6263,7 +6263,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 21953855382881890, guid: c5a5a87f6ea291843b56fa5c257a64f3, type: 2}
+  - {fileID: 21613949718058644, guid: b2773266343a5284bbcf4808f278a3c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
