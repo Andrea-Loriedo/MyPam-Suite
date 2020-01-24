@@ -8,7 +8,6 @@ public class MoleController : MonoBehaviour
     [HideInInspector] public float waitTime = 3f;
     Vector3 aboveGround = new Vector3(0f, 0.75f, 0f);
     Vector3 belowGround = new Vector3(0f, -0.15f, 0f);
-    public ParticleSystem[] particles;
 	private float timer = 0;
 
     void Update () 
@@ -64,7 +63,6 @@ public class MoleController : MonoBehaviour
 		if (state == MoleState.BELOW_GROUND) 
 			return false;
 
-        PlayParticles();
         Logger.Debug($"Whacked {gameObject}!");
 		// Send back underground
         state = MoleState.DOWN;
@@ -72,9 +70,4 @@ public class MoleController : MonoBehaviour
 		return true;
 	}
 
-    public void PlayParticles()
-    {
-        foreach (ParticleSystem system in particles)
-            system.Play();
-    }
 }

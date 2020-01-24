@@ -12,12 +12,16 @@ public class HammerController : MonoBehaviour
 	[SerializeField] Interactor interactor;
 	[SerializeField] float speed = 15f; 
 	[SerializeField] Animator animator;
+	[SerializeField] GameObject hammerImpact;
+	ParticleSystem[] particles;
 
     public float radius = 3f;
 
 	void Awake()
 	{
 		InitPhysics();
+
+		particles = hammerImpact.GetComponentsInChildren<ParticleSystem>();
 	}
 
 	void Start () 
@@ -74,6 +78,11 @@ public class HammerController : MonoBehaviour
 	IEnumerator PlayWhackAnimation()
 	{
 		animator.SetTrigger("Whack");
+		// PlayParticles();
+		// hammerImpact.transform.position = new Vector3(		interactor.gameObject.transform.position.x, 
+		// 													1f, 
+		// 													interactor.gameObject.transform.position.z
+		// );
 		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 		animator.SetTrigger("Idle");
 	}
@@ -82,6 +91,12 @@ public class HammerController : MonoBehaviour
 	{
 		StartCoroutine(PlayWhackAnimation());
 	}
+
+	void PlayParticles()
+    {
+        foreach (ParticleSystem system in particles)
+            system.Play();
+    }
 
 	void InitCamera()
 	{
