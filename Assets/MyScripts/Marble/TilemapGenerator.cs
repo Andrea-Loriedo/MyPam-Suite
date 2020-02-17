@@ -14,11 +14,6 @@ public static class TilemapGenerator
     static List<int> usedMaps = new List<int>();
     static string fileName = "marble_tilemaps.json";
 
-    // public TilemapGenerator()
-    // {
-    //     maps = LoadTilemaps();
-    // }
-
     public static int[,] GenerateFromJson()
     {
         maps = LoadTilemaps();
