@@ -626,7 +626,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  spawnSpeed: 0.001
   waitTime: 3
 --- !u!114 &114092560710548622
 MonoBehaviour:

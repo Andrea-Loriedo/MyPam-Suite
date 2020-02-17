@@ -19,7 +19,7 @@ public class SerialHandler : MonoBehaviour
 
 	private void OnEnable()
 	{
-	 	looping = true;
+	 	looping = true; 
 		portReadingThread = new Thread(ReadPort);
 		portReadingThread.Start();
 		myPamOrigin.x = 0;

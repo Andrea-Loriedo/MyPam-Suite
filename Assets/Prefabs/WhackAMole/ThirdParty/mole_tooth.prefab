@@ -712,11 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  spawnSpeed: 0.001
   waitTime: 3
-  particles:
-  - {fileID: 198509046231313908}
-  - {fileID: 198129333823414086}
 --- !u!114 &114827719905987456
 MonoBehaviour:
   m_ObjectHideFlags: 1

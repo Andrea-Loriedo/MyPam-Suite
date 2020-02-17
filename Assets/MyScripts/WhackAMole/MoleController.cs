@@ -1,26 +1,29 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class MoleController : MonoBehaviour
 {
     [HideInInspector] public MoleState state;
-    [HideInInspector] public float spawnSpeed = 0.001f;
     [HideInInspector] public float waitTime = 3f;
-    Vector3 aboveGround = new Vector3(0f, 0.75f, 0f);
-    Vector3 belowGround = new Vector3(0f, -0.15f, 0f);
+    Animator animator;
 	private float timer = 0;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Update () 
 	{
         CheckState();
-        // Logger.Debug($"State: {state}");
 	}
 
     void CheckState()
     {
         if(state == MoleState.UP)
         {
-            Move(aboveGround);
+            AnimateMole("Up");
             state = MoleState.ABOVE_GROUND;
         }
 
@@ -34,21 +37,17 @@ public class MoleController : MonoBehaviour
 
         if(state == MoleState.DOWN)
         {
-            Move(belowGround);
+            AnimateMole("Down");
             state = MoleState.BELOW_GROUND;
             Destroy(gameObject);
         }
     }
 
-    void Move(Vector3 target)
+    IEnumerator AnimateMole(string trigger)
     {
-        transform.position = Vector3.MoveTowards(   transform.position, 
-                                                    target, 
-                                                    spawnSpeed * Time.deltaTime
-        );
-
-        if (Vector3.Distance(transform.position, target) < 0.001f)
-            transform.position = target;
+        animator.SetTrigger(trigger);
+		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+		animator.SetTrigger("Idle");
     }
 
     public void Up()

@@ -78,11 +78,6 @@ public class HammerController : MonoBehaviour
 	IEnumerator PlayWhackAnimation()
 	{
 		animator.SetTrigger("Whack");
-		// PlayParticles();
-		// hammerImpact.transform.position = new Vector3(		interactor.gameObject.transform.position.x, 
-		// 													1f, 
-		// 													interactor.gameObject.transform.position.z
-		// );
 		yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 		animator.SetTrigger("Idle");
 	}

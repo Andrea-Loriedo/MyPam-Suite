@@ -639,9 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  spawnSpeed: 0.001
   waitTime: 3
-  particles: []
 --- !u!114 &114572551521428872
 MonoBehaviour:
   m_ObjectHideFlags: 1

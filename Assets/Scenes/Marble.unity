@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: c869523620764f049bc89d51274bddb5, type: 2}
+  profile: {fileID: 0}
 --- !u!1 &355173367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   forward: {x: 0, y: 0, z: 0}
   right: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
-  speed: 6.5
+  speed: 6
 --- !u!54 &839676702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5738,14 +5738,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skins:
   - {fileID: 2100000, guid: 15277fe5b85afcd4d8df1e12af348e95, type: 2}
-  - {fileID: 2100000, guid: 5a7add22e13dab04bb73cd6f081702ef, type: 2}
-  - {fileID: 2100000, guid: f77e72260b02c4f49836d3775d9d5316, type: 2}
   - {fileID: 2100000, guid: 781b4a605d654c049ab0c574d67d6860, type: 2}
   - {fileID: 2100000, guid: 0378528d515806c49acf32d4e78ca26c, type: 2}
+  - {fileID: 2100000, guid: 5a7add22e13dab04bb73cd6f081702ef, type: 2}
   - {fileID: 2100000, guid: f6d7c6551518c454fb176c9939e75547, type: 2}
-  - {fileID: 2100000, guid: 0862e90e516a8844abf87c4e023fbbd3, type: 2}
   - {fileID: 2100000, guid: a70f84058daaf684f993c211d50f40fd, type: 2}
+  - {fileID: 2100000, guid: f77e72260b02c4f49836d3775d9d5316, type: 2}
   - {fileID: 2100000, guid: 479a707851f149c4e958540636ec199a, type: 2}
+  - {fileID: 2100000, guid: 0862e90e516a8844abf87c4e023fbbd3, type: 2}
   - {fileID: 2100000, guid: 6e5c3be6e00d7d74f8c653dafffb9344, type: 2}
   - {fileID: 2100000, guid: 4dcee74702eda734390b6f4e2d195ef2, type: 2}
   selectedSkin: {fileID: 0}
@@ -5923,7 +5923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: c869523620764f049bc89d51274bddb5, type: 2}
+  profile: {fileID: 0}
 --- !u!1 &1219902101
 GameObject:
   m_ObjectHideFlags: 0
@@ -6372,7 +6372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: c869523620764f049bc89d51274bddb5, type: 2}
+  profile: {fileID: 0}
 --- !u!1 &1513897524
 GameObject:
   m_ObjectHideFlags: 0
