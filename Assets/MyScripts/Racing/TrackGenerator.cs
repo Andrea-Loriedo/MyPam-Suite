@@ -9,21 +9,24 @@ using PathCreation;
 public class TrackGenerator : MonoBehaviour {
 
 	const string fileName = "racing_tracks.json";
-    static Dictionary<string, Dictionary<string,float>> tracks;
-
-	// Constants
-	const float PI = Mathf.PI;
-    const float twoPI = Mathf.PI * 2f;
-    const float PIovertwo = Mathf.PI / 2f;
-	float lineResolution = 0.2f;
+    static Dictionary<string, object> tracks;
 
 	void Start () {
 
-        tracks = LoadTracks();
         // TrajectoryInput circleInput = (TrajectoryInput)tracks["circle"];
-        TrajectoryGenerator circle = new TrajectoryGenerator(GetTrajectoryParameters("circle"));
-		GetComponent<PathCreator> ().bezierPath = GeneratePath(circle.trajectory, true);
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            tracks = new Dictionary<string, object>();
+            tracks = LoadTracks();
+            
+            TrajectoryGenerator circle = new TrajectoryGenerator(GetTrajectoryParameters(tracks));
+		    GetComponent<PathCreator> ().bezierPath = GeneratePath(circle.trajectory, true);
+        }    
+    }
 
     // Generate bezier path from an input list of points
 	BezierPath GeneratePath(List<Vector2> points, bool closedPath)
@@ -33,7 +36,7 @@ public class TrackGenerator : MonoBehaviour {
 		return bezierPath;
 	}
 
-	public static Dictionary<string, Dictionary<String,float>> LoadTracks()
+	public static Dictionary<string, object> LoadTracks()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         if (File.Exists(filePath))
@@ -41,7 +44,7 @@ public class TrackGenerator : MonoBehaviour {
             // Read the json from the file into a string
             string jsonString = File.ReadAllText(filePath);   
             // Deserialize JSON dictionary containing tilemaps
-            var dict = Json.Deserialize(jsonString) as Dictionary<string,Dictionary<string,float>>; 
+            var dict = Json.Deserialize(jsonString) as Dictionary<string, object>; 
             return dict;
         } 
         else
@@ -52,17 +55,21 @@ public class TrackGenerator : MonoBehaviour {
     }
 
     // Returns a TrajectoryInput object with the values for the input track shape
-    TrajectoryInput GetTrajectoryParameters(string shape)
+    TrajectoryInput GetTrajectoryParameters(Dictionary<string, object> tracks)
     {
-        Dictionary<string,float> track = tracks[shape];
+        var par = (List<float>)tracks["circle"]; 
+        float[] inputs = new float[par.Count];
 
-        TrajectoryInput trajectoryParams = new TrajectoryInput
+        for (int i = 0; i < par.Count; i++)
+            inputs[i] = (float)par[i];
+
+        TrajectoryInput trajectoryParams = new TrajectoryInput()
         {
-            A = track["A"],
-            B = track["B"],
-            q = track["q"],
-            p = track["p"],
-            period = track["period"]
+            A = inputs[0],
+            B = inputs[1],
+            q = inputs[2],
+            p = inputs[3],
+            period = inputs[4]
         };
 
         return trajectoryParams;

@@ -9,11 +9,11 @@ public class TrajectoryGenerator {
     const float twoPI = Mathf.PI * 2f;
     const float PIovertwo = Mathf.PI / 2f;
 	float lineResolution = 0.2f;
-    [HideInInspector] public List<Vector2> trajectory;
+    [HideInInspector] public List<Vector2> trajectory; // List of anchors defining the path
 
     public TrajectoryGenerator(TrajectoryInput input)
     {
-        trajectory = GenerateAnchorPoints(input);
+        trajectory = GenerateAnchorPoints(input); 
     }
 
 	// Returns a list of points treated as anchors for the path to pass through given the equation input parameters

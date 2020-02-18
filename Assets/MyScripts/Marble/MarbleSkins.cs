@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 
-public class MarbleSkins : MonoBehaviour, IPointerDownHandler 
+public class MarbleSkins : MonoBehaviour 
 {
     [SerializeField] Material[] skins = new Material[11];
     public Material selectedSkin;
@@ -15,11 +15,6 @@ public class MarbleSkins : MonoBehaviour, IPointerDownHandler
         selectedSkin = skins[skinID];
         gameObject.GetComponent<Renderer>().material = selectedSkin;
     }
-
-	public virtual void OnPointerDown(PointerEventData ped)
-	{
-		ToggleSkin();
-	}
 
     void ToggleSkin()
     {

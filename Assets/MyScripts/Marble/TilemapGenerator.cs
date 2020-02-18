@@ -20,7 +20,7 @@ public static class TilemapGenerator
         // store the randomly picked JSON tilemap split into rows inside a list
         var rows = (List<object>)maps[Shuffle(maps.Count)]; 
         int[,] tileMap = new int[rows.Count, rows.Count];
-        // go through each row and column in the tilemap and store the values into a 2D array
+        // go through each row and column in the tilemap and store the values into a 2D array of ints
         for (int row = 0; row < rows.Count; row++)
         {
             var tiles = (List<object>)rows[row];
