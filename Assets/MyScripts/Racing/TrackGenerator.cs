@@ -9,24 +9,14 @@ using PathCreation;
 public class TrackGenerator : MonoBehaviour {
 
 	const string fileName = "racing_tracks.json";
-    static Dictionary<string, object> tracks;
 
 	void Start () {
-
-        // TrajectoryInput circleInput = (TrajectoryInput)tracks["circle"];
+        Dictionary<string, TrajectoryInput> tracks = new Dictionary<string, TrajectoryInput>();
+        tracks = LoadTracks();
+        TrajectoryInput input = GetTrajectoryParameters("circle", tracks);
+        TrajectoryGenerator circle = new TrajectoryGenerator(input);
+        GetComponent<PathCreator>().bezierPath = GeneratePath(circle.trajectory, true);
 	}
-
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            tracks = new Dictionary<string, object>();
-            tracks = LoadTracks();
-            
-            TrajectoryGenerator circle = new TrajectoryGenerator(GetTrajectoryParameters(tracks));
-		    GetComponent<PathCreator> ().bezierPath = GeneratePath(circle.trajectory, true);
-        }    
-    }
 
     // Generate bezier path from an input list of points
 	BezierPath GeneratePath(List<Vector2> points, bool closedPath)
@@ -36,7 +26,7 @@ public class TrackGenerator : MonoBehaviour {
 		return bezierPath;
 	}
 
-	public static Dictionary<string, object> LoadTracks()
+	public Dictionary<string, TrajectoryInput> LoadTracks()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         if (File.Exists(filePath))
@@ -44,7 +34,7 @@ public class TrackGenerator : MonoBehaviour {
             // Read the json from the file into a string
             string jsonString = File.ReadAllText(filePath);   
             // Deserialize JSON dictionary containing tilemaps
-            var dict = Json.Deserialize(jsonString) as Dictionary<string, object>; 
+            var dict = Json.Deserialize(jsonString) as Dictionary<string, TrajectoryInput>; 
             return dict;
         } 
         else
@@ -55,22 +45,20 @@ public class TrackGenerator : MonoBehaviour {
     }
 
     // Returns a TrajectoryInput object with the values for the input track shape
-    TrajectoryInput GetTrajectoryParameters(Dictionary<string, object> tracks)
+    TrajectoryInput GetTrajectoryParameters(string track, Dictionary<string, TrajectoryInput> tracks)
     {
-        var par = (List<float>)tracks["circle"]; 
-        float[] inputs = new float[par.Count];
+        TrajectoryInput trajectoryParams = new TrajectoryInput();
+        Logger.Debug($"{tracks[track]}, A = {tracks[track].A} ");
 
-        for (int i = 0; i < par.Count; i++)
-            inputs[i] = (float)par[i];
-
-        TrajectoryInput trajectoryParams = new TrajectoryInput()
+        if(!tracks.ContainsKey(track))
         {
-            A = inputs[0],
-            B = inputs[1],
-            q = inputs[2],
-            p = inputs[3],
-            period = inputs[4]
-        };
+            Logger.Debug($"Building a {tracks[track]} shaped track");
+            trajectoryParams.A = (float) tracks[track].A;
+            trajectoryParams.B = (float) tracks[track].B;
+            trajectoryParams.q = (float) tracks[track].q;
+            trajectoryParams.p = (float) tracks[track].p;
+            trajectoryParams.period = (float) tracks[track].period;
+        }   
 
         return trajectoryParams;
     }

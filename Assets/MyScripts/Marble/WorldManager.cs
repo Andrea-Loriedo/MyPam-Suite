@@ -26,7 +26,7 @@ public class WorldManager : MonoBehaviour
                 maps[i].previousMap = maps[i].currentMap;
             else 
                 maps[i].previousMap = maps[i-1].currentMap;
-            // Adjust level orientation based on position in hierarchy
+            // Adjust map orientation based on position in hierarchy
             maps[i].currentMap = AdjustOrientation(maps[i], i);
             // Build each maze based on updated tilemaps
             levels[i].BuildMaze(maps[i].currentMap);

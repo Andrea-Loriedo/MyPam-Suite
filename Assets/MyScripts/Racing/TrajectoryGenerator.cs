@@ -9,7 +9,7 @@ public class TrajectoryGenerator {
     const float twoPI = Mathf.PI * 2f;
     const float PIovertwo = Mathf.PI / 2f;
 	float lineResolution = 0.2f;
-    [HideInInspector] public List<Vector2> trajectory; // List of anchors defining the path
+    [HideInInspector] public List<Vector2> trajectory { get; set; }// List of anchors defining the path
 
     public TrajectoryGenerator(TrajectoryInput input)
     {
