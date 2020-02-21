@@ -1,4 +1,6 @@
-﻿using PathCreation;
+﻿using System.Collections;
+using System.Collections.Generic;
+using PathCreation;
 using UnityEngine;
 
 namespace PathCreation.Examples {
@@ -6,14 +8,14 @@ namespace PathCreation.Examples {
     [ExecuteInEditMode]
     public class PathPlacer : PathSceneTool {
 
-        public GameObject prefab;
+        public GameObject carPrefab;
         public GameObject holder;
+        List<GameObject> cars;
         public float spacing = 3;
-
         const float minSpacing = .1f;
 
         void Generate () {
-            if (pathCreator != null && prefab != null && holder != null) {
+            if (pathCreator != null && carPrefab != null && holder != null) {
                 DestroyObjects ();
 
                 VertexPath path = pathCreator.path;
@@ -22,9 +24,12 @@ namespace PathCreation.Examples {
                 float dst = 0;
 
                 while (dst < path.length) {
+                    Vector3 heightOffset = new Vector3(0, 0.15f, 0);
                     Vector3 point = path.GetPointAtDistance (dst);
                     Quaternion rot = path.GetRotationAtDistance (dst);
-                    Instantiate (prefab, point, rot, holder.transform);
+                    Quaternion orientation = Quaternion.Euler(0, 0, 90);
+                    GameObject car = Instantiate(carPrefab, point+heightOffset, rot*orientation, holder.transform);
+                    cars.Add(car);
                     dst += spacing;
                 }
             }

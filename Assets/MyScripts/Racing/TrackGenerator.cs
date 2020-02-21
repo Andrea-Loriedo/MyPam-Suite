@@ -6,15 +6,16 @@ using System.IO;
 using MiniJSON;
 using PathCreation;
 
+[ExecuteInEditMode]
 public class TrackGenerator : MonoBehaviour {
 
 	const string fileName = "racing_tracks.json";
 
 	void Start () {
-        Dictionary<string, TrajectoryInput> tracks = new Dictionary<string, TrajectoryInput>();
-        tracks = LoadTracks();
-        TrajectoryInput input = GetTrajectoryParameters("circle", tracks);
-        TrajectoryGenerator circle = new TrajectoryGenerator(input);
+        // Dictionary<string, TrajectoryInput> tracks = new Dictionary<string, TrajectoryInput>();
+        // tracks = LoadTracks();
+        // TrajectoryInput input = GetTrajectoryParameters("circle", tracks);
+        TrajectoryGenerator circle = new TrajectoryGenerator(GetCircle());
         GetComponent<PathCreator>().bezierPath = GeneratePath(circle.trajectory, true);
 	}
 
@@ -25,6 +26,20 @@ public class TrackGenerator : MonoBehaviour {
 		BezierPath bezierPath = new BezierPath (points, closedPath, PathSpace.xz);
 		return bezierPath;
 	}
+
+    TrajectoryInput GetCircle()
+    {
+        TrajectoryInput trajectory = new TrajectoryInput()
+        {
+            A = 0.7f,
+            B = 0.7f,
+            q = 1.7f,
+            p = 1.7f,
+            period = 1.176f
+        };
+
+        return trajectory;
+    }
 
 	public Dictionary<string, TrajectoryInput> LoadTracks()
     {
