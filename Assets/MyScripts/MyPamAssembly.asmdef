@@ -1,8 +1,7 @@
 {
     "name": "MyPamAssembly",
     "references": [
-        "PathCreator",
-        "PathCreatorEditor"
+        "PathCreator"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

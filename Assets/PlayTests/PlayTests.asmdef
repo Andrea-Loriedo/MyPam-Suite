@@ -1,7 +1,9 @@
 {
     "name": "PlayTests",
     "references": [
-        "MyPamAssembly"
+        "MyPamAssembly",
+        "PathCreatorEditor",
+        "PathCreator"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
