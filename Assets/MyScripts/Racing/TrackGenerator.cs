@@ -41,6 +41,34 @@ public class TrackGenerator : MonoBehaviour {
         return trajectory;
     }
 
+    TrajectoryInput GetFigure8()
+    {
+        TrajectoryInput trajectory = new TrajectoryInput()
+        {
+            A = 1f,
+            B = 0.5f,
+            q = 1f,
+            p = 2f,
+            period = 2f
+        };
+
+        return trajectory;
+    }
+
+    TrajectoryInput GetEllipse()
+    {
+        TrajectoryInput trajectory = new TrajectoryInput()
+        {
+            A = 0.6f,
+            B = 0.9f,
+            q = 1.7f,
+            p = 1.7f,
+            period = 1.176f
+        };
+
+        return trajectory;
+    }
+
 	public Dictionary<string, TrajectoryInput> LoadTracks()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);

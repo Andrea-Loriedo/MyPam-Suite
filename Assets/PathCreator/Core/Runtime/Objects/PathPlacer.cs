@@ -12,10 +12,8 @@ namespace PathCreation.Examples {
         public GameObject holder;
         [HideInInspector] public Vector3 heightOffset = new Vector3(0, 0.15f, 0);
         [HideInInspector] public Quaternion orientation = Quaternion.Euler(0, 0, 90);
-        [HideInInspector] public float carOffset;
         public float spacing = 3;
         const float minSpacing = 1.1f;
-
 
         void Generate () {
             if (pathCreator != null && carPrefab != null && holder != null) {
@@ -31,8 +29,6 @@ namespace PathCreation.Examples {
                     Quaternion rot = path.GetRotationAtDistance (dst);
                     Instantiate(carPrefab, point + heightOffset, rot * orientation, holder.transform);
                     dst += spacing;
-                    carOffset = dst;
-                    // Debug.Log($"dst = {dst}, offset = {carOffset}");
                 }
             }
         }
