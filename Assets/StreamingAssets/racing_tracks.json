@@ -9,10 +9,20 @@
         "spacing": 1.1
     },
 
-    "ellipse":
+    "vertical_ellipse":
     {
         "A": 0.6,
         "B": 0.9,
+        "q": 1.7,
+        "p": 1.7,
+        "period": 1.176,
+        "spacing": 1.61
+    },
+
+    "horizontal_ellipse":
+    {
+        "A": 0.9,
+        "B": 0.6,
         "q": 1.7,
         "p": 1.7,
         "period": 1.176,

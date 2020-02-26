@@ -1,4 +1,4 @@
-	public enum MoleState{
+	public enum MoleState {
 		BELOW_GROUND,
 		UP,
 		ABOVE_GROUND,

@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
-using PathCreation;
 using UnityEngine;
-using PathCreation;
-
 
 public class CarGameManager : MonoBehaviour {
 
-    [HideInInspector] public Dictionary<string, object> tracks;
-	const string fileName = "racing_tracks.json";
-    PathCreation.Examples.PathPlacer placer;
+    [SerializeField] NPCCarController npcCars;
+    [SerializeField] Track track;
+    float spacing;
 
     void Start()
     {
-        placer.Generate();
+        track.Generate(TrackShape.CIRCLE);
+        spacing = TrajectoryParameters.GetTrajectoryParameters(track.generated.currentTrack).spacing;
+        npcCars.PositionCars(spacing);
     }
+
+    void Update()
+    {
+        npcCars.MoveCars(spacing);
+
+        // Run timer
+        // Cycle through each trajectory for a given amount of time
+    }
+
 }
