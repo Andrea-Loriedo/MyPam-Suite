@@ -40,3 +40,8 @@ public class TrajectoryGenerator {
         return new Vector2(x, y);
     }
 }
+
+// Input parameters for the equation generating the Path trajectory
+public struct TrajectoryInput {
+	public float  A, B, q, p, period, spacing;
+}

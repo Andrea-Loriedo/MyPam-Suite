@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace PathCreation.Examples {
 
-    [ExecuteInEditMode]
     public class PathPlacer : PathSceneTool {
 
         public GameObject carPrefab;
@@ -15,13 +14,13 @@ namespace PathCreation.Examples {
         public float spacing = 3;
         const float minSpacing = 1.1f;
 
-        void Generate () {
+        public void Generate () {
             if (pathCreator != null && carPrefab != null && holder != null) {
                 DestroyObjects ();
 
                 VertexPath path = pathCreator.path;
 
-                spacing = Mathf.Max(minSpacing, spacing);
+                spacing = Mathf.Max(minSpacing, spacing); // returns largest value
                 float dst = 0f;
 
                 while (dst < path.length) {
