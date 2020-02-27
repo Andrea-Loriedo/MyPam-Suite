@@ -13,21 +13,23 @@ public class NPCCarController : MonoBehaviour {
     float dstTravelled;
 
     public GameObject carPrefab;
-    [HideInInspector] public Vector3 heightOffset = new Vector3(0, 0.15f, 0);
+    // [HideInInspector] public Vector3 heightOffset = new Vector3(0, 0.15f, 0);
     [HideInInspector] public Quaternion orientation = Quaternion.Euler(0, 0, 90);
     const float minSpacing = 1.1f;
 
-    public void MoveCars(float spacing)
+    public IEnumerator MoveCars(float spacing)
     {
         float dst = 0f;
 
         foreach(Transform car in transform)
         {
             dstTravelled += speed * Time.deltaTime;
-            car.position = pathCreator.path.GetPointAtDistance(dstTravelled + dst, end) + heightOffset;
+            car.position = pathCreator.path.GetPointAtDistance(dstTravelled + dst, end);// + heightOffset;
             car.rotation = pathCreator.path.GetRotationAtDistance (dstTravelled + dst, end) * orientation;
             dst += spacing;
         } 
+
+        yield return null;
     }
 
     public void PositionCars(float spacing)
@@ -42,7 +44,7 @@ public class NPCCarController : MonoBehaviour {
                 while (dst < path.length) {
                     Vector3 point = path.GetPointAtDistance (dst);
                     Quaternion rot = path.GetRotationAtDistance (dst);
-                    Instantiate(carPrefab, point + heightOffset, rot * orientation, transform);
+                    Instantiate(carPrefab, point, rot * orientation, transform);
                     dst += spacing;
                 }
         }

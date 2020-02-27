@@ -32,8 +32,8 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
 	public virtual void OnPointerUp(PointerEventData ped)
 	{
-		mouseControl = false; // myPam override mouse control
-		knob.rectTransform.anchoredPosition = Vector2.zero;
+		// mouseControl = false; // myPam override mouse control
+		// knob.rectTransform.anchoredPosition = Vector2.zero;
 	}
 
 	public virtual void OnPointerDown(PointerEventData ped)
@@ -50,10 +50,10 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	void MoveJoystick(Vector2 controllerInput)
 	{
 		// clamp the joystick to its frame
-		if (input.magnitude > 1.0f)
-		{
-			input = input.normalized;
-		}
+		// if (input.magnitude > 1.0f)
+		// {
+		// 	input = input.normalized;
+		// }
 
 		knob.rectTransform.anchoredPosition = new Vector2(input.x * (background.rectTransform.sizeDelta.x/2), input.y * (background.rectTransform.sizeDelta.x/2));
 	}

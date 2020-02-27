@@ -5,13 +5,8 @@ using PathCreation;
 
 public class Track : MonoBehaviour {
 
-    BezierPath path;
     [HideInInspector] public TrajectoryGenerator generated;
-
-	void Start () 
-    {
-        BezierPath path = GetComponent<PathCreator>().bezierPath;
-	}
+    public RoadMeshCreator roadMesh;
 
     public void Generate(TrackShape track)
     {
@@ -39,6 +34,9 @@ public class Track : MonoBehaviour {
         generated = new TrajectoryGenerator(shape);
         Logger.Debug($"Generated a {shape} shaped track");
         GetComponent<PathCreator>().bezierPath = DrawPath(generated.trajectory, true);
+        roadMesh.AssignMeshComponents();
+        roadMesh.AssignMaterials();
+        roadMesh.CreateRoadMesh();
     }
 
     // Generate bezier path from an input list of points

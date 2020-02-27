@@ -5,6 +5,8 @@ using System;
 using System.IO;
 using MiniJSON;
 
+// Contains the low level functions to generate trajectories 
+// from JSON and turning them into a list of anchors to generate a path.
 public class TrajectoryGenerator {
 
     [HideInInspector] public List<Vector2> trajectory { get; set; } // List of anchors defining the path
