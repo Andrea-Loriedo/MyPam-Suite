@@ -72,7 +72,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 			mousePos.y = (mousePos.y / background.rectTransform.sizeDelta.y);
 
 			// correct joystick "0" mousePos and override myPam control
-			input = new Vector2(mousePos.x*2 + 1, mousePos.y*2 - 1); 
+			input = new Vector2(mousePos.x*2, mousePos.y*2); 
 		}
 	}
 

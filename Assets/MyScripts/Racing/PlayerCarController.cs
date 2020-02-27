@@ -7,21 +7,22 @@ public class PlayerCarController : MonoBehaviour {
 	[HideInInspector] public Vector3 initialPosition { get; set; }
     [HideInInspector] public Quaternion initialRotation { get; set; }
 	[HideInInspector] public Vector3 forward, right;
-    [HideInInspector] public Rigidbody rb;
-    [SerializeField] float speed = 15f; 
-    Transform playerCar;    
+    public Rigidbody rb;
+    [SerializeField] float speed = 0.1f; 
+    [SerializeField] GameObject playerCar;    
+
+    float radius = 4;
 
 
     void Awake()
     {
         InitCamera();
         rb = GetComponent<Rigidbody>();
-        playerCar = GetComponentInChildren<Transform>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // playerCar.position = Vector3.Lerp(playerCar.position, transform.position, Time.time);
+        playerCar.transform.position = Vector3.Lerp(playerCar.transform.position, transform.position, speed);
         MoveCar(GetInput());
     }
 
@@ -30,16 +31,18 @@ public class PlayerCarController : MonoBehaviour {
 		// define diamond workspace
 		Vector3 rightMovement = right * input.x; // define the "right" direction
 		Vector3 upMovement = forward * input.y; // define the "forward" direction
-		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * speed;
-
+		Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
         Vector3 direction = new Vector3(input.x, 0f, input.y); 
 
 		if (direction != Vector3.zero) {
 			transform.LookAt(heading); // transform the world forward vector into the orthographic forward vector
+            playerCar.transform.LookAt(heading);
             transform.Rotate(90, 0, 0);
 		}
 
-        transform.position = Vector3.Lerp(transform.position, direction, Time.time);
+        transform.position = Vector3.Lerp(transform.position, rightMovement*radius + upMovement*radius, Time.time);
+        transform.position = new Vector3(transform.position.x, 0.011f, transform.position.z);
+        Logger.Debug($"x = {input.x}, y = {input.y}");
 	}
 
     Vector2 GetInput()
