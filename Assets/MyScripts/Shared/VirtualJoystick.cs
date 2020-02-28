@@ -50,10 +50,10 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	void MoveJoystick(Vector2 controllerInput)
 	{
 		// clamp the joystick to its frame
-		// if (input.magnitude > 1.0f)
-		// {
-		// 	input = input.normalized;
-		// }
+		if (input.magnitude > 1.0f)
+		{
+			input = input.normalized;
+		}
 
 		knob.rectTransform.anchoredPosition = new Vector2(input.x * (background.rectTransform.sizeDelta.x/2), input.y * (background.rectTransform.sizeDelta.x/2));
 	}
