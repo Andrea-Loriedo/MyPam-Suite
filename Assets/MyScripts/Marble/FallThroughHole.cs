@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FallThroughHole: MonoBehaviour, IFallThrough
 {
-    MarbleController marble;
+    PenguinController penguin;
     WorldManager levels;
     
     void Start()
@@ -10,14 +10,14 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
         #if !ENABLE_TESTING
         GameObject mazeObj = transform.parent.gameObject;
         GameObject world = transform.root.gameObject;
-        marble = GameObject.FindGameObjectsWithTag("Marble")[0].GetComponent<MarbleController>();
+        penguin = GameObject.FindGameObjectsWithTag("Penguin")[0].GetComponent<PenguinController>();
         levels = world.GetComponent<WorldManager>();
         #endif
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Marble"))
+        if (other.CompareTag("Penguin"))
             OnFall(other);
     }
 
@@ -25,7 +25,7 @@ public class FallThroughHole: MonoBehaviour, IFallThrough
     {
         #if !ENABLE_TESTING
         MyPamSessionManager.Instance.player.score++;
-        marble.PlayParticles();
+        penguin.PlayParticles();
         levels.SpawnNewLevel();
         #endif
     }

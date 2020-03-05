@@ -37,7 +37,6 @@ public class MarbleController : MonoBehaviour
 		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * speed;
 
 		rb.AddForce(heading * speed);
-		// rb.AddTorque(heading);
 	}
 
 	void InitCamera()
