@@ -21,9 +21,9 @@ public class HolePositioner : MonoBehaviour
         int lastHole = UnityEngine.Random.Range(0, holesCount);
         holeIndex = UnityEngine.Random.Range(0, holesCount);
 
-        // Always pick a map different from all the previously used ones
-        while (previousHoles.Contains(holeIndex) || holeIndex == lastHole)
-            holeIndex = UnityEngine.Random.Range(0, holesCount);
+        // // Always pick a map different from all the previously used ones
+        // while (previousHoles.Contains(holeIndex) || holeIndex == lastHole)
+        //     holeIndex = UnityEngine.Random.Range(0, holesCount);
         
         previousHoles.Add(holeIndex); 
 

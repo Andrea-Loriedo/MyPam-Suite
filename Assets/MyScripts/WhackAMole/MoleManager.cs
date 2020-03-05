@@ -42,9 +42,9 @@ public class MoleManager : MonoBehaviour
         int lastMole = UnityEngine.Random.Range(0, molesCount);
         moleIndex = UnityEngine.Random.Range(0, molesCount);
 
-        // Always pick a map different from all the previously used ones
-        while (previousMoles.Contains(moleIndex) || moleIndex == lastMole)
-            moleIndex = UnityEngine.Random.Range(0, molesCount);
+        // // Always pick a map different from all the previously used ones
+        // while (previousMoles.Contains(moleIndex) || moleIndex == lastMole)
+        //     moleIndex = UnityEngine.Random.Range(0, molesCount);
         
         previousMoles.Add(moleIndex);
 

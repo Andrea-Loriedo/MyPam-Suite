@@ -56,10 +56,8 @@ public static class TilemapGenerator
         mapNumber = UnityEngine.Random.Range(0, mapsCount);
 
         // Always pick a map different from all the previously used ones
-        while (usedMaps.Contains(mapNumber) || mapNumber == lastMap)
-        {
-            mapNumber = UnityEngine.Random.Range(0, mapsCount);
-        }
+        // while (usedMaps.Contains(mapNumber) || mapNumber == lastMap)
+        //     mapNumber = UnityEngine.Random.Range(0, mapsCount);
         
         usedMaps.Add(mapNumber);
 
