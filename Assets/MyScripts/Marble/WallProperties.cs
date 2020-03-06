@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PenguinDive: MonoBehaviour
+public class WallProperties: MonoBehaviour
 {
     PenguinController penguin;
     
@@ -14,7 +14,7 @@ public class PenguinDive: MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Penguin"))
-            penguin.Dive();
+            penguin.rb.velocity = Vector3.zero;
 
     }
 }
