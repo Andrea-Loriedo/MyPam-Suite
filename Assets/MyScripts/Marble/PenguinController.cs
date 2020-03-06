@@ -11,16 +11,20 @@ public class PenguinController : MonoBehaviour
     ParticleSystem particles;
 	public float movementSpeed = 3f; 
 
-    public float jumpForce = 20;
+    public float jumpForce = 1000;
     public float timeBeforeNextJump = 1.2f;
     private float canJump = 0f;
     Animator anim;
     Collider collider;
 
+	bool lockVert = false;
+	bool lockHoriz = false;
+
 	void Awake()
 	{
 		InitPhysics();
-		particles = gameObject.GetComponent<ParticleSystem>();
+		particles = gameObject.GetComponentInChildren<ParticleSystem>();
+		anim = GetComponent<Animator>();
 	}
 
 	void Start () {
@@ -37,24 +41,36 @@ public class PenguinController : MonoBehaviour
 		#endif
 	}
 
+	void LockDirections(Vector2 input)
+	{
+		if (input.x != 0 && input.y != 0)
+			lockHoriz = lockVert = false;
+		else if (input.x != 0 && input.y == 0)
+			lockHoriz = true;
+		else if (input.y != 0 && input.x == 0)
+			lockVert = true;
+	}
+
 	void MovePenguin(Vector2 input)
 	{
+		LockDirections(input);
 		// define diamond workspace
-		Vector3 rightMovement = right * input.x; // define the "right" direction
-		Vector3 upMovement = forward * input.y; // define the "forward" direction
-		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * movementSpeed;
+		Vector3 rightMovement = lockHoriz ? Vector3.zero : (right * input.x); // define the "right" direction
+		Vector3 upMovement = lockVert ? Vector3.zero : (forward * input.y); // define the "forward" direction
+		Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
 
-        // if (heading != Vector3.zero)
-        // {
-        //     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(heading), 0.15f);
-        //     anim.SetInteger("Walk", 1);
-        // }
-        // else 
-        // {
-        //     anim.SetInteger("Walk", 0);
-        // }
+        if (heading != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(heading), 0.15f);
+            anim.SetInteger("Walk", 1);
+        }
 
-		rb.AddForce(heading * movementSpeed);
+        else 
+        {
+            anim.SetInteger("Walk", 0);
+        }
+
+        transform.Translate(heading * movementSpeed * Time.deltaTime, Space.World);
 	}
 
 	void InitCamera()
@@ -88,5 +104,12 @@ public class PenguinController : MonoBehaviour
 	public void PlayParticles()
 	{
 		particles.Play();
+	}
+
+	public void Dive()
+	{
+		rb.AddForce(0, jumpForce, 0);
+		canJump = Time.time + timeBeforeNextJump;
+		anim.SetTrigger("jump");
 	}
 }

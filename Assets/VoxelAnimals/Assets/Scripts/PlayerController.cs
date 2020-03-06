@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Fish") {
             Physics.IgnoreCollision(collision.collider, collider);
         }
-     
     }
 
 
