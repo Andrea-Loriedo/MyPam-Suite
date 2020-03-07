@@ -8,8 +8,10 @@ public class PenguinController : MonoBehaviour
 	[HideInInspector] public Vector3 initialPosition { get; set; }
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
+	[HideInInspector] public float startSpeed; 
+
     ParticleSystem particles;
-	public float movementSpeed = 3f; 
+	public float movementSpeed = 1f; 
 
     public float jumpForce = 1000;
     public float timeBeforeNextJump = 1.2f;
@@ -21,6 +23,7 @@ public class PenguinController : MonoBehaviour
 		InitPhysics();
 		particles = gameObject.GetComponentInChildren<ParticleSystem>();
 		anim = GetComponent<Animator>();
+		startSpeed = movementSpeed;
 	}
 
 	void Start () {

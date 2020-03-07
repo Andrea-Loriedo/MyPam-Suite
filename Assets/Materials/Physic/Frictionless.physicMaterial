@@ -6,8 +6,8 @@ PhysicMaterial:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Frictionless
-  dynamicFriction: 210.96
-  staticFriction: 660
-  bounciness: 0
+  dynamicFriction: 200
+  staticFriction: 200
+  bounciness: 1
   frictionCombine: 3
   bounceCombine: 1

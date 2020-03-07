@@ -11,10 +11,15 @@ public class WallProperties: MonoBehaviour
         #endif
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Penguin"))
-            penguin.rb.velocity = Vector3.zero;
+        if (other.gameObject.CompareTag("Penguin"))
+            penguin.movementSpeed = 0.2f;
+    }
 
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Penguin"))
+            penguin.movementSpeed = penguin.startSpeed;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.46317208, b: 0.80209565, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.46317208, b: 0.8006593, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -597,6 +597,8 @@ MonoBehaviour:
   _plainTile: {fileID: 1939493160747742, guid: 5c73b64583a14034c9ec94761b206909, type: 2}
   _hole: {fileID: 1753505928659452, guid: 2c166a101083824429c096b8ecf9002c, type: 2}
   _wall: {fileID: 1119973528815884, guid: b844b39e15bc28c489bb94e905a5e934, type: 2}
+  _fishingPenguin: {fileID: 1104689747844410, guid: 4bd71b0658423244c847d14beae127b2,
+    type: 2}
   high: {fileID: 2100000, guid: 7009e7677f762204daf80b74028ec93b, type: 2}
   medium: {fileID: 2100000, guid: 043629b95477fe04c8d2b52bb2248ef0, type: 2}
   low: {fileID: 2100000, guid: 273d0e739d06103488a2663ab6955430, type: 2}
@@ -10918,6 +10920,8 @@ MonoBehaviour:
   _plainTile: {fileID: 1939493160747742, guid: 5c73b64583a14034c9ec94761b206909, type: 2}
   _hole: {fileID: 1753505928659452, guid: 2c166a101083824429c096b8ecf9002c, type: 2}
   _wall: {fileID: 1119973528815884, guid: b844b39e15bc28c489bb94e905a5e934, type: 2}
+  _fishingPenguin: {fileID: 1104689747844410, guid: 4bd71b0658423244c847d14beae127b2,
+    type: 2}
   high: {fileID: 2100000, guid: 7009e7677f762204daf80b74028ec93b, type: 2}
   medium: {fileID: 2100000, guid: 043629b95477fe04c8d2b52bb2248ef0, type: 2}
   low: {fileID: 2100000, guid: 273d0e739d06103488a2663ab6955430, type: 2}
@@ -11101,6 +11105,8 @@ MonoBehaviour:
   _plainTile: {fileID: 1939493160747742, guid: 5c73b64583a14034c9ec94761b206909, type: 2}
   _hole: {fileID: 1753505928659452, guid: 2c166a101083824429c096b8ecf9002c, type: 2}
   _wall: {fileID: 1119973528815884, guid: b844b39e15bc28c489bb94e905a5e934, type: 2}
+  _fishingPenguin: {fileID: 1104689747844410, guid: 4bd71b0658423244c847d14beae127b2,
+    type: 2}
   high: {fileID: 2100000, guid: 7009e7677f762204daf80b74028ec93b, type: 2}
   medium: {fileID: 2100000, guid: 043629b95477fe04c8d2b52bb2248ef0, type: 2}
   low: {fileID: 2100000, guid: 273d0e739d06103488a2663ab6955430, type: 2}
