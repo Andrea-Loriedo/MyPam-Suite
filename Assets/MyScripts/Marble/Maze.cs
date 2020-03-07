@@ -7,9 +7,13 @@ public class Maze : MonoBehaviour
     [SerializeField] GameObject _plainTile;
     [SerializeField] GameObject _hole;
     [SerializeField] GameObject _wall;
+    [SerializeField] GameObject _fishingPenguin;
     [SerializeField] Material high;
     [SerializeField] Material medium;
     [SerializeField] Material low;
+    Transform endOfMaze;
+    Transform penguin;
+
     int gridSize;
     float tileSize;
 
@@ -44,9 +48,19 @@ public class Maze : MonoBehaviour
                     hole.transform.parent = transform;
                     hole.transform.localPosition = new Vector3(i * tileSize, Vector3.zero.y, j * tileSize);
                     hole.transform.localScale = new Vector3(tileSize * 0.5f, tileSize * 0.5f, tileSize * 0.25f);
+                    endOfMaze = hole.transform;
+                }
+                else if (maze[i,j] == 4)
+                {
+                    // Create new instance of the fishing penguin prefab
+                    GameObject fishingPenguin = (GameObject)Instantiate(_fishingPenguin); 
+                    fishingPenguin.transform.parent = transform;
+                    fishingPenguin.transform.localPosition = new Vector3(i * tileSize, Vector3.zero.y, j * tileSize);
+                    penguin = fishingPenguin.transform;
                 }
             }
         }
+        penguin.LookAt(endOfMaze);
     }
 
     public void SetMazeHighLight(LevelHighlight highlight)
