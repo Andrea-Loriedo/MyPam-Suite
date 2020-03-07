@@ -9,9 +9,10 @@ public class PenguinController : MonoBehaviour
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
 	[HideInInspector] public float startSpeed; 
+	[HideInInspector] public State currentState;
 
     ParticleSystem particles;
-	public float movementSpeed = 1f; 
+	[Range(0.5f, 1.5f)] public float movementSpeed = 1f; 
 
     public float jumpForce = 1000;
     public float timeBeforeNextJump = 1.2f;
@@ -51,11 +52,13 @@ public class PenguinController : MonoBehaviour
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(heading), 0.15f);
             anim.SetInteger("Walk", 1);
+			currentState = State.WALK;
         }
 
         else 
         {
             anim.SetInteger("Walk", 0);
+			currentState = State.IDLE;
         }
 
         transform.Translate(heading * movementSpeed * Time.deltaTime, Space.World);
@@ -101,6 +104,9 @@ public class PenguinController : MonoBehaviour
 			rb.AddForce(0, jumpForce, 0);
 			canJump = Time.time + timeBeforeNextJump;
 			anim.SetTrigger("jump");
+			currentState = State.DIVE;
 		}
 	}
 }
+
+public enum State { IDLE, WALK, DIVE };

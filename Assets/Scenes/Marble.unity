@@ -5805,9 +5805,24 @@ MonoBehaviour:
   forward: {x: 0, y: 0, z: 0}
   right: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
-  movementSpeed: 1
+  startSpeed: 0
+  currentState: 0
+  movementSpeed: 1.5
   jumpForce: 1000
   timeBeforeNextJump: 1.2
+--- !u!114 &1313637076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1313637071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc42dc37f1c25d049b92f501314ae76a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dive: {fileID: 8300000, guid: e35a3af0e03ee514aa89dd63cd94fb6f, type: 3}
+  walk: {fileID: 8300000, guid: 2dbf273bf64b0814ebd39a499914c1f0, type: 3}
 --- !u!4 &1313637078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4936587561821370, guid: 2884e6b071e1c2a4faef2e7fd67b481e,
