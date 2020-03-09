@@ -19,9 +19,10 @@ public class PlayerCarController : MonoBehaviour {
 
     void FixedUpdate()
     {
+        // Make the car follow the cursor using linear interpolation
         playerCar.transform.position = Vector3.Lerp(playerCar.transform.position, transform.position, speed*Time.deltaTime);
-        playerCar.transform.LookAt(transform);
-        MoveCar(GetInput());
+        playerCar.transform.LookAt(transform); // Make the car face the cursor
+        MoveCar(GetInput()); 
     }
 
     void MoveCar(Vector2 input)
@@ -31,15 +32,12 @@ public class PlayerCarController : MonoBehaviour {
 		Vector3 upMovement = forward * input.y; // define the "forward" direction
 
         Vector3 direction = new Vector3(input.x, 0f, input.y); // Direction wrt perspective camera
-        Vector3 isoDirection = rightMovement + upMovement;
+        Vector3 isoDirection = rightMovement + upMovement; // Direction wrt isometric camera
 
+        // Move to destination using linear interpolation
         transform.position = Vector3.Lerp(transform.position, isoDirection * scaler, speed*Time.time);
 
         // Logger.Debug($"x = {input.x}, y = {input.y}");
-	}
-
-	public float Remap (float value, float from1, float to1, float from2, float to2) {
-    	return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
 	}
 
     Vector2 GetInput()

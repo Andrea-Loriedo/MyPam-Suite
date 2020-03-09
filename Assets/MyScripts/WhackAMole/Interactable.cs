@@ -19,10 +19,10 @@ public class Interactable : MonoBehaviour
         {
             if (interfaces[i] == null)
             {
-                interfaces.RemoveAt(i);
+                interfaces.RemoveAt(i); 
             }
 
-            interfaces[i].InteractionFocus(state);
+            interfaces[i].InteractionFocus(state); // Activate focus on the IInteractable objects that require it
         }
     }
 
@@ -35,7 +35,7 @@ public class Interactable : MonoBehaviour
                 interfaces.RemoveAt(i);
             }
 
-            interfaces[i].Interact();
+            interfaces[i].Interact(); // Interact with the IInteractable objects that require it
         }
     }
 }

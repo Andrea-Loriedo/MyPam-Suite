@@ -30,18 +30,18 @@ public class Interactor : MonoBehaviour
 
         if (Physics.Raycast(transform.position, down, out hit, 10))
         {
-            // Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
+            Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             target = hit.collider.gameObject;
-
-                var newInteractable = target.GetComponent<Interactable>(); 
-                if (newInteractable != null && newInteractable != activeInteractable)
-                {
-                    newInteractable.Focus(true);
-                    activeInteractable = newInteractable;
-                    newInteractable = null;
-                }
+            var newInteractable = target.GetComponent<Interactable>(); 
+            
+            if (newInteractable != null && newInteractable != activeInteractable)
+            {
+                newInteractable.Focus(true);
+                activeInteractable = newInteractable;
+                newInteractable = null;
+            }
             else if (newInteractable == null && activeInteractable != null)
-                activeInteractable.Focus(false);
+            activeInteractable.Focus(false);
         }
     }
 

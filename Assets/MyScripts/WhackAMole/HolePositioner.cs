@@ -41,7 +41,7 @@ public class HolePositioner : MonoBehaviour
     {
         for (int i = 0; i < holesCount; i++)
         {
-            float angle = i * Mathf.PI*2f / 8;
+            float angle = i * Mathf.PI*2f / holesCount;
             Vector3 newPos = new Vector3(Mathf.Cos(angle)*radius, transform.localPosition.y, Mathf.Sin(angle)*radius);
             GameObject hole = (GameObject)Instantiate(holePrefab, newPos, Quaternion.identity);
             holes.Add(newPos);

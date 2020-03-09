@@ -10,6 +10,7 @@ public class HammerController : MonoBehaviour
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
 	[SerializeField] Interactor interactor;
+	[SerializeField] Transform startPoint;
 	[SerializeField] float speed = 15f; 
 	[SerializeField] Animator animator;
 	[SerializeField] GameObject hammerImpact;
@@ -20,7 +21,6 @@ public class HammerController : MonoBehaviour
 	void Awake()
 	{
 		InitPhysics();
-
 		particles = hammerImpact.GetComponentsInChildren<ParticleSystem>();
 	}
 
@@ -29,7 +29,6 @@ public class HammerController : MonoBehaviour
 		InitCamera();
 		initialPosition = transform.position;
         initialRotation = transform.rotation;
-		// anim = gameObject.GetComponent<Animation>();
  	}
 
 	void FixedUpdate () 
@@ -44,36 +43,11 @@ public class HammerController : MonoBehaviour
 		// define diamond workspace
 		Vector3 rightMovement = right * input.x; // define the "right" direction
 		Vector3 upMovement = forward * input.y; // define the "forward" direction
-		Vector3 heading = Vector3.Normalize(rightMovement + upMovement) * speed;
-        Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
+		Vector3 isoDirection = rightMovement + upMovement + new Vector3(0, 0.7f, 0); // Direction wrt isometric camera
+		Vector3 direction = new Vector3(input.x, 0.7f, input.y); // Direction wrt perspective camera
 
-        Vector3 direction = new Vector3(input.x, 0f, input.y); 
-
-		if (direction != Vector3.zero) {
-			transform.LookAt(heading); // transform the world forward vector into the orthographic forward vector
-            transform.Rotate(65, 0, 0);
-		}
-
-        rb.AddForce(heading * speed);
-
-        if (input == Vector2.zero)
-        {
-            transform.position = initialPosition;
-            transform.rotation = initialRotation;
-        }
-    
-        else if (pos2D.magnitude >= radius)
-            transform.position = ConstrainToCircle();
+        transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
 	}
-
-    Vector3 ConstrainToCircle()
-    {
-		Vector3 circleCentre = new Vector3(0f, 3f, 0f);
-        Vector3 offset = transform.position - circleCentre;
-        offset.Normalize();
-        offset = offset * radius;
-        return circleCentre + offset;
-    }
 
 	IEnumerator PlayWhackAnimation()
 	{

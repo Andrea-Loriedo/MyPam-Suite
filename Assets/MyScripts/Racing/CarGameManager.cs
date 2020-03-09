@@ -17,7 +17,7 @@ public class CarGameManager : MonoBehaviour {
 
     void Start()
     {
-        track.Generate(TrackShape.CIRCLE);
+        track.Generate(TrackShape.FIGURE_8);
         npcCars.PositionCars(TrajectoryParameters.GetTrajectoryParameters(track.generated.currentTrack).spacing);
 
     }
