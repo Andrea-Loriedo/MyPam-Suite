@@ -139,9 +139,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4434599338905980}
   - component: {fileID: 135074371120941434}
-  - component: {fileID: 114733570541774646}
-  - component: {fileID: 114500768247347774}
   - component: {fileID: 114803993195784258}
+  - component: {fileID: 114794034545464242}
+  - component: {fileID: 114129980914975622}
   m_Layer: 0
   m_Name: mole_radio
   m_TagString: Mole
@@ -616,7 +616,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355710554988402}
   m_Mesh: {fileID: 4300002, guid: 606f0d9bb03394059a3b41fb756864ad, type: 3}
---- !u!114 &114500768247347774
+--- !u!114 &114129980914975622
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -624,10 +624,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1929636235463090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bf550a35558d049990c2597655bd69, type: 3}
+  m_Script: {fileID: 11500000, guid: 590b027de41a4304aaf6469e13f54417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114733570541774646
+--- !u!114 &114794034545464242
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -635,7 +635,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1929636235463090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114803993195784258
@@ -650,7 +650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  waitTime: 3
 --- !u!135 &135074371120941434
 SphereCollider:
   m_ObjectHideFlags: 1

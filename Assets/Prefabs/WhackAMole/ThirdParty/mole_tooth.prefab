@@ -139,9 +139,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4227771371179594}
   - component: {fileID: 135041085256148104}
-  - component: {fileID: 114519282896195978}
-  - component: {fileID: 114827719905987456}
   - component: {fileID: 114578479750479032}
+  - component: {fileID: 114141914985511630}
+  - component: {fileID: 114672794549200186}
   m_Layer: 0
   m_Name: mole_tooth
   m_TagString: Mole
@@ -689,7 +689,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1982600610601156}
   m_Mesh: {fileID: 4300002, guid: 0465b51da0a2341fa951e4dece60bff7, type: 3}
---- !u!114 &114519282896195978
+--- !u!114 &114141914985511630
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -697,7 +697,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1848079023759194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114578479750479032
@@ -712,8 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  waitTime: 3
---- !u!114 &114827719905987456
+--- !u!114 &114672794549200186
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -721,7 +720,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1848079023759194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bf550a35558d049990c2597655bd69, type: 3}
+  m_Script: {fileID: 11500000, guid: 590b027de41a4304aaf6469e13f54417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135041085256148104

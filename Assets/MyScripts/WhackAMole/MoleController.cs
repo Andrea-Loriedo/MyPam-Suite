@@ -5,13 +5,14 @@ using UnityEngine;
 public class MoleController : MonoBehaviour
 {
     [HideInInspector] public MoleState state;
-    [HideInInspector] public float waitTime = 3f;
+    float timeLeft = 30.0f;
+    float resetTimer;
     Animator animator;
-	private float timer = 0;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        resetTimer = timeLeft;
     }
 
     void Update () 
@@ -21,25 +22,25 @@ public class MoleController : MonoBehaviour
 
     void CheckState()
     {
-        if(state == MoleState.UP)
+        switch(state)
         {
-            AnimateMole("Up");
-            state = MoleState.ABOVE_GROUND;
-        }
-
-        if(state == MoleState.ABOVE_GROUND)
-        {
-            timer += Time.deltaTime;
-            
-            if (timer > waitTime) 
-                state = MoleState.DOWN;
-        }
-
-        if(state == MoleState.DOWN)
-        {
-            AnimateMole("Down");
-            state = MoleState.BELOW_GROUND;
-            Destroy(gameObject);
+            case MoleState.UP:
+                AnimateMole("Up");
+                state = MoleState.ABOVE_GROUND;
+                break;
+            case MoleState.ABOVE_GROUND:
+                timeLeft -= Time.deltaTime;
+                if (timeLeft < 0) 
+                {
+                    state = MoleState.DOWN;
+                    timeLeft = resetTimer;
+                }
+                break;
+            case MoleState.DOWN:
+                AnimateMole("Down");
+                state = MoleState.BELOW_GROUND;
+                Destroy(gameObject);
+                break;
         }
     }
 

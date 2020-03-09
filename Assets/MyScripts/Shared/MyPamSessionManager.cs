@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class MyPamSessionManager: MonoBehaviour
 {
     [HideInInspector] public Player player;

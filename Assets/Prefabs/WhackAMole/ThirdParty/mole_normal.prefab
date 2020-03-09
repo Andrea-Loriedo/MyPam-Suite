@@ -37,9 +37,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4777952977504804}
   - component: {fileID: 135826057467359386}
-  - component: {fileID: 114509477759454734}
-  - component: {fileID: 114621460199361298}
   - component: {fileID: 114063836010343148}
+  - component: {fileID: 114365331844893060}
+  - component: {fileID: 114421929868255306}
   m_Layer: 0
   m_Name: mole_normal
   m_TagString: Mole
@@ -555,8 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  waitTime: 3
---- !u!114 &114509477759454734
+--- !u!114 &114365331844893060
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -564,10 +563,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1142811452314098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114621460199361298
+--- !u!114 &114421929868255306
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -575,7 +574,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1142811452314098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bf550a35558d049990c2597655bd69, type: 3}
+  m_Script: {fileID: 11500000, guid: 590b027de41a4304aaf6469e13f54417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135826057467359386

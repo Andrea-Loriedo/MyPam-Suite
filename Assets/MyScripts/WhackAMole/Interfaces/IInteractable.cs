@@ -3,6 +3,5 @@ using UnityEngine;
 public interface IInteractable
 {
     void Interact();
-    void InteractionFocus(bool focussed);
-
+    void InteractionFocus(bool focused);
 }

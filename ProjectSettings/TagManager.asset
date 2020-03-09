@@ -17,6 +17,7 @@ TagManager:
   - Taxi
   - Fish
   - Penguin
+  - StartZone
   layers:
   - Default
   - TransparentFX

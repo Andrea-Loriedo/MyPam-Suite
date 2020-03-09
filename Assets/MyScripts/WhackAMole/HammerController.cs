@@ -10,7 +10,6 @@ public class HammerController : MonoBehaviour
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
 	[SerializeField] Interactor interactor;
-	[SerializeField] Transform startPoint;
 	[SerializeField] float speed = 15f; 
 	[SerializeField] Animator animator;
 	[SerializeField] GameObject hammerImpact;

@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4834944685841436}
   - component: {fileID: 135192531177486002}
-  - component: {fileID: 114836316824036306}
-  - component: {fileID: 114092560710548622}
   - component: {fileID: 114031252985359156}
+  - component: {fileID: 114928218790099610}
+  - component: {fileID: 114326958897786542}
   m_Layer: 0
   m_Name: mole_cheek
   m_TagString: Mole
@@ -626,8 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  waitTime: 3
---- !u!114 &114092560710548622
+--- !u!114 &114326958897786542
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -635,10 +634,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1043915981983498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bf550a35558d049990c2597655bd69, type: 3}
+  m_Script: {fileID: 11500000, guid: 590b027de41a4304aaf6469e13f54417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114836316824036306
+--- !u!114 &114928218790099610
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -646,7 +645,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1043915981983498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135192531177486002

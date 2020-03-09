@@ -953,7 +953,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.8
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1006,7 +1006,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.8
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5548,8 +5548,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 337608245}
+  - component: {fileID: 337608246}
   m_Layer: 0
-  m_Name: StartPoint
+  m_Name: StartZone
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5571,6 +5572,50 @@ Transform:
   m_Father: {fileID: 576823958}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+--- !u!114 &337608246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 337608244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3271024c3b4ab094faaf25022c5206d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  onGo:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697625185}
+        m_MethodName: SpawnRandom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onWaiting:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697625185}
+        m_MethodName: StopSpawning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &367854841
 GameObject:
   m_ObjectHideFlags: 0
@@ -6047,7 +6092,6 @@ MonoBehaviour:
   right: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   interactor: {fileID: 1140560525}
-  startPoint: {fileID: 337608245}
   speed: 10
   animator: {fileID: 1176299682}
   hammerImpact: {fileID: 119344456}
@@ -6466,7 +6510,7 @@ GameObject:
   - component: {fileID: 1151053687}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Interactable
+  m_TagString: StartZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6489,27 +6533,26 @@ Transform:
 --- !u!114 &1151053687
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114636814609383734, guid: 635fdfa8400f0604188e4c0f0f7fe94b,
-    type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1151053685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3bdd55c8eb21ef4b93ac9bff7b607c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5319b4dee176d244b90b4f8c4123d04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaterial: {fileID: 2100000, guid: 0259ff197ab64d54c9b63a36f3462764, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 58c7b983c1d9a734b98fadf10b63cc3c, type: 2}
+  startZone: {fileID: 337608246}
 --- !u!114 &1151053688
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114631923911060974, guid: 635fdfa8400f0604188e4c0f0f7fe94b,
-    type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1151053685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &1151053689
@@ -7753,6 +7796,8 @@ MonoBehaviour:
   - {fileID: 1047443009375662, guid: e6fd2370dcf7e824ba2c716590366955, type: 2}
   - {fileID: 1848079023759194, guid: ec3b00925317d324c8254aba832517aa, type: 2}
   holePositioner: {fileID: 2105208021}
+  spawn: 0
+  startZone: {fileID: 337608246}
 --- !u!4 &1697625186
 Transform:
   m_ObjectHideFlags: 0

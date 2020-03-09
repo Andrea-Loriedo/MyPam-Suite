@@ -105,9 +105,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4135316978757492}
   - component: {fileID: 135968946996244428}
-  - component: {fileID: 114358449339516212}
-  - component: {fileID: 114126211332433512}
   - component: {fileID: 114892389935553770}
+  - component: {fileID: 114304227042785826}
+  - component: {fileID: 114308059614865838}
   m_Layer: 0
   m_Name: mole_hair
   m_TagString: Mole
@@ -616,7 +616,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1629192072696178}
   m_Mesh: {fileID: 4300002, guid: afdf5a9a5251e4eba97068d32f8def72, type: 3}
---- !u!114 &114126211332433512
+--- !u!114 &114304227042785826
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -624,10 +624,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1690091507892472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bf550a35558d049990c2597655bd69, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114358449339516212
+--- !u!114 &114308059614865838
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -635,7 +635,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1690091507892472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 590b027de41a4304aaf6469e13f54417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114892389935553770
@@ -650,7 +650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  waitTime: 3
 --- !u!135 &135968946996244428
 SphereCollider:
   m_ObjectHideFlags: 1

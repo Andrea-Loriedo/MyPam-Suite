@@ -156,9 +156,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4618568980664336}
   - component: {fileID: 135282951233889872}
-  - component: {fileID: 114936560057046104}
-  - component: {fileID: 114916862581661160}
   - component: {fileID: 114505413839959340}
+  - component: {fileID: 114067919696556952}
+  - component: {fileID: 114167616566250470}
   m_Layer: 0
   m_Name: mole_dr
   m_TagString: Mole
@@ -543,6 +543,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655367511418302}
   m_Mesh: {fileID: 4300010, guid: 68d0a3f5ee781495fabe56b1e3b512a9, type: 3}
+--- !u!114 &114067919696556952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848327763792528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114167616566250470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848327763792528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590b027de41a4304aaf6469e13f54417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114505413839959340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -555,29 +577,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  waitTime: 3
---- !u!114 &114916862581661160
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848327763792528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bf550a35558d049990c2597655bd69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114936560057046104
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848327763792528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &135282951233889872
 SphereCollider:
   m_ObjectHideFlags: 1

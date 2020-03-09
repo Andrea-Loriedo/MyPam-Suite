@@ -5,37 +5,40 @@ using UnityEngine.UI;
 
 public class MoleManager : MonoBehaviour
 {
-    [Tooltip("Mole prefabs to be randomly instanced")]
-    [SerializeField] public GameObject[] moles;
-    [SerializeField] public HolePositioner holePositioner;
+    [Tooltip("Mole prefabs to be randomly instantiated")]
+    public GameObject[] moles;
+    public HolePositioner holePositioner;
+    [HideInInspector] public bool spawn;
+    [SerializeField] StartZoneController startZone;
+
     List<int> previousMoles = new List<int>();
     int moleIndex;
-    float spawnFrequency = 4f;
-    bool spawn;
 
-    void Start()
+    public void SpawnRandom()
+	{
+        StartCoroutine(Spawn());
+	}
+
+    public void StopSpawning()
     {
-        spawn = true;
-        StartCoroutine(SpawnRandom(spawnFrequency));
+        StopAllCoroutines();
     }
 
-    IEnumerator SpawnRandom(float frequency)
-	{
-        while(spawn)
-        {
-            // Instantiate a random mole
-            GameObject randomMole = (GameObject)Instantiate(moles[Shuffle(moles.Length)]);
-            Vector3 randomHole = holePositioner.holes[holePositioner.Shuffle()];
-            randomMole.transform.parent = transform;
-            // Place in a random hole
-            randomMole.transform.position = randomHole;
-            MoleController controller = randomMole.GetComponent<MoleController>();
-            if (controller != null)
-                controller.Up();
-            yield return new WaitForSeconds (frequency);
-        }
-
-	}
+    IEnumerator Spawn()
+    {
+        GameObject randomMole = (GameObject)Instantiate(moles[Shuffle(moles.Length)]); // Instantiate a random mole
+        Vector3 randomHole = holePositioner.holes[holePositioner.Shuffle()]; 
+        randomMole.transform.parent = transform; // Gather under common transform
+        randomMole.transform.position = randomHole; // Place in a random hole
+        MoleController controller = randomMole.GetComponent<MoleController>();
+        
+        if (controller != null)
+            controller.Up();
+        
+        yield return null;
+        
+        startZone.SetState(StartZoneState.WAITING);
+    }
 
     public int Shuffle(int molesCount)
     {
@@ -57,4 +60,7 @@ public class MoleManager : MonoBehaviour
         // Logger.Debug("Generated map number " + mapNumber);
         return moleIndex;
     }
+
+
 }
+

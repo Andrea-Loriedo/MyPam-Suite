@@ -37,9 +37,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4013359193300476}
   - component: {fileID: 135583559292164812}
-  - component: {fileID: 114213807598163878}
-  - component: {fileID: 114572551521428872}
   - component: {fileID: 114442027319437800}
+  - component: {fileID: 114152140105062238}
+  - component: {fileID: 114431649748144944}
   m_Layer: 0
   m_Name: mole_sunglass
   m_TagString: Mole
@@ -616,7 +616,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411262189176306}
   m_Mesh: {fileID: 4300006, guid: a120994a4cfc54a60b9fd63907dba094, type: 3}
---- !u!114 &114213807598163878
+--- !u!114 &114152140105062238
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -624,7 +624,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1047443009375662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd577bbd0a4afa24ca68207ac41dedd6, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a7e238ad19f6840aeb03eb1bccf93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114431649748144944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1047443009375662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590b027de41a4304aaf6469e13f54417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114442027319437800
@@ -639,18 +650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  waitTime: 3
---- !u!114 &114572551521428872
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1047443009375662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bf550a35558d049990c2597655bd69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &135583559292164812
 SphereCollider:
   m_ObjectHideFlags: 1
