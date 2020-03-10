@@ -14,10 +14,7 @@ public class InteractableWhack : MonoBehaviour, IInteractable
     public void Interact() 
     {
         if (mole != null)
-        {
-            // mole.PlayParticles();
             mole.Whack();
-        }
     }
 
     public void InteractionFocus(bool focused) {}

@@ -10,7 +10,7 @@ public class IInteractableFocusHighlight : MonoBehaviour, IInteractable
 
     public void Interact() 
     { 
-        if(startZone != null)
+        if(startZone != null && startZone.state == StartZoneState.READY)
             startZone.SetState(StartZoneState.GO);
     }
 

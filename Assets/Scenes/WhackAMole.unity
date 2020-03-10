@@ -5551,7 +5551,7 @@ GameObject:
   - component: {fileID: 337608246}
   m_Layer: 0
   m_Name: StartZone
-  m_TagString: Interactable
+  m_TagString: StartZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7796,8 +7796,6 @@ MonoBehaviour:
   - {fileID: 1047443009375662, guid: e6fd2370dcf7e824ba2c716590366955, type: 2}
   - {fileID: 1848079023759194, guid: ec3b00925317d324c8254aba832517aa, type: 2}
   holePositioner: {fileID: 2105208021}
-  spawn: 0
-  startZone: {fileID: 337608246}
 --- !u!4 &1697625186
 Transform:
   m_ObjectHideFlags: 0

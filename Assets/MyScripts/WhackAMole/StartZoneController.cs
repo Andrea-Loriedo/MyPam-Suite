@@ -9,6 +9,11 @@ public class StartZoneController : MonoBehaviour
     public UnityEvent onGo;
     public UnityEvent onWaiting;
 
+    void Awake()
+    {
+        SetState(StartZoneState.READY);
+    }
+
     public void SetState(StartZoneState newState)
     {
         state = newState;
@@ -24,6 +29,7 @@ public class StartZoneController : MonoBehaviour
                 // dostuff
                 break;
             case StartZoneState.GO:
+                state = StartZoneState.WAITING; 
                 onGo.Invoke();
                 break;
         }

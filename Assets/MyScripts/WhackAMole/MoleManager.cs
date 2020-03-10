@@ -8,8 +8,6 @@ public class MoleManager : MonoBehaviour
     [Tooltip("Mole prefabs to be randomly instantiated")]
     public GameObject[] moles;
     public HolePositioner holePositioner;
-    [HideInInspector] public bool spawn;
-    [SerializeField] StartZoneController startZone;
 
     List<int> previousMoles = new List<int>();
     int moleIndex;
@@ -17,11 +15,13 @@ public class MoleManager : MonoBehaviour
     public void SpawnRandom()
 	{
         StartCoroutine(Spawn());
+        Logger.Debug("Spawn");
 	}
 
     public void StopSpawning()
     {
         StopAllCoroutines();
+        Logger.Debug("Stop spawning");
     }
 
     IEnumerator Spawn()
@@ -30,14 +30,12 @@ public class MoleManager : MonoBehaviour
         Vector3 randomHole = holePositioner.holes[holePositioner.Shuffle()]; 
         randomMole.transform.parent = transform; // Gather under common transform
         randomMole.transform.position = randomHole; // Place in a random hole
-        MoleController controller = randomMole.GetComponent<MoleController>();
+        MoleController mole = randomMole.GetComponent<MoleController>();
         
-        if (controller != null)
-            controller.Up();
+        if (mole != null && mole.state == MoleState.BELOW_GROUND)
+            mole.SetState(MoleState.UP);
         
         yield return null;
-        
-        startZone.SetState(StartZoneState.WAITING);
     }
 
     public int Shuffle(int molesCount)
