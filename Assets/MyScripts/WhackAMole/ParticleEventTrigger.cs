@@ -19,9 +19,9 @@ public class ParticleEventTrigger : MonoBehaviour
 															hammerImpact.transform.position.y, 
 															gameObject.transform.position.z
 		);
+
         foreach (ParticleSystem system in particles)
             system.Play();
         shaker.Shake();
-        MyPamSessionManager.Instance.player.score++;
     }
 }

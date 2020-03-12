@@ -14,35 +14,36 @@ public class Interactor : MonoBehaviour
 
     void FixedUpdate()
     {
-        CheckIfAtStartPoint();
-        // In case we move the object, we want to check if there have been any interaction changes.
-        if (transform.hasChanged)
-        {
-            CheckIfInRange();
-            TryWhack();
-        }
+        CheckIfInStartZone();
+        CheckIfInHoleRange();
+        TryWhack();
     }
 
-    private void CheckIfInRange()
+    private void CheckIfInHoleRange()
     {
         Vector3 down = transform.TransformDirection(Vector3.left);
-        GameObject target;
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, down, out hit, 10))
         {
-            // Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
-            target = hit.collider.gameObject; // The object hit by the ray cast
+            Logger.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
+            GameObject target = hit.collider.gameObject; // The object hit by the ray cast
             var newInteractable = target.GetComponent<Interactable>(); 
             
-            if (newInteractable != null)
+            if (newInteractable != activeInteractable)
             {
-                newInteractable.Focus(true);
-                activeInteractable = newInteractable;
-                newInteractable = null;
+                if (activeInteractable != null)
+                {
+                    activeInteractable.Focus(false); // Notify the interfaces of the last active interactable that it is no longer being focussed
+                }
+
+                if (newInteractable != null)
+                {
+                    newInteractable.Focus(true); // Notify the new interactable that it is being focussed
+                }
+
+                activeInteractable = newInteractable; // Update active interactable to new interactable
             }
-            else if (newInteractable == null)
-            activeInteractable.Focus(false);
         }
     }
 
@@ -53,7 +54,6 @@ public class Interactor : MonoBehaviour
             activeInteractable.Interact();
             if (hammer != null)
                 hammer.Animate();
-
             return true;
         }
         else
@@ -62,11 +62,9 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    void CheckIfAtStartPoint()
+    void CheckIfInStartZone()
     {
         if (activeInteractable != null && activeInteractable.CompareTag("StartZone"))
-        {
             activeInteractable.Interact();
-        }
     }
 }

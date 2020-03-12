@@ -59,6 +59,7 @@ public class MoleController : MonoBehaviour
 			return false;
 
         SetState(MoleState.DOWN);
+        MyPamSessionManager.Instance.player.score++; // Increment player score
         // Logger.Debug($"Whacked {gameObject}!");
 		return true;
 	}
