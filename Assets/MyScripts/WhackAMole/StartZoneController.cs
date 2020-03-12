@@ -5,14 +5,15 @@ using UnityEngine.Events;
 
 public class StartZoneController : MonoBehaviour
 {
+    [SerializeField] Material waitMaterial;
+    [SerializeField] Material prepMaterial;
+    [SerializeField] Material goMaterial;
+
     public StartZoneState state;
     public UnityEvent onWaiting;
     public UnityEvent onPreparing;
     public UnityEvent onGo;
-
-    void Awake()
-    {
-    }
+    public Renderer rend;
 
     public void SetState(StartZoneState newState)
     {
@@ -21,12 +22,15 @@ public class StartZoneController : MonoBehaviour
         switch (state)
         {
             case StartZoneState.WAITING:
+                rend.material = waitMaterial;
                 onWaiting.Invoke(); // Stop moles from spawning
                 break;
             case StartZoneState.PREPARING:
+                rend.material = prepMaterial;
                 onPreparing.Invoke(); // Start the delayed mole spawn sequence
                 break;
             case StartZoneState.GO:
+                rend.material = goMaterial;
                 break;
         }
     }

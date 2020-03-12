@@ -31,15 +31,16 @@ public class MoleManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         GameObject randomMole = (GameObject)Instantiate(moles[Shuffle(moles.Length)]); // Instantiate a random mole
+        MoleController mole = randomMole.GetComponent<MoleController>();
         Vector3 randomHole = holePositioner.holes[holePositioner.Shuffle()]; 
+
         randomMole.transform.parent = transform; // Gather under common transform
         randomMole.transform.position = randomHole; // Place in a random hole
-        MoleController mole = randomMole.GetComponent<MoleController>();
         
         if (mole != null && mole.state == MoleState.BELOW_GROUND)
         {
             mole.SetState(MoleState.UP); // Bring mole to the surface
-            startZone.SetState(StartZoneState.GO);
+            startZone.SetState(StartZoneState.GO); // Notify start zone
         }
     }
 
