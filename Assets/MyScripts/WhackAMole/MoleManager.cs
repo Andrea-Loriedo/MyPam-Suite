@@ -8,24 +8,28 @@ public class MoleManager : MonoBehaviour
     [Tooltip("Mole prefabs to be randomly instantiated")]
     public GameObject[] moles;
     public HolePositioner holePositioner;
+    [SerializeField] StartZoneController startZone;
 
     List<int> previousMoles = new List<int>();
     int moleIndex;
+    float minDelay = 1.5f;
+    float maxDelay = 3f;
 
-    public void SpawnRandom()
+    public void StartSpawnSequence()
 	{
-        StartCoroutine(Spawn());
-        Logger.Debug("Spawn");
+        float randomizedDelay = Random.Range(minDelay, maxDelay);
+        StartCoroutine(DelayedSpawn(randomizedDelay));
 	}
 
     public void StopSpawning()
     {
         StopAllCoroutines();
-        Logger.Debug("Stop spawning");
     }
 
-    IEnumerator Spawn()
-    {
+    IEnumerator DelayedSpawn(float delay)
+    {        
+        yield return new WaitForSeconds(delay);
+
         GameObject randomMole = (GameObject)Instantiate(moles[Shuffle(moles.Length)]); // Instantiate a random mole
         Vector3 randomHole = holePositioner.holes[holePositioner.Shuffle()]; 
         randomMole.transform.parent = transform; // Gather under common transform
@@ -33,9 +37,10 @@ public class MoleManager : MonoBehaviour
         MoleController mole = randomMole.GetComponent<MoleController>();
         
         if (mole != null && mole.state == MoleState.BELOW_GROUND)
-            mole.SetState(MoleState.UP);
-        
-        yield return null;
+        {
+            mole.SetState(MoleState.UP); // Bring mole to the surface
+            startZone.SetState(StartZoneState.GO);
+        }
     }
 
     public int Shuffle(int molesCount)
@@ -43,7 +48,7 @@ public class MoleManager : MonoBehaviour
         int lastMole = UnityEngine.Random.Range(0, molesCount);
         moleIndex = UnityEngine.Random.Range(0, molesCount);
 
-        // // Always pick a map different from all the previously used ones
+        // // Always pick a map different from all the previously used ones (infinite loop bug needs fixing)
         // while (previousMoles.Contains(moleIndex) || moleIndex == lastMole)
         //     moleIndex = UnityEngine.Random.Range(0, molesCount);
         

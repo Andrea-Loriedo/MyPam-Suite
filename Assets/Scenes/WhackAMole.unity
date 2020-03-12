@@ -5584,22 +5584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  onGo:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1697625185}
-        m_MethodName: SpawnRandom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onWaiting:
     m_PersistentCalls:
       m_Calls:
@@ -5614,6 +5598,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onPreparing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697625185}
+        m_MethodName: StartSpawnSequence
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onGo:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &367854841
@@ -6538,12 +6543,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1151053685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5319b4dee176d244b90b4f8c4123d04f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0edac63d17faa1a45ab91f777ba27538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaterial: {fileID: 2100000, guid: 0259ff197ab64d54c9b63a36f3462764, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 58c7b983c1d9a734b98fadf10b63cc3c, type: 2}
   startZone: {fileID: 337608246}
+  waitingColor: {r: 0, g: 0, b: 0, a: 0}
+  preparingColor: {r: 1, g: 0, b: 0, a: 1}
+  goColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &1151053688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7796,6 +7804,7 @@ MonoBehaviour:
   - {fileID: 1047443009375662, guid: e6fd2370dcf7e824ba2c716590366955, type: 2}
   - {fileID: 1848079023759194, guid: ec3b00925317d324c8254aba832517aa, type: 2}
   holePositioner: {fileID: 2105208021}
+  startZone: {fileID: 337608246}
 --- !u!4 &1697625186
 Transform:
   m_ObjectHideFlags: 0
@@ -8283,7 +8292,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1845738536}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5890b75336a6f2a44b53ca45b72f4f8c, type: 2}
   m_CullingMode: 0

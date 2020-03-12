@@ -6,7 +6,7 @@ public class MoleController : MonoBehaviour
 {
     StartZoneController startZone;
     public MoleState state;
-    float aboveGroundTime = 30.0f;
+    float aboveGroundTime = 5.0f;
     Animator animator;
 
     void Awake()
@@ -18,7 +18,7 @@ public class MoleController : MonoBehaviour
     IEnumerator StayAboveGround(float timeLeft)
     {
         yield return new WaitForSeconds(timeLeft);
-        state = MoleState.DOWN;
+        SetState(MoleState.DOWN); // Send mole back under ground once timer has ran out
     }
 
     public void SetState(MoleState newState)
@@ -39,7 +39,7 @@ public class MoleController : MonoBehaviour
             case MoleState.DOWN:
                 AnimateMole("Down");
                 state = MoleState.BELOW_GROUND;
-                startZone.SetState(StartZoneState.READY);
+                startZone.SetState(StartZoneState.WAITING);
                 Destroy(gameObject);
             break;
         }
@@ -54,11 +54,10 @@ public class MoleController : MonoBehaviour
 
     public bool Whack()
 	{
-		// Don't whack if the mole is hidden
 		if (state == MoleState.BELOW_GROUND) 
-			return false;
+			return false; // Don't whack if the mole is hidden
 
-        SetState(MoleState.DOWN);
+        SetState(MoleState.DOWN); // Send mole back underground when whacked
         MyPamSessionManager.Instance.player.score++; // Increment player score
         // Logger.Debug($"Whacked {gameObject}!");
 		return true;

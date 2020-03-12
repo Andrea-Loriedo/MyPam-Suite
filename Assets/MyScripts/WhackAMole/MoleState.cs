@@ -3,5 +3,4 @@
 		UP,
 		ABOVE_GROUND,
 		DOWN,
-		HIT,
 	}

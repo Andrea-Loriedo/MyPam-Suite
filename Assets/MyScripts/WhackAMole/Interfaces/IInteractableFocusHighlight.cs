@@ -6,13 +6,8 @@ public class IInteractableFocusHighlight : MonoBehaviour, IInteractable
 {
     [SerializeField] Material baseMaterial;
     [SerializeField] Material highlightMaterial;
-    [SerializeField] StartZoneController startZone;
 
-    public void Interact() 
-    { 
-        if(startZone != null && startZone.state == StartZoneState.READY)
-            startZone.SetState(StartZoneState.GO);
-    }
+    public void Interact() { }
 
     public void InteractionFocus(bool focused)
     {

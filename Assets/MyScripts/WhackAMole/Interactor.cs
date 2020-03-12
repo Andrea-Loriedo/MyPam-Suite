@@ -12,11 +12,17 @@ public class Interactor : MonoBehaviour
         hammer = GetComponentInParent<HammerController>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         CheckIfInStartZone();
         CheckIfInHoleRange();
         TryWhack();
+    }
+
+    void CheckIfInStartZone()
+    {
+        if (activeInteractable != null && activeInteractable.CompareTag("StartZone"))
+            activeInteractable.Interact();
     }
 
     private void CheckIfInHoleRange()
@@ -60,11 +66,5 @@ public class Interactor : MonoBehaviour
         {
             return false;
         }
-    }
-
-    void CheckIfInStartZone()
-    {
-        if (activeInteractable != null && activeInteractable.CompareTag("StartZone"))
-            activeInteractable.Interact();
     }
 }
