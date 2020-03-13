@@ -11,7 +11,6 @@ public class StartZoneController : MonoBehaviour
     [SerializeField] Material goMaterial;
     [SerializeField] TextMeshPro startText;
 
-
     public StartZoneState state;
     public UnityEvent onWaiting;
     public UnityEvent onPreparing;
@@ -31,7 +30,7 @@ public class StartZoneController : MonoBehaviour
                 break;
             case StartZoneState.PREPARING:
                 rend.material = prepMaterial;
-                startText.text = "\n WAIT";
+                startText.text = " WAIT \n HERE";
                 onPreparing.Invoke(); // Start the delayed mole spawn sequence
                 break;
             case StartZoneState.GO:
