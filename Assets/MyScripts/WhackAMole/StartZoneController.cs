@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class StartZoneController : MonoBehaviour
 {
     [SerializeField] Material waitMaterial;
     [SerializeField] Material prepMaterial;
     [SerializeField] Material goMaterial;
+    [SerializeField] TextMeshPro startText;
+
 
     public StartZoneState state;
     public UnityEvent onWaiting;
@@ -23,13 +26,16 @@ public class StartZoneController : MonoBehaviour
         {
             case StartZoneState.WAITING:
                 rend.material = waitMaterial;
+                startText.text = "START \n HERE";
                 onWaiting.Invoke(); // Stop moles from spawning
                 break;
             case StartZoneState.PREPARING:
                 rend.material = prepMaterial;
+                startText.text = "\n WAIT";
                 onPreparing.Invoke(); // Start the delayed mole spawn sequence
                 break;
             case StartZoneState.GO:
+                startText.text = "\n  GO!";
                 rend.material = goMaterial;
                 break;
         }

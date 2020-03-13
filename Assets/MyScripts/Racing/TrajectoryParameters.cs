@@ -15,7 +15,8 @@ public static class TrajectoryParameters
             q = Convert.ToSingle(track["q"]),
             p = Convert.ToSingle(track["p"]),
             period = Convert.ToSingle(track["period"]),
-            spacing = Convert.ToSingle(track["spacing"])
+            spacing = Convert.ToSingle(track["spacing"]),
+            duration = Convert.ToSingle(track["duration"])
         };
         return trajectoryParams;
     }
@@ -23,5 +24,5 @@ public static class TrajectoryParameters
 
 // Input parameters for the equation generating the Path trajectory
 public struct TrajectoryInput {
-	public float  A, B, q, p, period, spacing;
+	public float  A, B, q, p, period, spacing, duration;
 }

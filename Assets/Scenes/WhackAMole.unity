@@ -5586,6 +5586,7 @@ MonoBehaviour:
   waitMaterial: {fileID: 2100000, guid: 0259ff197ab64d54c9b63a36f3462764, type: 2}
   prepMaterial: {fileID: 2100000, guid: 6ec98ebfd2b351240993e6c6c4b0cc9b, type: 2}
   goMaterial: {fileID: 2100000, guid: 58c7b983c1d9a734b98fadf10b63cc3c, type: 2}
+  startText: {fileID: 1338164884}
   state: 0
   onWaiting:
     m_PersistentCalls:
@@ -7193,7 +7194,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1338164882}
   m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 0, y: 0, z: -1.35}
+  m_LocalPosition: {x: 0, y: 0, z: -1.381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 337608245}
@@ -7201,7 +7202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 45, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.04, y: 0.122}
+  m_AnchoredPosition: {x: -2.078, y: 0.122}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1338164884
@@ -7289,7 +7290,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 18.777502, w: 4.057383}
+  m_margin: {x: 0.014822602, y: -0.1092112, z: 19.00415, w: 3.9904184}
   m_textInfo:
     textComponent: {fileID: 1338164884}
     characterCount: 12

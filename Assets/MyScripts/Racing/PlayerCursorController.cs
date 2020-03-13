@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCarController : MonoBehaviour {
+public class PlayerCursorController : MonoBehaviour {
 
 	[HideInInspector] public Vector3 initialPosition { get; set; }
     [HideInInspector] public Quaternion initialRotation { get; set; }
 	[HideInInspector] public Vector3 forward, right;
     [SerializeField] float speed = 2; 
     [SerializeField] GameObject playerCar;    
-    float scaler = 3.5f;
+    float radius = 3.5f;
 
 
     void Awake()
@@ -35,9 +35,7 @@ public class PlayerCarController : MonoBehaviour {
         Vector3 isoDirection = rightMovement + upMovement; // Direction wrt isometric camera
 
         // Move to destination using linear interpolation
-        transform.position = Vector3.Lerp(transform.position, isoDirection * scaler, speed*Time.time);
-
-        // Logger.Debug($"x = {input.x}, y = {input.y}");
+        transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed*Time.time);
 	}
 
     Vector2 GetInput()

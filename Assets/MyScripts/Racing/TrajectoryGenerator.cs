@@ -9,9 +9,8 @@ using MiniJSON;
 // from JSON and turning them into a list of anchors to generate a path.
 public class TrajectoryGenerator {
 
-    [HideInInspector] public List<Vector2> trajectory { get; set; } // List of anchors defining the path
     [HideInInspector] public Dictionary<string, object> currentTrack;
-    Dictionary<string, object> tracks;
+    List<Vector2> trajectory; // List of anchors defining the path
 
     const string fileName = "racing_tracks.json";
 	
@@ -22,26 +21,15 @@ public class TrajectoryGenerator {
 	float lineResolution = 0.2f;
 
 
-    public TrajectoryGenerator(string shape)
-    {
-        LoadTracks();
-        
-        currentTrack = tracks[shape] as Dictionary<string, object>;
-        TrajectoryInput input;
-
-        if(tracks.ContainsKey(shape))
-        {
-            input = TrajectoryParameters.GetTrajectoryParameters(currentTrack);
-            trajectory = GenerateAnchorPoints(input); 
-        }
-        else
-        {
-            Logger.Debug($"Couldn't find parameters for {currentTrack} trajectory");
-        }
+    public List<Vector2> Generate(Dictionary<string, object> track)
+    {        
+        currentTrack = track;
+        TrajectoryInput input = TrajectoryParameters.GetTrajectoryParameters(currentTrack);
+        return trajectory = GenerateAnchorPoints(input); 
     }
 
     // Get the tracks from JSON as a Dictionary
-    void LoadTracks()
+    public Dictionary<string, object> LoadTracks()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         if (File.Exists(filePath))
@@ -50,11 +38,12 @@ public class TrajectoryGenerator {
             string jsonString = File.ReadAllText(filePath);   
             // Deserialize JSON into a dictionary
             var dict = Json.Deserialize(jsonString) as Dictionary<string, object>; 
-            tracks = dict;
+            return dict;
         } 
         else
         {
             Logger.DebugError("Couldn't load tracks. Please make sure tracks are included as a .json file");
+            return null;
         }
     }
 

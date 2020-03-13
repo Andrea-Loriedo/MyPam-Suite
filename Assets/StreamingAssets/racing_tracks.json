@@ -6,7 +6,8 @@
         "q": 1.7,
         "p": 1.7,
         "period": 1.176,
-        "spacing": 1.1
+        "spacing": 1.1,
+        "duration": 0.5
     },
 
     "vertical_ellipse":
@@ -16,7 +17,8 @@
         "q": 1.7,
         "p": 1.7,
         "period": 1.176,
-        "spacing": 1.61
+        "spacing": 1.61,
+        "duration": 0.5
     },
 
     "horizontal_ellipse":
@@ -26,7 +28,8 @@
         "q": 1.7,
         "p": 1.7,
         "period": 1.176,
-        "spacing": 1.61
+        "spacing": 1.61,
+        "duration": 0.5
     },
 
     "figure8":
@@ -36,6 +39,7 @@
 		"q": 1,
 		"p": 2,
         "period": 2,
-        "spacing": 2.03
+        "spacing": 2.03,
+        "duration": 0.5
     }
 }

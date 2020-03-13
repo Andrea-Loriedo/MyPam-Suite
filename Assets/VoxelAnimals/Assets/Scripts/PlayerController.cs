@@ -11,13 +11,11 @@ public class PlayerController : MonoBehaviour
     private float canJump = 0f;
     Animator anim;
     Rigidbody rb;
-    Collider collider;
     
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
     }
 
     void Update()

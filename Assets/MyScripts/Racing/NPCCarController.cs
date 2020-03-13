@@ -21,11 +21,11 @@ public class NPCCarController : MonoBehaviour {
     {
         float dst = 0f;
 
-        if (crash != true) {
+        if (crash != true) { // Stop cars if a crash occurs
             foreach(Transform car in transform)
             {
                 dstTravelled += speed * Time.deltaTime;
-                car.position = pathCreator.path.GetPointAtDistance(dstTravelled + dst, end);// + heightOffset;
+                car.position = pathCreator.path.GetPointAtDistance(dstTravelled + dst, end); // + heightOffset;
                 car.rotation = pathCreator.path.GetRotationAtDistance (dstTravelled + dst, end) * orientation;
                 dst += spacing;
             } 
