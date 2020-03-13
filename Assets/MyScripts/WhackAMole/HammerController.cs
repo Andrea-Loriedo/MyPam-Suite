@@ -9,7 +9,6 @@ public class HammerController : MonoBehaviour
     [HideInInspector] public Quaternion initialRotation { get; set; }
 	[HideInInspector] public Vector3 forward, right;
 	[HideInInspector] public Rigidbody rb;
-	[SerializeField] Interactor interactor;
 	[SerializeField] float speed = 15f; 
 	[SerializeField] Animator animator;
 	[SerializeField] GameObject hammerImpact;
@@ -33,8 +32,6 @@ public class HammerController : MonoBehaviour
 	void FixedUpdate () 
     {
  		MoveHammer(GetInput());
-		if (Input.GetKeyDown("space"))
-			StartCoroutine(PlayWhackAnimation());
 	}
 
 	void MoveHammer(Vector2 input)
@@ -83,10 +80,8 @@ public class HammerController : MonoBehaviour
 		rb.drag = 4;
 	}
 
-	Vector2 GetInput()
+	public Vector2 GetInput()
 	{
 		return MyPamSessionManager.Instance.player.PlayerInput.Input;
 	}
 }
-
-// https://free3d.com/3d-model/hand-v2--144793.html hand asset

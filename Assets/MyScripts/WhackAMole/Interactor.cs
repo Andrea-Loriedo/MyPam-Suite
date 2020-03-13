@@ -59,16 +59,13 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    public bool TryWhack()
+    public void TryWhack()
     {
         if (activeInteractable != null && activeInteractable.CompareTag("Mole"))
         {
             activeInteractable.Interact();
             if (hammer != null)
                 hammer.Animate();
-            return true;
         }
-        else
-            return false;
     }
 }
