@@ -2,7 +2,9 @@
     "name": "MyPamAssembly",
     "references": [
         "PathCreator",
-        "PathCreatorEditor"
+        "PathCreatorEditor",
+        "Unity.TextMeshPro",
+        "Unity.TextMeshPro.Editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
