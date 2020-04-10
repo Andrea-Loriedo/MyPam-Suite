@@ -21,7 +21,8 @@ public class PlayerCursorController : MonoBehaviour {
     {
         // Make the car follow the cursor using linear interpolation
         playerCar.transform.position = Vector3.Lerp(playerCar.transform.position, transform.position, speed*Time.deltaTime);
-        playerCar.transform.LookAt(transform); // Make the car face the cursor
+        if(transform != playerCar.transform)
+            playerCar.transform.LookAt(transform); // Make the car face the cursor
         MoveCar(GetInput()); 
     }
 

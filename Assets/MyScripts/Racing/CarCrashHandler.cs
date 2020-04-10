@@ -14,7 +14,6 @@ public class CarCrashHandler: MonoBehaviour, ICrash
     {
         if (other.CompareTag("Taxi"))
             cars.crashOccurred = false;
-
     }
 
     public void OnCrash(Collider other)

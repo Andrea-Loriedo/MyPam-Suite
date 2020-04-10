@@ -25,16 +25,16 @@ public class StartZoneController : MonoBehaviour
         {
             case StartZoneState.WAITING:
                 rend.material = waitMaterial;
-                startText.text = "START \n HERE";
+                startText.text = "START";
                 onWaiting.Invoke(); // Stop moles from spawning
                 break;
             case StartZoneState.PREPARING:
                 rend.material = prepMaterial;
-                startText.text = " WAIT \n HERE";
+                startText.text = " WAIT";
                 onPreparing.Invoke(); // Start the delayed mole spawn sequence
                 break;
             case StartZoneState.GO:
-                startText.text = "\n  GO!";
+                startText.text = "  GO!";
                 rend.material = goMaterial;
                 break;
         }
