@@ -26,7 +26,7 @@ namespace UXF
         /// Event(s) to trigger when we write a file. Not performed in amin thread so cannot include most Unity actions.
         /// </summary>
         /// <returns></returns>
-        [Tooltip("Event(s) to trigger when we write a file. Not performed in amin thread so cannot include most Unity actions.")]
+        [Tooltip("Event(s) to trigger when we write a file. Can be used to move/upload files after saving. Event not performed in main thread so cannot include most Unity actions.")]
         public WriteFileEvent onWriteFile = new WriteFileEvent();
 
         /// <summary>
@@ -166,6 +166,31 @@ namespace UXF
         }
 
         /// <summary>
+        /// Reads a file from a path then calls a given action with the whole file string as the first argument 
+        /// </summary>
+        /// <param name="fpath"></param>
+        /// <param name="callback"></param>
+        public void ReadFileString(string fpath, System.Action<string> callback)
+        {
+            string data;
+            try
+            {
+                StreamReader reader = new StreamReader(fpath); 
+			    data = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch (FileNotFoundException)
+            {
+                string message = string.Format("File not found in {0}!", fpath);
+                Debug.LogWarning(message);
+                return;
+            }
+
+            System.Action action = new System.Action(() => callback.Invoke(data));
+            executeOnMainThreadQueue.Enqueue(action);
+        }
+
+        /// <summary>
         /// Serializes an object using MiniJSON and writes to a given path
         /// </summary>
         /// <param name="destFileName"></param>
@@ -180,23 +205,44 @@ namespace UXF
         /// <summary>
         /// Writes trial data (List of OrderedResultsDict) to file at fpath
         /// </summary>
-        /// <param name="dataDict"></param>
-        /// <param name="headers"></param>
+        /// <param name="dictList"></param>
         /// <param name="fpath"></param>
-        public void WriteTrials(List<OrderedResultDict> dataDict, string[] headers, WriteFileInfo writeFileInfo)
+        public void WriteTrials(List<ResultsDictionary> dictList, WriteFileInfo writeFileInfo)
         {
-            string[] csvRows = new string[dataDict.Count + 1];
-            csvRows[0] = string.Join(",", headers.ToArray());
-            object[] row = new object[headers.Length];
-
-            for (int i = 1; i <= dataDict.Count; i++)
-            {
-                OrderedResultDict dict = dataDict[i - 1];
+            // generate list of all headers possible
+            // hashset keeps unique set of keys
+            HashSet<string> headers = new HashSet<string>();
+            foreach (ResultsDictionary dict in dictList)
                 if (dict != null)
-                {
-                    dict.Values.CopyTo(row, 0);
-                    csvRows[i] = string.Join(",", row.Select(v => System.Convert.ToString(v)).ToArray());
-                }
+                    foreach (string key in dict.Keys)
+                        headers.Add(key);
+
+            // final output: array of rows (comma-separated strings)
+            string[] csvRows = new string[dictList.Count + 1];
+
+            // first row: headers
+            csvRows[0] = string.Join(",", headers.ToArray());
+            
+            for (int i = 0; i < dictList.Count; i++)
+            {
+                ResultsDictionary dict = dictList[i];
+                if (dict == null) continue; // empty trial, try next loop iteration
+
+                // add all observations to the row, in correct order.
+                // check if null, if so assign to empty string (?? operator)
+                var row = headers
+                    .Select(header => 
+                        {
+                            object val;
+                            try { val = dict[header]; }
+                            catch (KeyNotFoundException) { val = string.Empty; }
+                            if (val == null) val = string.Empty;
+                            return val.ToString();
+                        }
+                    );
+
+                // join to string & store in output
+                csvRows[i + 1] = string.Join(",", row.ToArray());               
             }
 
             File.WriteAllLines(writeFileInfo.FullPath, csvRows);
