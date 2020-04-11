@@ -1,0 +1,11 @@
+directory,experiment,ppid,session_num,trial_num,block_num,trial_num_in_block,start_time,end_time
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,1,1,1,6.610741,7.85324
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,2,1,2,11.33411,12.70914
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,3,1,3,15.17772,15.69164
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,4,1,4,18.16249,18.60994
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,5,1,5,21.04501,21.95646
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,6,1,6,25.40205,25.96531
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,7,1,7,28.78209,29.62655
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,8,1,8,33.27132,33.75165
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,9,1,9,36.88838,37.38545
+advanced_example_1/P_200411182520/S001,advanced_example_1,P_200411182520,1,10,1,10,39.5723,40.23485

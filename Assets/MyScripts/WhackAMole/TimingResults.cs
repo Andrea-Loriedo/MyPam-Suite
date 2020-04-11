@@ -1,63 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UXF;
 
-public class AimingResultsController : MonoBehaviour
+public class TimingResults : MonoBehaviour
 {
-    [HideInInspector] public float speed;
-    [SerializeField] HammerController hammer;
-    List<float> speeds = new List<float>();
+    float reactionTime = 0f;
+    bool recording;
 
-    Vector3 currPos;
-    Vector3 prevPos;    
-
-    bool recording = false;
-
-    float sum = 0f;
+    public Session session;
 
     void Start()
     {
-        speeds.Capacity = 1024;
-        prevPos = hammer.GetInput();
+        ResetTimer();
+        recording = false;
     }
 
-    void FixedUpdate()
+    void Update()
     { 
         if (recording)
         {
-            currPos = hammer.GetInput();
-            RecordVelocity(currPos, prevPos);
-            prevPos = currPos;
-
-            speeds.Add(speed);
-			sum += speed;
+            reactionTime += Time.deltaTime;
         }
     }
 
-    public void StartRecording()
+    public void StartTimer()
     {
-		speeds.Clear();
-        recording = true;
-    }
-    
-    public void StopRecording()
-    {
-        recording = false;
-        float m = MeanCalculation();
-		// trial.result["mean_speed"] = m;
-		sum = 0;
+        if (!recording) recording = true;
     }
 
-	float MeanCalculation()
-	{
-		int recordings = speeds.Count;
-		float mean = (sum/recordings);
-		return mean;
-	}
-
-    void RecordVelocity(Vector3 currPosition, Vector3 prevPosition)
+    public void StopTimer()
     {
-        speed = (currPosition - prevPosition).magnitude / Time.fixedDeltaTime;
-        // Logger.Debug($"Speed = {speed}");
+        if (recording) recording = false;
+        if (session.InTrial) session.CurrentTrial.result["reaction_time"] = GetReactionTime();
+    }
+
+    public void ResetTimer()
+    {
+        reactionTime = 0f;
+    }
+
+    public float GetReactionTime()
+    {
+        return reactionTime;
     }
 }

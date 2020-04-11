@@ -3,7 +3,8 @@
     "references": [
         "MyPamAssembly",
         "PathCreator",
-        "PathCreatorEditor"
+        "PathCreatorEditor",
+        "UXFAssembly"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

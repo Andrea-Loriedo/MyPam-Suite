@@ -1,0 +1,11 @@
+directory,experiment,ppid,session_num,trial_num,block_num,trial_num_in_block,start_time,end_time,reaction_time,hammer_movement_filename
+whack_a_mole/test/S001,whack_a_mole,test,1,1,1,1,7.268546,8.494479,0.5963993,hammer_movement_T001.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,2,1,2,11.07928,16.08241,5,hammer_movement_T002.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,3,1,3,17.63968,19.62768,1.872034,hammer_movement_T003.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,4,1,4,23.47115,24.26635,0.4806738,hammer_movement_T004.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,5,1,5,26.74656,27.62418,0.4637353,hammer_movement_T005.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,6,1,6,30.97127,31.38519,0.3970893,hammer_movement_T006.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,7,1,7,34.11832,34.53248,0.397796,hammer_movement_T007.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,8,1,8,38.09432,39.0722,0.4477587,hammer_movement_T008.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,9,1,9,42.15315,43.11402,0.8945997,hammer_movement_T009.csv
+whack_a_mole/test/S001,whack_a_mole,test,1,10,1,10,45.64873,46.0636,0.3975865,hammer_movement_T010.csv

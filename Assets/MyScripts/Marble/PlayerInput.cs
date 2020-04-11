@@ -8,9 +8,9 @@ public class PlayerInput : IPlayerInput
 {
    #if !ENABLE_TESTING
    public VirtualJoystick input;
-   public Vector2 Input => input.GetInput();
+   public Vector2 Input { get { return input.GetInput(); } }
    #else
-   public Vector2 Input => new Vector2(0, 0);
+   public Vector2 Input { get { return new Vector2(0, 0); } }
    #endif
 
    public PlayerInput()

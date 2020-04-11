@@ -27,11 +27,22 @@ public class HammerController : MonoBehaviour
 		InitCamera();
 		initialPosition = transform.position;
         initialRotation = transform.rotation;
+		DeActivate();
  	}
 
 	void FixedUpdate () 
     {
  		MoveHammer(GetInput());
+	}
+
+	public void Activate()
+	{
+		gameObject.SetActive(true);
+	}
+
+	public void DeActivate()
+	{
+		gameObject.SetActive(false);
 	}
 
 	void MoveHammer(Vector2 input)

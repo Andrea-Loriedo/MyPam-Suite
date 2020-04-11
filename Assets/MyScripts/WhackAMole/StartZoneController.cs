@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UXF;
 
 public class StartZoneController : MonoBehaviour
 {
@@ -16,6 +15,18 @@ public class StartZoneController : MonoBehaviour
     public UnityEvent onPreparing;
     public UnityEvent onGo;
     public Renderer rend;
+
+    public Session session;
+
+    public float GetTimeout()
+    {
+        return session.settings.GetFloat("maximum_time_above_ground");
+    }
+
+    public void TimedOut(float time)
+    {
+        session.CurrentTrial.result["reaction_time"] = time;
+    }
 
     public void SetState(StartZoneState newState)
     {
@@ -36,6 +47,7 @@ public class StartZoneController : MonoBehaviour
             case StartZoneState.GO:
                 startText.text = "  GO!";
                 rend.material = goMaterial;
+                session.BeginNextTrial(); // Start experimental trial
                 break;
         }
     }

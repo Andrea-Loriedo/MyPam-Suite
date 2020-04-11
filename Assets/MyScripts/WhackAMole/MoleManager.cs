@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UXF;
 
 public class MoleManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class MoleManager : MonoBehaviour
     float minDelay = 1.5f;
     float maxDelay = 3f;
 
+    public Session session;
+
     public void StartSpawnSequence()
 	{
         float randomizedDelay = Random.Range(minDelay, maxDelay);
@@ -24,6 +27,11 @@ public class MoleManager : MonoBehaviour
     public void StopSpawning()
     {
         StopAllCoroutines();
+
+        if(session.InTrial)
+        {
+            session.EndCurrentTrial();
+        }
     }
 
     IEnumerator DelayedSpawn(float delay)
@@ -48,10 +56,6 @@ public class MoleManager : MonoBehaviour
     {
         int lastMole = UnityEngine.Random.Range(0, molesCount);
         moleIndex = UnityEngine.Random.Range(0, molesCount);
-
-        // // Always pick a map different from all the previously used ones (infinite loop bug needs fixing)
-        // while (previousMoles.Contains(moleIndex) || moleIndex == lastMole)
-        //     moleIndex = UnityEngine.Random.Range(0, molesCount);
         
         previousMoles.Add(moleIndex);
 
@@ -64,7 +68,5 @@ public class MoleManager : MonoBehaviour
         // Logger.Debug("Generated map number " + mapNumber);
         return moleIndex;
     }
-
-
 }
 

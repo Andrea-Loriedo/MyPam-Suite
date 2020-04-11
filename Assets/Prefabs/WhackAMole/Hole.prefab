@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaterial: {fileID: 2100000, guid: 8144d219b9a6af8438fe9420486676c2, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 9fd29139a07dc184c9b65b29aa35c6ab, type: 2}
+  startZone: {fileID: 0}
 --- !u!114 &114454682132087964
 MonoBehaviour:
   m_ObjectHideFlags: 1

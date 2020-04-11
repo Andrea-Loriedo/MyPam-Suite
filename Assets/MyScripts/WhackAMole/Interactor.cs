@@ -6,6 +6,7 @@ public class Interactor : MonoBehaviour
     // Equivalent to public delegate void OnCanInteract(Interactable target)
     public Interactable activeInteractable { get; private set; }
     [SerializeField] StartZoneController startZone;
+    [SerializeField] TimingResults timer;
     HammerController hammer;
 
     void Start()
@@ -24,11 +25,12 @@ public class Interactor : MonoBehaviour
     {
         if (activeInteractable != null)
         {
-            if (activeInteractable.CompareTag("StartZone"))
-                activeInteractable.Interact();
+            if (activeInteractable.CompareTag("StartZone")) activeInteractable.Interact();
+            else timer.StopTimer();
         }
         else if (startZone != null && startZone.state == StartZoneState.PREPARING)
             startZone.SetState(StartZoneState.WAITING);
+        else timer.StopTimer();
     }
 
     private void CheckIfInHoleRange()
