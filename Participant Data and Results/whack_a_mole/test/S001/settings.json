@@ -1,4 +1,6 @@
 {
-    "trials_per_block": 10,
-    "maximum_time_above_ground": 5
+    "number_of_trials": 3,
+    "number_of_holes": 3,
+    "mole_timeout": 3,
+    "workspace_radius": 30
 }

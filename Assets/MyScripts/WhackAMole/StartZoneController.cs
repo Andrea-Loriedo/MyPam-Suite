@@ -20,7 +20,7 @@ public class StartZoneController : MonoBehaviour
 
     public float GetTimeout()
     {
-        return session.settings.GetFloat("maximum_time_above_ground");
+        return session.settings.GetFloat("mole_timeout");
     }
 
     public void TimedOut(float time)

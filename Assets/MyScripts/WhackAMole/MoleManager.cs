@@ -65,7 +65,6 @@ public class MoleManager : MonoBehaviour
             previousMoles.Clear();
         }
 
-        // Logger.Debug("Generated map number " + mapNumber);
         return moleIndex;
     }
 }
