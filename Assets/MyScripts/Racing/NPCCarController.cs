@@ -17,15 +17,15 @@ public class NPCCarController : MonoBehaviour {
     [HideInInspector] public Quaternion orientation = Quaternion.Euler(0, 0, 90);
     const float minSpacing = 1.1f;
 
-    public void MoveCars(float spacing, bool crash)
+    public void MoveCars(float spacing, float period, bool crash)
     {
         float dst = 0f;
 
         if (crash != true) { // Stop cars if a crash occurs
             foreach(Transform car in transform)
             {
-                dstTravelled += speed * Time.deltaTime;
-                car.position = pathCreator.path.GetPointAtDistance(dstTravelled + dst, end); // + heightOffset;
+                dstTravelled += (speed/period) * Time.deltaTime; // Avoid influence of period on car speed
+                car.position = pathCreator.path.GetPointAtDistance(dstTravelled + dst, end);
                 car.rotation = pathCreator.path.GetRotationAtDistance (dstTravelled + dst, end) * orientation;
                 dst += spacing;
             } 

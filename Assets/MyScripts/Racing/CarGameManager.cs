@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UXF; 
 
@@ -8,6 +9,7 @@ public class CarGameManager : MonoBehaviour {
     [SerializeField] NPCCarController npcCars;
     [HideInInspector] public bool crashOccurred;
     TrajectoryGenerator trajectoryGenerator;
+    List<Vector2> anchorPoints;
     Dictionary<string, object> tracks;
 
     Track track;
@@ -15,6 +17,8 @@ public class CarGameManager : MonoBehaviour {
     
     public Session session;
     bool InSession;
+
+    public FileIOManager fileIOManager;
 
     void Awake()
     {
@@ -41,8 +45,9 @@ public class CarGameManager : MonoBehaviour {
         if(InSession)
         {
             // Move NPC cars along the path if a crash hasn't occurred
-            npcCars.MoveCars(TrajectoryParameters.GetTrajectoryParameters(  trajectoryGenerator.currentTrack).spacing, 
-                                                                            crashOccurred
+            npcCars.MoveCars(   TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).spacing, 
+                                TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).period,
+                                crashOccurred
             );
         }
     }
@@ -54,7 +59,7 @@ public class CarGameManager : MonoBehaviour {
             Dictionary<string, object> newTrajectory = tracks[trajectory] as Dictionary<string, object>;
 
             // Generate list of anchor points to define the track
-            List<Vector2> anchorPoints = trajectoryGenerator.Generate(newTrajectory); 
+            anchorPoints = trajectoryGenerator.Generate(newTrajectory); 
 
             // Generate road from list of anchors
             track.Generate(anchorPoints); 
@@ -71,5 +76,30 @@ public class CarGameManager : MonoBehaviour {
             // End trial
             session.EndCurrentTrial();
         }
+    }
+
+    public void WriteTrajectoryToFile(Trial trial)
+    {
+        string[] convertedCoordinates = new string[anchorPoints.Count];
+
+        convertedCoordinates[0] = "x,y";
+
+        for (int i = 1; i < anchorPoints.Count; i++)
+        {
+            convertedCoordinates[i] = string.Format("{0},{1}", anchorPoints[i].x, anchorPoints[i].y);
+        }
+
+        string fname = string.Format("reference_trajectory_T{0:000}.csv", trial.number);
+        
+        string outputLocation = Path.Combine(trial.session.FullPath, fname);
+
+        // store in results, easier to access later
+        trial.result["reference_trajectory_filename"] = fname;
+
+        var fileIO = trial.session.GetComponent<UXF.FileIOManager>();
+        fileIO.ManageInWorker(() =>
+        {
+            File.WriteAllLines(outputLocation, convertedCoordinates);
+        });
     }
 }

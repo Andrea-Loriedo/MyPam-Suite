@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 // Contains the low level functions to generate trajectories 
 // from JSON and turning them into a list of anchors to generate a path.
@@ -7,13 +8,13 @@ public class TrajectoryGenerator {
 
     [HideInInspector] public Dictionary<string, object> currentTrack;
     List<Vector2> trajectory; // List of anchors defining the path
+    StreamWriter writer;
 	
 	// Constants
 	const float PI = Mathf.PI;
     const float twoPI = Mathf.PI * 2f;
     const float PIovertwo = Mathf.PI / 2f;
-	float lineResolution = 0.2f;
-
+	float lineResolution = 0.1f;
 
     public List<Vector2> Generate(Dictionary<string, object> track)
     {        

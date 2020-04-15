@@ -1,6 +1,11 @@
 timestamp,log_type,message
 0,Log,Loaded: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
-5.744604,Log,Updating: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
-6.527298,Warning,Warning: Session already exists! Continuing will overwrite
-7.98,Log,Crash!
-10.68,Log,Crash!
+539.7385,Exception,IOException: Sharing violation on path C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+540.7764,Exception,Exception: Participant ID already exists! Enter a new ID or select the existing participant from the dropdown.
+547.5081,Exception,IOException: Sharing violation on path C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+548.7837,Exception,IOException: Sharing violation on path C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+549.4464,Exception,IOException: Sharing violation on path C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+550.0763,Exception,IOException: Sharing violation on path C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+550.7226,Exception,IOException: Sharing violation on path C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+561.5084,Log,Updating: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+562.6348,Warning,Warning: Session already exists! Continuing will overwrite

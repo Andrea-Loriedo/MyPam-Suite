@@ -1,0 +1,6 @@
+{
+    "number_of_trials": 10,
+    "number_of_holes": 8,
+    "mole_timeout": 5,
+    "workspace_radius": 30
+}

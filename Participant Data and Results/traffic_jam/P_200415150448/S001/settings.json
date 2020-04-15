@@ -1,0 +1,40 @@
+{
+    "tracks": {
+        "circle": {
+            "A": 0.7,
+            "B": 0.7,
+            "q": 1.7,
+            "p": 1.7,
+            "period": 1.176,
+            "spacing": 1.1,
+            "duration": 0.2
+        },
+        "vertical_ellipse": {
+            "A": 0.6,
+            "B": 0.9,
+            "q": 1.7,
+            "p": 1.7,
+            "period": 1.176,
+            "spacing": 1.61,
+            "duration": 0.2
+        },
+        "horizontal_ellipse": {
+            "A": 0.9,
+            "B": 0.6,
+            "q": 1.7,
+            "p": 1.7,
+            "period": 1.176,
+            "spacing": 1.61,
+            "duration": 0.2
+        },
+        "figure8": {
+            "A": 1,
+            "B": 0.5,
+            "q": 1,
+            "p": 2,
+            "period": 2,
+            "spacing": 2.03,
+            "duration": 0.2
+        }
+    }
+}
