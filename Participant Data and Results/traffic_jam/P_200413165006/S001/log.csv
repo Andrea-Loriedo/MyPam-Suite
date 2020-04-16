@@ -1,4 +1,0 @@
-timestamp,log_type,message
-0,Log,Loaded: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
-2.246119,Log,Updating: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
-2.246119,Exception,NullReferenceException: Object reference not set to an instance of an object

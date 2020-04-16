@@ -1,5 +1,0 @@
-directory,experiment,ppid,session_num,trial_num,block_num,trial_num_in_block,start_time,end_time,times_crashed,reference_trajectory_filename,playercursor_movement_filename
-traffic_jam/P_200415155416/S001,traffic_jam,P_200415155416,1,1,1,1,1.401068,7.626874,3,reference_trajectory_T001.csv,playercursor_movement_T001.csv
-
-
-

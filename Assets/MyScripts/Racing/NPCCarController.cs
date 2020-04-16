@@ -1,15 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.IO;
+﻿using UnityEngine;
 using PathCreation;
 
 public class NPCCarController : MonoBehaviour {
 
     public PathCreator pathCreator;
     public EndOfPathInstruction end;
-    public float speed = 0.1f;
     float dstTravelled;
 
     public GameObject carPrefab;
@@ -17,14 +12,14 @@ public class NPCCarController : MonoBehaviour {
     [HideInInspector] public Quaternion orientation = Quaternion.Euler(0, 0, 90);
     const float minSpacing = 1.1f;
 
-    public void MoveCars(float spacing, float period, bool crash)
+    public void MoveCars(float spacing, float period, float pace, bool crash)
     {
         float dst = 0f;
-
+        pace /= 10;
         if (crash != true) { // Stop cars if a crash occurs
             foreach(Transform car in transform)
             {
-                dstTravelled += (speed/period) * Time.deltaTime; // Avoid influence of period on car speed
+                dstTravelled += (pace/period) * Time.deltaTime; // Avoid influence of period on car pace
                 car.position = pathCreator.path.GetPointAtDistance(dstTravelled + dst, end);
                 car.rotation = pathCreator.path.GetRotationAtDistance (dstTravelled + dst, end) * orientation;
                 dst += spacing;

@@ -11,7 +11,6 @@ public class PlayerCursorController : MonoBehaviour {
     [SerializeField] GameObject playerCar;    
     float radius = 3.5f;
 
-
     void Awake()
     {
         InitCamera();
@@ -36,7 +35,7 @@ public class PlayerCursorController : MonoBehaviour {
         Vector3 isoDirection = rightMovement + upMovement; // Direction wrt isometric camera
 
         // Move to destination using linear interpolation
-        transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed*Time.time);
+        transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
 	}
 
     Vector2 GetInput()
