@@ -14,7 +14,7 @@ public class CarGameManager : MonoBehaviour {
     Dictionary<string, object> tracks;
 
     Track track;
-    float spacing;
+    public float spacing;
     
     public Session session;
     bool InSession;

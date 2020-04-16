@@ -24,7 +24,7 @@ public class PathAccuracyMeasurer : MonoBehaviour
         {
             Vector2 playerPosition = new Vector2(transform.position.x, transform.position.z);
             playerTrajectory.Add(playerPosition);
-            shortestDist = ShortestDistance(playerPosition, referenceTraj);
+            shortestDist = ShortestDistance(playerPosition, referenceTraj) * 10;
             Logger.Debug("Distance from reference = " + shortestDist);
         }
     }
@@ -65,8 +65,9 @@ public class PathAccuracyMeasurer : MonoBehaviour
         for (int j = 0; j < referenceTrajectory.Count; j++)
             cumulativeReferenceError += ShortestDistance(referenceTrajectory[j], playerTrajectory);
 
-        trajectoryError = (cumulativePlayerError/playerTrajectory.Count) + (cumulativeReferenceError/referenceTrajectory.Count);
+        // Calculate trajectory error in cm
+        trajectoryError = ((cumulativePlayerError/playerTrajectory.Count) + (cumulativeReferenceError/referenceTrajectory.Count)) * 10; 
         
-        trial.result["trajectory_error"] = trajectoryError;
+        trial.result["trajectory_error_cm"] = trajectoryError;
     }
 }

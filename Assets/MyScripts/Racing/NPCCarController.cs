@@ -10,7 +10,7 @@ public class NPCCarController : MonoBehaviour {
     public GameObject carPrefab;
     // [HideInInspector] public Vector3 heightOffset = new Vector3(0, 0.15f, 0);
     [HideInInspector] public Quaternion orientation = Quaternion.Euler(0, 0, 90);
-    const float minSpacing = 1.1f;
+    const float minSpacing = 5.5f;
 
     public void MoveCars(float spacing, float period, float pace, bool crash)
     {

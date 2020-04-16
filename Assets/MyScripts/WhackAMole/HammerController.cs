@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -12,7 +11,10 @@ public class HammerController : MonoBehaviour
 	[SerializeField] float speed = 15f; 
 	[SerializeField] Animator animator;
 	[SerializeField] GameObject hammerImpact;
+	[SerializeField] CameraHandler cameraHandler;
 	ParticleSystem[] particles;
+
+	public Transform perspectiveCursor;
 
     public float radius = 3f;
 
@@ -53,7 +55,19 @@ public class HammerController : MonoBehaviour
 		Vector3 isoDirection = rightMovement + upMovement + new Vector3(0, 0.7f, 0); // Direction wrt isometric camera
 		Vector3 direction = new Vector3(input.x, 0.7f, input.y); // Direction wrt perspective camera
 
-        transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
+		Quaternion perspOffset = Quaternion.Euler(0, -45, 0);
+
+		if (cameraHandler.activeCamera.Equals("isometric"))
+        {
+            // Move to destination in the correct isometric direction using linear interpolation
+            transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
+        } else
+        {
+            // If not using isometric camera, move cursor wrt the standard Unity coordinate frame
+            transform.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * radius, speed * Time.time);
+        }
 	}
 
 	IEnumerator PlayWhackAnimation()

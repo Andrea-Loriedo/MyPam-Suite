@@ -2,36 +2,36 @@
     "tracks": {
         "track_1": {
             "shape": "circle",
-            "A": 2.25,
-            "B": 2.25,
+            "A": 3,
+            "B": 3,
             "q": 1.7,
             "p": 1.7,
             "period": 1.176,
-            "spacing": 1.1,
+            "spacing": 6.28,
             "duration": 0.1,
             "pace": 1
         },
         "track_2": {
             "shape": "vertical_ellipse",
-            "A": 2.1,
-            "B": 3.15,
+            "A": 2,
+            "B": 3,
             "q": 1.7,
             "p": 1.7,
             "period": 1.176,
-            "spacing": 1.61,
-            "duration": 15,
-            "pace": 1
+            "spacing": 5.55,
+            "duration": 0.1,
+            "pace": 2
         },
         "track_3": {
             "shape": "horizontal_ellipse",
-            "A": 3.15,
-            "B": 2.1,
+            "A": 3,
+            "B": 2,
             "q": 1.7,
             "p": 1.7,
             "period": 1.176,
-            "spacing": 1.61,
-            "duration": 0.2,
-            "pace": 1
+            "spacing": 5.55,
+            "duration": 0.1,
+            "pace": 2
         },
         "track_4": {
             "shape": "figure_8",
@@ -40,9 +40,9 @@
             "q": 1,
             "p": 2,
             "period": 2,
-            "spacing": 2.03,
-            "duration": 0.2,
-            "pace": 1
+            "spacing": 7.12,
+            "duration": 0.1,
+            "pace": 2
         }
     }
 }

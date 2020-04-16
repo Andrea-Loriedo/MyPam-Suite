@@ -1,5 +1,5 @@
 directory,experiment,ppid,session_num,trial_num,block_num,trial_num_in_block,start_time,end_time,times_crashed,trajectory_error,reference_trajectory_filename,playercursor_movement_filename
-traffic_jam/P_200415230430/S001,traffic_jam,P_200415230430,1,1,1,1,1.157363,13.16719,14,1.572878,reference_trajectory_T001.csv,playercursor_movement_T001.csv
-traffic_jam/P_200415230430/S001,traffic_jam,P_200415230430,1,2,1,2,13.16719,25.1771,0,0.8777975,reference_trajectory_T002.csv,playercursor_movement_T002.csv
-traffic_jam/P_200415230430/S001,traffic_jam,P_200415230430,1,3,1,3,25.1771,37.18892,0,0.8421557,reference_trajectory_T003.csv,playercursor_movement_T003.csv
-traffic_jam/P_200415230430/S001,traffic_jam,P_200415230430,1,4,1,4,37.18892,49.19091,0,1.202571,reference_trajectory_T004.csv,playercursor_movement_T004.csv
+traffic_jam/P_200415230430/S001,traffic_jam,P_200415230430,1,1,1,1,5.361063,20.38541,0,3.492332,reference_trajectory_T001_circle.csv,playercursor_movement_T001.csv
+traffic_jam/P_200415230430/S001,traffic_jam,P_200415230430,1,2,1,2,20.38541,24.18907,0,,reference_trajectory_T002_vertical_ellipse.csv,playercursor_movement_T002.csv
+
+

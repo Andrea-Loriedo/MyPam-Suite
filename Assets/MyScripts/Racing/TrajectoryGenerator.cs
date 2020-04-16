@@ -47,4 +47,3 @@ public class TrajectoryGenerator {
         return new Vector2(x, y);
     }
 }
-
