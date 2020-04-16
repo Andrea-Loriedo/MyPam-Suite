@@ -60,20 +60,22 @@ public class CarGameManager : MonoBehaviour {
         {
             Dictionary<string, object> newTrajectory = tracks[trajectory] as Dictionary<string, object>;
 
+            string shape = newTrajectory["shape"].ToString();
+
             // Generate list of anchor points to define the track
-            trajectoryPoints = trajectoryGenerator.Generate(newTrajectory); 
+            trajectoryPoints = trajectoryGenerator.Generate(shape); 
 
             // Generate road from list of anchors
             track.Generate(trajectoryPoints); 
 
             // Spawn NPC cars with appropriate spacing
-            npcCars.PositionCars(TrajectoryParameters.GetTrajectoryParameters(newTrajectory).spacing); 
+            npcCars.PositionCars(TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).spacing); 
 
             // Begin trial
             session.BeginNextTrial();
 
             // Wait for the amount of minutes set in the settings file
-            yield return new WaitForSeconds(TrajectoryParameters.GetTrajectoryParameters(newTrajectory).duration * 60); 
+            yield return new WaitForSeconds(TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).duration * 60); 
 
             // Calculate trajectory error and save to results
             pathAccuracyMeasurer.CalculateTrajectoryError(session.CurrentTrial, trajectoryPoints);

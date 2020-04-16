@@ -1,0 +1,42 @@
+{
+    "circle": {
+        "A": 3,
+        "B": 3,
+        "q": 1.7,
+        "p": 1.7,
+        "period": 1.176,
+        "spacing": 6.28,
+        "duration": 0.1,
+        "pace": 1
+    },
+    "vertical_ellipse": {
+        "A": 2,
+        "B": 3,
+        "q": 1.7,
+        "p": 1.7,
+        "period": 1.176,
+        "spacing": 5.55,
+        "duration": 0.1,
+        "pace": 2
+    },
+    "horizontal_ellipse": {
+        "A": 3,
+        "B": 2,
+        "q": 1.7,
+        "p": 1.7,
+        "period": 1.176,
+        "spacing": 5.55,
+        "duration": 0.1,
+        "pace": 2
+    },
+    "figure_8": {
+        "A": 3.5,
+        "B": 1.755,
+        "q": 1,
+        "p": 2,
+        "period": 2,
+        "spacing": 7.12,
+        "duration": 0.1,
+        "pace": 2
+    }
+}

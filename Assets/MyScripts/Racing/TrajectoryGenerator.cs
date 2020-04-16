@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using MiniJSON;
 
 // Contains the low level functions to generate trajectories 
 // from JSON and turning them into a list of anchors to generate a path.
@@ -8,6 +9,7 @@ public class TrajectoryGenerator {
 
     [HideInInspector] public Dictionary<string, object> currentTrack;
     List<Vector2> trajectory; // List of anchors defining the path
+    Dictionary<string, object> tracks;
     StreamWriter writer;
 	
 	// Constants
@@ -16,9 +18,13 @@ public class TrajectoryGenerator {
     const float PIovertwo = Mathf.PI / 2f;
 	float lineResolution = 0.1f;
 
-    public List<Vector2> Generate(Dictionary<string, object> track)
+    const string fileName = "car_trajectory_parameters.json";
+
+    public List<Vector2> Generate(string shape)
     {        
-        currentTrack = track;
+        LoadTracks();
+
+        currentTrack = tracks[shape] as Dictionary<string, object>;
         TrajectoryInput input = TrajectoryParameters.GetTrajectoryParameters(currentTrack);
         return trajectory = GenerateAnchorPoints(input); 
     }
@@ -38,6 +44,24 @@ public class TrajectoryGenerator {
 
 		return points;
 	}
+
+    // Get the tracks from JSON as a Dictionary
+    void LoadTracks()
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        if (File.Exists(filePath))
+        {
+            // Read the json from the file into a string
+            string jsonString = File.ReadAllText(filePath);   
+            // Deserialize JSON into a dictionary
+            var dict = Json.Deserialize(jsonString) as Dictionary<string, object>; 
+            tracks = dict;
+        } 
+        else
+        {
+            Logger.DebugError("Couldn't load tracks. Please make sure tracks are included as a .json file");
+        }
+    }
 
 	public Vector2 CalculatePoint(TrajectoryInput input, float t)
     {

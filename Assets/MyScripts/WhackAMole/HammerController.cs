@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UXF;
 
 [RequireComponent(typeof(Rigidbody))]
 public class HammerController : MonoBehaviour
@@ -16,7 +17,9 @@ public class HammerController : MonoBehaviour
 
 	public Transform perspectiveCursor;
 
-    public float radius = 3f;
+	public Session session;
+
+    float radius = 0;
 
 	void Awake()
 	{
@@ -40,6 +43,7 @@ public class HammerController : MonoBehaviour
 	public void Activate()
 	{
 		gameObject.SetActive(true);
+		radius = session.settings.GetFloat("workspace_radius_cm");
 	}
 
 	public void DeActivate()
@@ -60,13 +64,13 @@ public class HammerController : MonoBehaviour
 		if (cameraHandler.activeCamera.Equals("isometric"))
         {
             // Move to destination in the correct isometric direction using linear interpolation
-            transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
-            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
+            transform.position = Vector3.Lerp(transform.position, isoDirection * (radius/10), speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * (radius/10), speed * Time.time);
         } else
         {
             // If not using isometric camera, move cursor wrt the standard Unity coordinate frame
-            transform.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
-            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * radius, speed * Time.time);
+            transform.position = Vector3.Lerp(transform.position, direction * (radius/10), speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * (radius/10), speed * Time.time);
         }
 	}
 

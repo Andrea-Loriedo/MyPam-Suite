@@ -8,7 +8,7 @@ public static class TrajectoryParameters
     {
         TrajectoryInput trajectoryParams = new TrajectoryInput
         {
-            shape = Convert.ToString(track["shape"]),
+            // shape = Convert.ToString(track["shape"]),
             A = Convert.ToSingle(track["A"]),
             B = Convert.ToSingle(track["B"]),
             q = Convert.ToSingle(track["q"]),

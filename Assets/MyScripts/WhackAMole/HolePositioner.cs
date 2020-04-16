@@ -31,7 +31,7 @@ public class HolePositioner : MonoBehaviour
 
     public void PlaceHoles()
     {
-        float radius = session.settings.GetFloat("workspace_radius");
+        float radius = session.settings.GetFloat("workspace_radius_cm");
         int holesCount = session.settings.GetInt("number_of_holes");
         
         for (int i = 0; i < holesCount; i++)
