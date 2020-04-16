@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 using UXF; 
 
@@ -12,10 +13,13 @@ public class CarGameManager : MonoBehaviour {
     TrajectoryGenerator trajectoryGenerator;
     [HideInInspector] public List<Vector2> trajectoryPoints;
     Dictionary<string, object> tracks;
+    [HideInInspector] public Dictionary<string, object> currentTrack;
 
+    // Path creator
     Track track;
     public float spacing;
     
+    // UXF
     public Session session;
     bool InSession;
 
@@ -48,7 +52,7 @@ public class CarGameManager : MonoBehaviour {
             // Move NPC cars along the path if a crash hasn't occurred
             npcCars.MoveCars(   TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).spacing, 
                                 TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).period,
-                                TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).pace,
+                                Convert.ToSingle(currentTrack["pace"]),
                                 crashOccurred
             );
         }
@@ -58,9 +62,9 @@ public class CarGameManager : MonoBehaviour {
     {
         foreach (var trajectory in tracks.Keys)
         {
-            Dictionary<string, object> newTrajectory = tracks[trajectory] as Dictionary<string, object>;
+            currentTrack = tracks[trajectory] as Dictionary<string, object>;
 
-            string shape = newTrajectory["shape"].ToString();
+            string shape = Convert.ToString(currentTrack["shape"]);
 
             // Generate list of anchor points to define the track
             trajectoryPoints = trajectoryGenerator.Generate(shape); 
@@ -75,7 +79,7 @@ public class CarGameManager : MonoBehaviour {
             session.BeginNextTrial();
 
             // Wait for the amount of minutes set in the settings file
-            yield return new WaitForSeconds(TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).duration * 60); 
+            yield return new WaitForSeconds(Convert.ToSingle(currentTrack["duration"]) * 60); 
 
             // Calculate trajectory error and save to results
             pathAccuracyMeasurer.CalculateTrajectoryError(session.CurrentTrial, trajectoryPoints);
@@ -96,7 +100,7 @@ public class CarGameManager : MonoBehaviour {
             convertedCoordinates[i] = string.Format("{0},{1}", trajectoryPoints[i].x, trajectoryPoints[i].y);
         }
 
-        string trackShape = TrajectoryParameters.GetTrajectoryParameters(trajectoryGenerator.currentTrack).shape;
+        string trackShape = Convert.ToString(currentTrack["shape"]);
 
         string fname = string.Format("reference_trajectory_T{0:000}_{1}.csv", trial.number, trackShape);
         

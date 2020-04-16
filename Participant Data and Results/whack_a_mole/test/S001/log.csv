@@ -1,4 +1,4 @@
 timestamp,log_type,message
 0,Log,Loaded: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
-2.098835,Log,Updating: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
-2.818232,Warning,Warning: Session already exists! Continuing will overwrite
+2.91031,Log,Updating: C:\Users\andrea\Desktop\MyPam Suite Working Folder\MyPam-Suite\Participant Data and Results\participant_list.csv
+4.039373,Warning,Warning: Session already exists! Continuing will overwrite

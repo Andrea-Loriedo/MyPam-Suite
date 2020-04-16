@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerCursorController : MonoBehaviour {
@@ -12,7 +11,7 @@ public class PlayerCursorController : MonoBehaviour {
     [SerializeField] Transform perspectiveCursor;
     [SerializeField] CameraHandler cameraHandler;
 
-    float radius = 3.5f;
+    float workspaceEdge = 3.5f;
 
     void Awake()
     {
@@ -41,13 +40,13 @@ public class PlayerCursorController : MonoBehaviour {
         if (cameraHandler.activeCamera.Equals("isometric"))
         {
             // Move to destination in the correct isometric direction using linear interpolation
-            transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
-            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
+            transform.position = Vector3.Lerp(transform.position, isoDirection * workspaceEdge, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * workspaceEdge, speed * Time.time);
         } else
         {
             // If not using isometric camera, move cursor wrt the standard Unity coordinate frame
-            transform.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
-            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * radius, speed * Time.time);
+            transform.position = Vector3.Lerp(transform.position, direction * workspaceEdge, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * workspaceEdge, speed * Time.time);
         }
 	}
 

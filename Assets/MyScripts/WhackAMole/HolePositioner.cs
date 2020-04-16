@@ -31,13 +31,13 @@ public class HolePositioner : MonoBehaviour
 
     public void PlaceHoles()
     {
-        float radius = session.settings.GetFloat("workspace_radius_cm");
+        float radius = 3;
         int holesCount = session.settings.GetInt("number_of_holes");
         
         for (int i = 0; i < holesCount; i++)
         {
             float angle = i * Mathf.PI*2f / holesCount;
-            Vector3 newPos = new Vector3(Mathf.Cos(angle) * (radius/10), transform.localPosition.y, Mathf.Sin(angle) * (radius/10));
+            Vector3 newPos = new Vector3(Mathf.Cos(angle) * radius, transform.localPosition.y, Mathf.Sin(angle) * radius);
             GameObject hole = (GameObject)Instantiate(holePrefab, newPos, Quaternion.identity);
             holes.Add(newPos);
             hole.transform.parent = transform;

@@ -1,5 +1,5 @@
 directory,experiment,ppid,session_num,trial_num,block_num,trial_num_in_block,start_time,end_time,times_crashed,trajectory_error_cm,reference_trajectory_filename,playercursor_movement_filename
-traffic_jam/test/S001,traffic_jam,test,1,1,1,1,3.61305,9.616705,0,24.84264,reference_trajectory_T001_.csv,playercursor_movement_T001.csv
-traffic_jam/test/S001,traffic_jam,test,1,2,1,2,9.616705,15.62291,0,24.02472,reference_trajectory_T002_.csv,playercursor_movement_T002.csv
-traffic_jam/test/S001,traffic_jam,test,1,3,1,3,15.62291,21.62823,3,12.3722,reference_trajectory_T003_.csv,playercursor_movement_T003.csv
-traffic_jam/test/S001,traffic_jam,test,1,4,1,4,21.62823,26.01462,0,,reference_trajectory_T004_.csv,playercursor_movement_T004.csv
+traffic_jam/test/S001,traffic_jam,test,1,1,1,1,4.727472,10.73754,0,16.16912,reference_trajectory_T001_circle.csv,playercursor_movement_T001.csv
+traffic_jam/test/S001,traffic_jam,test,1,2,1,2,10.73754,16.7427,0,15.42515,reference_trajectory_T002_vertical_ellipse.csv,playercursor_movement_T002.csv
+traffic_jam/test/S001,traffic_jam,test,1,3,1,3,16.7427,22.75209,0,13.77281,reference_trajectory_T003_horizontal_ellipse.csv,playercursor_movement_T003.csv
+traffic_jam/test/S001,traffic_jam,test,1,4,1,4,22.75209,28.75799,5,6.301788,reference_trajectory_T004_figure_8.csv,playercursor_movement_T004.csv

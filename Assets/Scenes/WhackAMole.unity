@@ -5723,6 +5723,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1443694654563606, guid: 182c4b20a875a604293b3596c677ea9a,
     type: 2}
   m_PrefabInternal: {fileID: 1902447098}
+--- !u!114 &373068978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373068977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b086afa3acd24ad4c85e485d76edce2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  session: {fileID: 910265144}
+  referenceScale: 3.5
 --- !u!114 &373068979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6194,6 +6207,7 @@ MonoBehaviour:
   animator: {fileID: 1404565100}
   hammerImpact: {fileID: 119344456}
   cameraHandler: {fileID: 1914965244}
+  workspace: {fileID: 373068978}
   perspectiveCursor: {fileID: 652066786}
   session: {fileID: 910265144}
 --- !u!54 &763479632
@@ -6509,7 +6523,7 @@ Prefab:
     - target: {fileID: 114916036141644208, guid: 0a3b6392f04558844bd340e68ced1ff9,
         type: 2}
       propertyPath: onSessionBegin.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4522850482104986, guid: 0a3b6392f04558844bd340e68ced1ff9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -7132,6 +7146,31 @@ Prefab:
         type: 2}
       propertyPath: customHeaders.Array.data[1]
       value: total_game_score
+      objectReference: {fileID: 0}
+    - target: {fileID: 114916036141644208, guid: 0a3b6392f04558844bd340e68ced1ff9,
+        type: 2}
+      propertyPath: onSessionBegin.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114916036141644208, guid: 0a3b6392f04558844bd340e68ced1ff9,
+        type: 2}
+      propertyPath: onSessionBegin.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114916036141644208, guid: 0a3b6392f04558844bd340e68ced1ff9,
+        type: 2}
+      propertyPath: onSessionBegin.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 373068978}
+    - target: {fileID: 114916036141644208, guid: 0a3b6392f04558844bd340e68ced1ff9,
+        type: 2}
+      propertyPath: onSessionBegin.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: ScaleWorkspace
+      objectReference: {fileID: 0}
+    - target: {fileID: 114916036141644208, guid: 0a3b6392f04558844bd340e68ced1ff9,
+        type: 2}
+      propertyPath: onSessionBegin.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a3b6392f04558844bd340e68ced1ff9, type: 2}
@@ -8966,12 +9005,12 @@ Prefab:
     - target: {fileID: 224032331721365556, guid: 182c4b20a875a604293b3596c677ea9a,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 567
+      value: 565
       objectReference: {fileID: 0}
     - target: {fileID: 224032331721365556, guid: 182c4b20a875a604293b3596c677ea9a,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 567
+      value: 565
       objectReference: {fileID: 0}
     - target: {fileID: 224032331721365556, guid: 182c4b20a875a604293b3596c677ea9a,
         type: 2}

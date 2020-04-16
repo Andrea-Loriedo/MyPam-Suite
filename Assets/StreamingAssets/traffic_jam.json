@@ -1,28 +1,28 @@
 {
+    "view": "isometric",
+
+    "workspace_radius_cm": 30,
+
     "tracks": {
         "track_1": {
             "shape": "circle",
-            "workspace_radius_cm": 30,
             "duration": 0.1,
-            "pace": 2
+            "pace": 4
         },
         "track_2": {
             "shape": "vertical_ellipse",
-            "workspace_radius_cm": 30,
             "duration": 0.1,
-            "pace": 2
+            "pace": 4
         },
         "track_3": {
             "shape": "horizontal_ellipse",
-            "workspace_radius_cm": 30,
             "duration": 0.1,
-            "pace": 2
+            "pace": 4
         },
         "track_4": {
             "shape": "figure_8",
-            "workspace_radius_cm": 30,
             "duration": 0.1,
-            "pace": 2
+            "pace": 4
         }
     }
 }

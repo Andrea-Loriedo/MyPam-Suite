@@ -13,6 +13,7 @@ public class HammerController : MonoBehaviour
 	[SerializeField] Animator animator;
 	[SerializeField] GameObject hammerImpact;
 	[SerializeField] CameraHandler cameraHandler;
+	[SerializeField] WorkspaceManager workspace;
 	ParticleSystem[] particles;
 
 	public Transform perspectiveCursor;
@@ -64,13 +65,13 @@ public class HammerController : MonoBehaviour
 		if (cameraHandler.activeCamera.Equals("isometric"))
         {
             // Move to destination in the correct isometric direction using linear interpolation
-            transform.position = Vector3.Lerp(transform.position, isoDirection * (radius/10), speed * Time.time);
-            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * (radius/10), speed * Time.time);
+            transform.position = Vector3.Lerp(transform.position, isoDirection * workspace.referenceScale, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * workspace.referenceScale, speed * Time.time);
         } else
         {
             // If not using isometric camera, move cursor wrt the standard Unity coordinate frame
-            transform.position = Vector3.Lerp(transform.position, direction * (radius/10), speed * Time.time);
-            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * (radius/10), speed * Time.time);
+            transform.position = Vector3.Lerp(transform.position, direction * workspace.referenceScale, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * workspace.referenceScale, speed * Time.time);
         }
 	}
 
