@@ -575,4 +575,7 @@ crashlytics-build.properties
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 
+### Participant Data and Results ###
+/Participant Data and Results
+
 # End of https://www.gitignore.io/api/unity,csharp,visualstudio,visualstudiocode

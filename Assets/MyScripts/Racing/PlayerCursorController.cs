@@ -9,6 +9,9 @@ public class PlayerCursorController : MonoBehaviour {
 	[HideInInspector] public Vector3 forward, right;
     [SerializeField] float speed = 2; 
     [SerializeField] GameObject playerCar;    
+    [SerializeField] Transform perspectiveCursor;
+    [SerializeField] CameraHandler cameraHandler;
+
     float radius = 3.5f;
 
     void Awake()
@@ -22,10 +25,10 @@ public class PlayerCursorController : MonoBehaviour {
         playerCar.transform.position = Vector3.Lerp(playerCar.transform.position, transform.position, speed*Time.deltaTime);
         if(transform != playerCar.transform)
             playerCar.transform.LookAt(transform); // Make the car face the cursor
-        MoveCar(GetInput()); 
+        MoveCursor(GetInput()); 
     }
 
-    void MoveCar(Vector2 input)
+    void MoveCursor(Vector2 input)
 	{
 		// define diamond workspace
 		Vector3 rightMovement = right * input.x; // define the "right" direction
@@ -33,9 +36,19 @@ public class PlayerCursorController : MonoBehaviour {
 
         Vector3 direction = new Vector3(input.x, 0f, input.y); // Direction wrt perspective camera
         Vector3 isoDirection = rightMovement + upMovement; // Direction wrt isometric camera
+        Quaternion perspOffset = Quaternion.Euler(0, -45, 0);
 
-        // Move to destination using linear interpolation
-        transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
+        if (cameraHandler.activeCamera.Equals("isometric"))
+        {
+            // Move to destination in the correct isometric direction using linear interpolation
+            transform.position = Vector3.Lerp(transform.position, isoDirection * radius, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
+        } else
+        {
+            // If not using isometric camera, move cursor wrt the standard Unity coordinate frame
+            transform.position = Vector3.Lerp(transform.position, direction * radius, speed * Time.time);
+            perspectiveCursor.position = Vector3.Lerp(transform.position, (perspOffset*direction) * radius, speed * Time.time);
+        }
 	}
 
     Vector2 GetInput()

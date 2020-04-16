@@ -17,15 +17,15 @@ public class PathAccuracyMeasurer : MonoBehaviour
 
     void Update()
     {
-        float minDist;
+        float shortestDist;
         List<Vector2> referenceTraj = gameManager.trajectoryPoints;
 
         if (tracking)
         {
             Vector2 playerPosition = new Vector2(transform.position.x, transform.position.z);
             playerTrajectory.Add(playerPosition);
-            minDist = MinimumDistance(playerPosition, referenceTraj);
-            Logger.Debug("MinDist = " + minDist);
+            shortestDist = ShortestDistance(playerPosition, referenceTraj);
+            Logger.Debug("Distance from reference = " + shortestDist);
         }
     }
 
@@ -35,7 +35,7 @@ public class PathAccuracyMeasurer : MonoBehaviour
         tracking = true;
     }
 
-	float MinimumDistance(Vector2 point, List<Vector2> trajectory)
+	float ShortestDistance(Vector2 point, List<Vector2> trajectory)
 	{
         List<float> distances = new List<float>();
         distances.Capacity = trajectory.Count;
@@ -60,14 +60,13 @@ public class PathAccuracyMeasurer : MonoBehaviour
         float trajectoryError = 0;
         
         for (int i = 0; i < playerTrajectory.Count; i++)
-            cumulativePlayerError += MinimumDistance(playerTrajectory[i], referenceTrajectory);
+            cumulativePlayerError += ShortestDistance(playerTrajectory[i], referenceTrajectory);
 
         for (int j = 0; j < referenceTrajectory.Count; j++)
-            cumulativeReferenceError += MinimumDistance(referenceTrajectory[j], playerTrajectory);
+            cumulativeReferenceError += ShortestDistance(referenceTrajectory[j], playerTrajectory);
 
         trajectoryError = (cumulativePlayerError/playerTrajectory.Count) + (cumulativeReferenceError/referenceTrajectory.Count);
-
-        Logger.Debug("Trajectory error = " + trajectoryError);
+        
         trial.result["trajectory_error"] = trajectoryError;
     }
 }

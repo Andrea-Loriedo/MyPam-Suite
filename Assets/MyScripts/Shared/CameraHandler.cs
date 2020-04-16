@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraHandler : MonoBehaviour {
 
@@ -12,6 +10,7 @@ public class CameraHandler : MonoBehaviour {
 	[SerializeField] GameObject perspectiveCam;
 	[SerializeField] GameObject sideCam;
 	[SerializeField] GameObject topDownCam;
+	[HideInInspector] public string activeCamera;
 
 	// Use this for initialization
 	void Awake()
@@ -21,11 +20,13 @@ public class CameraHandler : MonoBehaviour {
 		perspectiveCam.SetActive(false);
 		topDownCam.SetActive(false);
 		sideCam.SetActive(false);
+		activeCamera = "isometric";
     }
 
 	void Update () {
 		if (Input.GetKeyDown(isoToggle))
 		{
+			activeCamera = "isometric";
 			isoCam.SetActive(true);
 			perspectiveCam.SetActive(false);
 			topDownCam.SetActive(false);
@@ -33,6 +34,7 @@ public class CameraHandler : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown(perspToggle))
 		{
+			activeCamera = "isometric";
 			isoCam.SetActive(false);
 			perspectiveCam.SetActive(true);
 			topDownCam.SetActive(false);
@@ -40,6 +42,7 @@ public class CameraHandler : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown(topDownToggle))
 		{
+			activeCamera = "perspective";
 			isoCam.SetActive(false);
 			perspectiveCam.SetActive(false);
 			topDownCam.SetActive(true);
@@ -47,6 +50,7 @@ public class CameraHandler : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown(sideToggle))
 		{
+			activeCamera = "perspective";
 			isoCam.SetActive(false);
 			perspectiveCam.SetActive(false);
 			topDownCam.SetActive(false);
