@@ -5,8 +5,7 @@
 > **Final Grade:** First Class Honours
 
 A battery of three computer games aimed at the delivery of rehabilitation exercise following a stroke. Devised as an adjunct to the **MyPam** assistive robotic rehabilitation device, the virtual platform addresses the need for a robust system to track the patient’s progress throughout a well-scoped exercise regime. As the MyPam games target a vulnerable user-base, a strong focus was put on engagement and ease of use.
-
-![](Media/MyPamSuite.PNG)
+![](Media/MyPamGames.png)
 > Built in Unity v.2018.2.7f1
 
 ## The Tasks 🖥️
@@ -25,7 +24,11 @@ The *“Maze Waddler”* game was designed to encourage the patient to exert for
 
 Each layer in the maze is procedurally generated from a visual grid as shown in the picture below, meaning that new blocks of levels can be easily designed and introduced to vary the difficulty and keep the game interesting. The same methodology was used to map the direction of the assistive forces to be provided by the robot across the workspace for each level.
 
-![](Media/LogicGrid.png)
+
+<p align="center">
+  <img src="Media/LogicGrid.png" width="500">
+</p>
+
 
 Directional force is recorded to obtain information about the functional state of the different muscle groups involved in shoulder and elbow movement. The goal is to take the penguin through as many different levels in the maze as possible within a defined timeframe. The patient score would therefore reflect the degree to which the impaired limb can exert enough controlled force in a specific direction. 
 
@@ -76,15 +79,28 @@ Aside from building a flexible data input system, major focus was put on creatin
 
 The file input/output system in `UXF` was the tool of choice to organize the output data into a cascading folder structure split by tasks, participants, sessions and trials.
 
-![](Media/OutputFolderStructure.jpg)
+<p align="center">
+  <img src="Media/MPSOutputStructure.png" width="500">
+</p>
 
 ### Graphical Representation of Directional Force
-![](Media/DirectionalForce.png)
+
+<p align="center">
+  <img src="Media/DirectionalForce.png" width="500">
+</p>
+
 ### Reaction Time Variability Between Consecutive Trials
 
-![](Media/ReactionTime1.png)
+<p align="center">
+  <img src="Media/ReactionTime1.png" width="300">
+</p>
+
 ### Patient Trajectory vs Target Path over one trial in "Traffic Jam"
-![](Media/PathAccuracy.png)
+
+<p align="center">
+  <img src="Media/PathAccuracy.png" width="500">
+</p>
+
 ## Future Developments 💡
 A future prospect worth mentioning is the possibility to host patient settings profiles and session results on an online database. The input and output formats of choice being respectively `.json` and `.csv`, data is suitably formatted for two-way communication between the game battery and a web-based physiotherapist UI mediated by a cloud hosted Realtime Database such as Google Firebase.
 
