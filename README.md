@@ -6,8 +6,7 @@
 
 A battery of three computer games aimed at the delivery of rehabilitation exercise following a stroke. Devised as an adjunct to the **MyPam** assistive robotic rehabilitation device, the virtual platform addresses the need for a robust system to track the patient’s progress throughout a well-scoped exercise regime. As the MyPam games target a vulnerable user-base, a strong focus was put on engagement and ease of use.
 
-![](Media/MypamSuite.png)
-
+![](Media/MyPamSuite.PNG)
 > Built in Unity v.2018.2.7f1
 
 ## The Tasks 🖥️
@@ -77,7 +76,8 @@ Aside from building a flexible data input system, major focus was put on creatin
 
 The file input/output system in `UXF` was the tool of choice to organize the output data into a cascading folder structure split by tasks, participants, sessions and trials.
 
-![](Media/OutputFolderStructure.png)
+![](Media/OutputFolderStructure.jpg)
+
 ### Graphical Representation of Directional Force
 ![](Media/DirectionalForce.png)
 ### Reaction Time Variability Between Consecutive Trials
